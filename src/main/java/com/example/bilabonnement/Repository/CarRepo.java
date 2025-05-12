@@ -23,7 +23,7 @@ public class CarRepo
 
     public void addCar(Car car)
     {
-        String sql = "insert into car(car_id, model, registration_number, status, brand, vin_number, color, equipment_level, co2_emission, purchase_price, registration_fee, mileage, location) valuse (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "insert into car(car_id, model, registration_number, status, brand, vin_number, color, equipment_level, co2_emission, purchase_price, registration_fee, mileage, location) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         template.update(sql, car.getCarId(),
                 car.getModel(), car.getRegNumber(),
                 car.getStatus(),
@@ -56,8 +56,9 @@ public class CarRepo
     public void updateCar(int id, Car car)
     {
         String sql = "update car set model = ?, registration_number = ?, status = ?, brand = ?, vin_number = ?, color = ?, equipment_level = ?, co2_emission = ?, purchase_price = ?, registration_fee = ?, mileage = ?, location = ? where id = ?";
-        template.update(sql, car.getCarId(),
-                car.getModel(), car.getRegNumber(),
+        template.update(sql,
+                car.getModel(),
+                car.getRegNumber(),
                 car.getStatus(),
                 car.getBrand(),
                 car.getVinNumber(),
