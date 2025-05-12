@@ -10,53 +10,58 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/leaseagreements")
 public class LeaseAgreementController {
 
     @Autowired
-    private LeaseAgreementService leaseAgreementService;
+    LeaseAgreementService leaseAgreementService;
 
-    // ➕ Vis form til oprettelse
-    @GetMapping("/create")
-    public String showCreateForm(Model model) {
-        model.addAttribute("leaseAgreement", new LeaseAgreement());
-        return "leaseagreement/create";
+    //Startside: vis alle lejeaftaler
+    @GetMapping("/leaseagreements")
+    public String index(Model model) {
+        List<LeaseAgreement> leaseAgreements = leaseAgreementService.fetchAll();
+        model.addAttribute("leaseAgreements", leaseAgreements);
+        return "leaseagreement/index"; // view: /templates/leaseagreement/index.html
     }
 
-    // 💾 Gem ny lejeaftale
-    @PostMapping("/create")
-    public String addLeaseAgreement(@ModelAttribute LeaseAgreement leaseAgreement) {
+    //Vis formular til oprettelse
+    @GetMapping("/leaseagreements/create")
+    public String create(Model model) {
+        model.addAttribute("leaseAgreement", new LeaseAgreement());
+        return "leaseagreement/create"; // view: /templates/leaseagreement/create.html
+    }
+
+    //Gem ny aftale
+    @PostMapping("/leaseagreements/createNew")
+    public String createNew(@ModelAttribute LeaseAgreement leaseAgreement) {
         leaseAgreementService.addLeaseAgreement(leaseAgreement);
         return "redirect:/leaseagreements";
     }
 
-    // 📋 Vis alle lejeaftaler
-    @GetMapping
-    public String listAll(Model model) {
-        List<LeaseAgreement> agreements = leaseAgreementService.fetchAll();
-        model.addAttribute("leaseAgreements", agreements);
-        return "leaseagreement/index"; // Din Thymeleaf-visning
+    //Vis én lejeaftale
+    @GetMapping("/leaseagreements/viewOne/{id}")
+    public String viewOne(@PathVariable("id") int id, Model model) {
+        model.addAttribute("leaseAgreement", leaseAgreementService.findLeaseAgreementById(id));
+        return "leaseagreement/viewOne"; // view: /templates/leaseagreement/viewOne.html
     }
 
-    // ✏️ Rediger-formular
-    @GetMapping("/edit/{id}")
-    public String showEditForm(@PathVariable("id") int id, Model model) {
-        LeaseAgreement leaseAgreement = leaseAgreementService.findLeaseAgreementById(id);
-        model.addAttribute("leaseAgreement", leaseAgreement);
-        return "leaseagreement/edit";
-    }
-
-    // ✅ Gem ændringer
-    @PostMapping("/update/{id}")
-    public String updateLeaseAgreement(@PathVariable("id") int id, @ModelAttribute LeaseAgreement leaseAgreement) {
-        leaseAgreementService.updateLeaseAgreement(id, leaseAgreement);
+    //Slet én lejeaftale
+    @GetMapping("/leaseagreements/deleteOne/{id}")
+    public String deleteOne(@PathVariable("id") int id) {
+        boolean deleted = leaseAgreementService.deleteLeaseAgreement(id);
         return "redirect:/leaseagreements";
     }
 
-    // 🗑 Slet lejeaftale
-    @GetMapping("/delete/{id}")
-    public String deleteLeaseAgreement(@PathVariable("id") int id) {
-        leaseAgreementService.deleteLeaseAgreement(id);
+    //Vis formular til opdatering
+    @GetMapping("/leaseagreements/updateOne/{id}")
+    public String updateOne(@PathVariable("id") int id, Model model) {
+        model.addAttribute("leaseAgreement", leaseAgreementService.findLeaseAgreementById(id));
+        return "leaseagreement/updateOne"; // view: /templates/leaseagreement/updateOne.html
+    }
+
+    //Gem opdateret aftale
+    @PostMapping("/leaseagreements/updateAgreement")
+    public String updateAgreement(@ModelAttribute LeaseAgreement leaseAgreement) {
+        leaseAgreementService.updateLeaseAgreement(leaseAgreement.getLeaseId(), leaseAgreement);
         return "redirect:/leaseagreements";
     }
 }
