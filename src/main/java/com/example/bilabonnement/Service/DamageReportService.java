@@ -28,6 +28,7 @@ public class DamageReportService {
         return damageReportRepo.findByCarId(carId);
     }
 
+
     // Gemmer en ny skadesrapport i databasen, med validering
     public void save(DamageReport report) {
         if (report.getDescription() == null || report.getDescription().isBlank()) {
@@ -44,8 +45,7 @@ public class DamageReportService {
         }
 
         // Når databasen er klar, virker dette
-        damageReportRepo.save(report);
-    }
+
 
     // Opdaterer en eksisterende skadesrapport
     public void update(DamageReport report) {
