@@ -28,10 +28,24 @@ public class DamageReportService {
         return damageReportRepo.findByCarId(carId);
     }
 
-    // Gemmer en ny skadesrapport i databasen
+
+    // Gemmer en ny skadesrapport i databasen, med validering
     public void save(DamageReport report) {
-        damageReportRepo.save(report);
-    }
+        if (report.getDescription() == null || report.getDescription().isBlank()) {
+            throw new IllegalArgumentException("Beskrivelse må ikke være tom.");
+        }
+        if (report.getPrice() < 0) {
+            throw new IllegalArgumentException("Pris må ikke være negativ.");
+        }
+        if (report.getDate() == null) {
+            throw new IllegalArgumentException("Dato skal angives.");
+        }
+        if (report.getCarId() <= 0) {
+            throw new IllegalArgumentException("Bilens ID skal være positivt.");
+        }
+
+        // Når databasen er klar, virker dette
+
 
     // Opdaterer en eksisterende skadesrapport
     public void update(DamageReport report) {
