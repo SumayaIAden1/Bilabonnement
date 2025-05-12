@@ -72,4 +72,21 @@ public class CarRepo
                 car.getCarId());
 
     }
+
+    //-----------------------------------------------------------------------------------------------------------------
+
+    //User story 6: Lageroversigt
+
+    public List<Car> fetchAllLeasedCars()
+    {
+        String sql = "select c.*" +
+                "from car c" +
+                "join lease_agreement l on c.car_id = l.car_id" +
+                "where current_date between l.start_date and l.end_date";
+
+        RowMapper<Car> rowMapper = new BeanPropertyRowMapper<>(Car.class);
+        return template.query(sql, rowMapper);
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
 }
