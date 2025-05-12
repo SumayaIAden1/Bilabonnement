@@ -69,4 +69,6 @@ public class LeaseAgreementRepo
                 leaseAgreement.getCustomerId(),
                 leaseAgreement.getLocationId());
     }
+
+
 }
