@@ -12,6 +12,7 @@ public class LeaseAgreement
     private String leaseType;
     private String status;
     private int carId;
+    private int userId;
     private int customerId;
     private int locationId;
 
