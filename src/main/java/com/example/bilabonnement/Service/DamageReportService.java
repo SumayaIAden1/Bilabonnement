@@ -28,6 +28,8 @@ public class DamageReportService {
         return damageReportRepo.findByCarId(carId);
     }
 
+
+    // Gemmer en ny skadesrapport i databasen, med validering
     // Gemmer en ny skadesrapport i databasen
     public void save(DamageReport report) {
         damageReportRepo.save(report);
