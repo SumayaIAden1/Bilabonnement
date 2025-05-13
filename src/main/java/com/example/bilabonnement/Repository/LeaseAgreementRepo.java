@@ -9,66 +9,59 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.List;
 
-//Persistenslaget: det er her vi har forbindelse til vores database
-
 @Repository
-public class LeaseAgreementRepo
-{
+public class LeaseAgreementRepo {
     @Autowired
-    JdbcTemplate template; //automatisk oprettelse af instans, Jdbc template forenkler Sql adgang (vi behøves ikke skrive try/catch selv)
+    JdbcTemplate template;
 
-    public List<LeaseAgreement> fetchAll()
-    {
+    public List<LeaseAgreement> fetchAll() {
         String sql = "select * from lease_agreement";
-        RowMapper<LeaseAgreement> rowmapper = new BeanPropertyRowMapper<LeaseAgreement>(LeaseAgreement.class); //RowMapper: mapper én række fra databasen til et Java-objekt.
-        return template.query(sql, rowmapper);                                                                 //BeanPropertyRowMapper bruger navnene på kolonnerne i databasen og matcher dem automatisk til felter i din LeaseAgreement-klasse ved navn.
-    }                                                                                                          //template.query() eksekverer SQL’en og returnerer en liste af objekter, mappet vha. rowmapper.
+        RowMapper<LeaseAgreement> rowmapper = new BeanPropertyRowMapper<>(LeaseAgreement.class);
+        return template.query(sql, rowmapper);
+    }
 
-    public void addLeaseAgreement(LeaseAgreement leaseAgreement)
-    {
-        String sql = "insert into lease_agreement(lease_id, start_date, end_date, monthly_price, total_price, lease_type, status, car_id, customer_id, location_id) values(?,?,?,?,?,?,?,?,?)";
+    public void addLeaseAgreement(LeaseAgreement leaseAgreement) {
+        String sql = "insert into lease_agreement(lease_id, start_date, end_date, monthly_price, total_price, lease_type, status, car_id, user_id, customer_id, location_id) " +
+                "values(?,?,?,?,?,?,?,?,?,?,?)";
         template.update(sql,
                 leaseAgreement.getLeaseId(),
                 leaseAgreement.getStartDate(),
                 leaseAgreement.getEndDate(),
-                leaseAgreement. getMonthlyPrice(),
+                leaseAgreement.getMonthlyPrice(),
                 leaseAgreement.getTotalPrice(),
                 leaseAgreement.getLeaseType(),
                 leaseAgreement.getStatus(),
                 leaseAgreement.getCarId(),
+                leaseAgreement.getUserId(),
                 leaseAgreement.getCustomerId(),
                 leaseAgreement.getLocationId());
     }
 
-    public LeaseAgreement findLeaseAgreementById(int id)
-    {
-        String sql = "select * from lease_agreement where id = ?";
+    public LeaseAgreement findLeaseAgreementById(int id) {
+        String sql = "select * from lease_agreement where lease_id = ?";
         RowMapper<LeaseAgreement> rowMapper = new BeanPropertyRowMapper<>(LeaseAgreement.class);
-        LeaseAgreement leaseAgreement = template.queryForObject(sql, rowMapper, id);
-        return leaseAgreement;
+        return template.queryForObject(sql, rowMapper, id);
     }
 
-    public Boolean deleteLeaseAgreement(int id)
-    {
-        String sql = "delete from lease_agreement where id = ?";
+    public Boolean deleteLeaseAgreement(int id) {
+        String sql = "delete from lease_agreement where lease_id = ?";
         return template.update(sql, id) > 0;
     }
 
-    public void updateLeaseAgreement(int id, LeaseAgreement leaseAgreement)
-    {
-        String sql = "UPDATE lease_agreement SET start_date = ?, end_date = ?, monthly_price = ?, total_price = ?, lease_type = ?, status, car_id = ?, " +
-                "customer_id = ?, location_id = ? where lease_id = ?";
+    public void updateLeaseAgreement(int id, LeaseAgreement leaseAgreement) {
+        String sql = "UPDATE lease_agreement SET start_date = ?, end_date = ?, monthly_price = ?, total_price = ?, lease_type = ?, status = ?, car_id = ?, user_id = ?, " +
+                "customer_id = ?, location_id = ? WHERE lease_id = ?";
         template.update(sql,
                 leaseAgreement.getStartDate(),
                 leaseAgreement.getEndDate(),
-                leaseAgreement. getMonthlyPrice(),
+                leaseAgreement.getMonthlyPrice(),
                 leaseAgreement.getTotalPrice(),
                 leaseAgreement.getLeaseType(),
                 leaseAgreement.getStatus(),
                 leaseAgreement.getCarId(),
+                leaseAgreement.getUserId(),
                 leaseAgreement.getCustomerId(),
-                leaseAgreement.getLocationId());
+                leaseAgreement.getLocationId(),
+                id);
     }
-
-
 }
