@@ -53,4 +53,9 @@ public class CustomerRepo {
         String sql = "SELECT * FROM customers WHERE customer_id = ?";
         return template.queryForObject(sql, customerRowMapper, customerId);
     }
+
+    public Customer findByEmail(String email) {
+        String sql = "SELECT * FROM customers WHERE email = ?";
+        return template.queryForObject(sql, customerRowMapper, email);
+    }
 }

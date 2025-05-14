@@ -4,6 +4,8 @@ import com.example.bilabonnement.Model.Customer;
 import com.example.bilabonnement.Repository.CustomerRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -20,8 +22,13 @@ public class CustomerService {
 
     // Add a new customer
     public void addCustomer(Customer customer) {
+        // Check if the email already exists in the database
+        if (customerRepo.findByEmail(customer.getEmail()) != null) {
+            throw new IllegalArgumentException("Email allerede i brug.");
+        }
         customerRepo.addCustomer(customer);
     }
+
 
     // Update an existing customer
     public boolean updateCustomer(int customerId, Customer updatedCustomer) {

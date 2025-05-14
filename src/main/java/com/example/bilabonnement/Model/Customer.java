@@ -1,16 +1,37 @@
 package com.example.bilabonnement.Model;
 
 import java.time.LocalDate;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.Email;
+
 
 public class Customer {
 
+    @NotNull(message = "Customer ID cannot be null")
     private int customerId;
+
+    @NotNull(message = "Name cannot be null")
+    @Size(min = 1, message = "Name cannot be empty")
     private String name;
+
+    @NotNull(message = "Email cannot be null")
+    @Email(message = "Invalid email format")
     private String email;
+
+    @NotNull(message = "Phone number cannot be null")
+    @Size(min = 10, max = 10, message = "Phone number must be 10 digits")
     private String phoneNumber;
+
+    @NotNull(message = "CPR number cannot be null")
     private String cprNumber;
+
+    @NotNull(message = "Address ID cannot be null")
     private int addressId;
+
+    @NotNull(message = "Creation date cannot be null")
     private LocalDate createdAt;
+
     private boolean isActive;
 
     public Customer() {}
