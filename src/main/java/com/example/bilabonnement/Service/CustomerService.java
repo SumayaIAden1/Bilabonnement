@@ -1,7 +1,10 @@
 package com.example.bilabonnement.Service;
+
 import com.example.bilabonnement.Model.Customer;
 import com.example.bilabonnement.Repository.CustomerRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,26 +13,34 @@ import java.util.List;
 public class CustomerService {
 
     @Autowired
-    private CustomerRepo customerRepository;
+    private CustomerRepo customerRepo;
 
+    // Get all customers
     public List<Customer> getAllCustomers() {
-        return customerRepository.findAll();
+        return customerRepo.findAll();
     }
 
-    public Customer getCustomerById(int id) {
-        return customerRepository.findById(id);
+    // Add a new customer
+    public void addCustomer(Customer customer) {
+        // Check if the email already exists in the database
+        if (customerRepo.findByEmail(customer.getEmail()) != null) {
+            throw new IllegalArgumentException("Email allerede i brug.");
+        }
+        customerRepo.addCustomer(customer);
     }
 
-    public void createCustomer(Customer customer) {
-        customerRepository.save(customer);
+
+    // Update an existing customer
+    public boolean updateCustomer(int customerId, Customer updatedCustomer) {
+        return customerRepo.updateCustomer(customerId, updatedCustomer);
     }
 
-    public boolean updateCustomer(int id, Customer customer) {
-        return customerRepository.update(id, customer);
+    // Delete a customer by ID
+    public boolean deleteById(int customerId) {
+        return customerRepo.deleteById(customerId);
     }
 
-    public boolean deleteCustomer(int id) {
-        return customerRepository.delete(id);
+    public Customer getCustomerById(int customerId) {
+        return customerRepo.getCustomerById(customerId);
     }
 }
-
