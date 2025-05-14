@@ -11,7 +11,11 @@ public class User {
         private boolean isActive;
         private LocalDate createdAt;
 
-        // Constructor
+    public User() {
+        // Tom constructor
+    }
+
+    // Constructor
         public User(int userId, String name, String password, String userRole, boolean isActive, LocalDate createdAt) {
             this.userId = userId;
             this.name = name;

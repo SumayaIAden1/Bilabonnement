@@ -14,7 +14,7 @@ public class UserService {
     private UserRepo userRepo;
 
     // Create a new user
-    public void createUser(User user) {
+    public void saveUser(User user) {
         userRepo.createUser(user);
     }
 
