@@ -48,4 +48,9 @@ public class CustomerRepo {
         int rowsDeleted = template.update(sql, customerId);
         return rowsDeleted > 0;  // Returns true if the customer was deleted
     }
+
+    public Customer getCustomerById(int customerId) {
+        String sql = "SELECT * FROM customers WHERE customer_id = ?";
+        return template.queryForObject(sql, customerRowMapper, customerId);
+    }
 }

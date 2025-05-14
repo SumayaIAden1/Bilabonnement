@@ -13,6 +13,8 @@ public class Customer {
     private LocalDate createdAt;
     private boolean isActive;
 
+    public Customer() {}
+
     // Constructor
     public Customer(int customerId, String name, String email, String phoneNumber,
                     String cprNumber, int addressId, LocalDate createdAt, boolean isActive) {

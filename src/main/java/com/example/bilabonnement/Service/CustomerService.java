@@ -29,7 +29,11 @@ public class CustomerService {
     }
 
     // Delete a customer by ID
-    public boolean deleteCustomer(int customerId) {
+    public boolean deleteById(int customerId) {
         return customerRepo.deleteById(customerId);
+    }
+
+    public Customer getCustomerById(int customerId) {
+        return customerRepo.getCustomerById(customerId);
     }
 }
