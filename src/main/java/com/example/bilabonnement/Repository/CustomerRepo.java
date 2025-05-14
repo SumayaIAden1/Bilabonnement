@@ -1,9 +1,11 @@
 package com.example.bilabonnement.Repository;
+
 import com.example.bilabonnement.Model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.List;
 
@@ -11,50 +13,49 @@ import java.util.List;
 public class CustomerRepo {
 
     @Autowired
-    private JdbcTemplate jdbcTemplate;
+    private JdbcTemplate template;
 
+    // RowMapper to map SQL result to Customer object
+    private final RowMapper<Customer> customerRowMapper = new BeanPropertyRowMapper<>(Customer.class);
+
+    // Find all customers
     public List<Customer> findAll() {
-        String sql = "SELECT * FROM customer";
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Customer.class));
+        String sql = "SELECT * FROM customers";  // Assuming your table name is 'customers'
+        return template.query(sql, customerRowMapper);
     }
 
-    public Customer findById(int id) {
-        String sql = "SELECT * FROM customer WHERE customer_id = ?";
-        List<Customer> result = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Customer.class), id);
-        return result.isEmpty() ? null : result.get(0);
+    // Add a new customer
+    public void addCustomer(Customer customer) {
+        String sql = "INSERT INTO customers (customer_id, name, email, phone_number, cpr_number, address_id, created_at, is_active) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        template.update(sql, customer.getCustomerId(), customer.getName(), customer.getEmail(),
+                customer.getPhoneNumber(), customer.getCprNumber(), customer.getAddressId(),
+                customer.getCreatedAt(), customer.isActive());
     }
 
-    public void save(Customer customer) {
-        String sql = "INSERT INTO customer (first_name, last_name, email, phone_number, cpr_number, address_id, created_at, is_active) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        jdbcTemplate.update(sql,
-                customer.getFirstName(),
-                customer.getLastName(),
-                customer.getEmail(),
-                customer.getPhoneNumber(),
-                customer.getCprNumber(),
-                customer.getAddressId(),
-                customer.getCreatedAt(),
-                customer.isActive());
+    // Update an existing customer
+    public boolean updateCustomer(int customerId, Customer updatedCustomer) {
+        String sql = "UPDATE customers SET name = ?, email = ?, phone_number = ?, cpr_number = ?, address_id = ?, created_at = ?, is_active = ? WHERE customer_id = ?";
+        int rowsUpdated = template.update(sql, updatedCustomer.getName(), updatedCustomer.getEmail(),
+                updatedCustomer.getPhoneNumber(), updatedCustomer.getCprNumber(),
+                updatedCustomer.getAddressId(), updatedCustomer.getCreatedAt(),
+                updatedCustomer.isActive(), customerId);
+        return rowsUpdated > 0;  // Returns true if at least one row was updated
     }
 
-    public boolean update(int id, Customer customer) {
-        String sql = "UPDATE customer SET first_name = ?, last_name = ?, email = ?, phone_number = ?, cpr_number = ?, address_id = ?, created_at = ?, is_active = ? WHERE customer_id = ?";
-        int rows = jdbcTemplate.update(sql,
-                customer.getFirstName(),
-                customer.getLastName(),
-                customer.getEmail(),
-                customer.getPhoneNumber(),
-                customer.getCprNumber(),
-                customer.getAddressId(),
-                customer.getCreatedAt(),
-                customer.isActive(),
-                id);
-        return rows > 0;
+    // Delete a customer by their ID
+    public boolean deleteById(int customerId) {
+        String sql = "DELETE FROM customers WHERE customer_id = ?";
+        int rowsDeleted = template.update(sql, customerId);
+        return rowsDeleted > 0;  // Returns true if the customer was deleted
     }
 
-    public boolean delete(int id) {
-        String sql = "DELETE FROM customer WHERE customer_id = ?";
-        return jdbcTemplate.update(sql, id) > 0;
+    public Customer getCustomerById(int customerId) {
+        String sql = "SELECT * FROM customers WHERE customer_id = ?";
+        return template.queryForObject(sql, customerRowMapper, customerId);
+    }
+
+    public Customer findByEmail(String email) {
+        String sql = "SELECT * FROM customers WHERE email = ?";
+        return template.queryForObject(sql, customerRowMapper, email);
     }
 }

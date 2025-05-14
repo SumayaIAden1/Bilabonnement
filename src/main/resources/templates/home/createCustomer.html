@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Opret Kunde</title>
+</head>
+<body>
+<h1>Opret Ny Kunde</h1>
+
+<form action="/customers/addCustomer" method="post">
+
+  <!-- Navn -->
+  <label for="name">Navn:</label>
+  <input type="text" id="name" name="name" th:value="${customer.name}" required /><br>
+
+  <!-- Email -->
+  <label for="email">Email:</label>
+  <input type="email" id="email" name="email" th:value="${customer.email}" required /><br>
+
+  <!-- Telefon -->
+  <label for="phoneNumber">Telefonnummer:</label>
+  <input type="text" id="phoneNumber" name="phoneNumber" th:value="${customer.phoneNumber}" required /><br>
+
+  <!-- CPR-nummer -->
+  <label for="cprNumber">CPR-nummer:</label>
+  <input type="text" id="cprNumber" name="cprNumber" th:value="${customer.cprNumber}" required /><br>
+
+  <!-- Adresse ID -->
+  <label for="addressId">Adresse ID:</label>
+  <input type="text" id="addressId" name="addressId" th:value="${customer.addressId}" required /><br>
+
+  <!-- Oprettelsesdato -->
+  <label for="createdAt">Oprettelsesdato:</label>
+  <input type="date" id="createdAt" name="createdAt" th:value="${customer.createdAt}" required /><br>
+
+  <!-- Aktiv -->
+  <label for="isActive">Aktiv:</label>
+  <input type="checkbox" id="isActive" name="isActive" th:checked="${customer.isActive}" /><br>
+
+  <!-- Submit Button -->
+  <button type="submit">Opret Kunde</button>
+</form>
+
+<a href="/customers">Tilbage til kundeoversigten</a>
+</body>
+</html>
