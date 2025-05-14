@@ -57,4 +57,9 @@ public class CustomerRepo {
         String sql = "DELETE FROM customer WHERE customer_id = ?";
         return jdbcTemplate.update(sql, id) > 0;
     }
+
+    public Customer getCustomerById(int customerId) {
+        String sql = "SELECT * FROM customers WHERE customer_id = ?";
+        return template.queryForObject(sql, customerRowMapper, customerId);
+    }
 }

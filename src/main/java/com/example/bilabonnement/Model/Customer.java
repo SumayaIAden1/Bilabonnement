@@ -13,6 +13,8 @@ public class Customer {
     private LocalDate createdAt;
     private boolean isActive;
 
+    public Customer() {}
+
     // Constructor
     public Customer() {}
 
