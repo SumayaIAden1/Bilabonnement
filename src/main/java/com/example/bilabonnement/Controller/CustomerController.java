@@ -17,7 +17,7 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
-    // Vis alle kunde
+    // Vis alle kunder
     @GetMapping("/customers")
     public String getAllCustomers(Model model) {
         List<Customer> customers = customerService.getAllCustomers();
@@ -29,7 +29,7 @@ public class CustomerController {
     @GetMapping("/customers/create")
     public String create(Model model) {
         model.addAttribute("customer", new Customer());
-        return "customer/create"; // templates/customer/create.html
+        return "customer/createCustomer"; // templates/customer/create.html
     }
 
     // Tilføj kunde
