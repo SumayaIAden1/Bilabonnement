@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Intraside for medarbejdere</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<header class="top-wrapper">
+  <div class="logo-left">
+    <img src="/images/logo.png" alt="Bilabonnement logo">
+  </div>
+
+  <nav class="center-logos">
+    <a href="/lejeaftaler" class ="lease-style">
+      <img src="/images/lejeaftaler.png" alt="Lejeaftaler">
+    </a>
+    <a href="/biler">
+      <img src="/images/biler.png" alt="Biler">
+    </a>
+    <a href="/kunder">
+      <img src="/images/kunder.png" alt="Biler">
+    </a>
+    <a href="/skade">
+      <img src="/images/skader.png" alt="Skade og udbedring">
+    </a>
+    <a href="/indbakke">
+      <img src="/images/indbakke.png" alt="Indbakke">
+    </a>
+    <a href="/medarbejder">
+      <img src="/images/medarbejder.png" alt="Medarbejder">
+    </a>
+
+    <a href="/dashboard">
+      <img src="/images/dashboard.png" alt="Biler">
+    </a>
+
+  </nav>
+
+
+  <div class="right-side">
+    <div class="search-bar">
+      <input type="text" placeholder="Søg...">
+      <button>Søg</button>
+    </div>
+    <div class="user-info">
+      <span>Logget ind:</span>
+      <strong>Isabella Joensen</strong>
+    </div>
+  </div>
+</header>
+
+<div class="welcome-wrapper">
+  <div class="welcome-text">
+    <h1>Bilabonnements intranet</h1>
+  </div>
+
+  <div class="quick-links">
+<h3>Quick links:</h3>
+  </div>
+</div>
+
+<!--alt logic mangler-->
+<div class="tabs-wrapper">
+  <div class="tabs">
+    <button class="tab-button active" onclick="showTab(event, 'information')">Information</button> <!--active er den knap der er blå, showtab fortæller JavaScript hvilken fane der er aktiv-->
+    <button class="tab-button" onclick="showTab(event, 'dashboard')">Nøgletal</button>
+    <button class="tab-button" onclick="showTab(event, 'features')">Nye funktioner</button>
+  </div>
+
+  <div id="information" class="tab-content active-tab">
+    <div class="info-box">
+      <strong>Nyheder</strong><br><br>
+      Hos Bilabonnement...<br>
+      Ny leder...
+    </div>
+    <div class="info-box">
+      <strong>Dine kontakter hos Bilabonnement</strong><br><br>
+      Ved spørgsmål til brugen...
+    </div>
+    <div class="info-box">
+      <strong>Meddelelser</strong><br><br>
+      <strong>Maria:</strong> Hej allesammen...<br>
+      <strong>Peter:</strong> Alle medarbejdere...
+    </div>
+  </div>
+
+  <div id="dashboard" class="tab-content">
+    <p>Her skal der være generelle nøgletal for firmaet...</p>
+  </div>
+
+  <div id="features" class="tab-content">
+    <p>Nye funktioner kommer snart...</p>
+  </div>
+</div>
+
+<script> <!--vi skifter til JavaScript her, så vi ikke behøves reloade siden når vi skifter mellem knapperne-->
+  function showTab(event, tabId) {
+    // Fjern aktive klasser fra alt
+    const allTabs = document.querySelectorAll('.tab-content');
+    const allButtons = document.querySelectorAll('.tab-button');
+
+    allTabs.forEach(tab => tab.classList.remove('active-tab'));
+    allButtons.forEach(button => button.classList.remove('active'));
+
+    // Tilføj aktiv klasse til valgt indhold og knap
+    document.getElementById(tabId).classList.add('active-tab');
+    event.target.classList.add('active');
+  }
+</script>
+
+</body>
+</html>
+
+</body>
+</html>
