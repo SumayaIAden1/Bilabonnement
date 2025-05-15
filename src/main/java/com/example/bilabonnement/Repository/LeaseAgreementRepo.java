@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -64,4 +65,17 @@ public class LeaseAgreementRepo {
                 leaseAgreement.getLocationId(),
                 id);
     }
+
+    /*Tjekker for om bilen er available i den givne periode*/
+    public boolean isCarAvailable(int carId, LocalDate startDate, LocalDate endDate) {
+        String sql = "SELECT COUNT(*) FROM lease_agreement " +
+                "WHERE car_id = ? AND (" +
+                "(start_date <= ? AND end_date >= ?) OR " +
+                "(start_date <= ? AND end_date >= ?)" +
+                ")";
+        Integer count = template.queryForObject(sql, Integer.class, carId, endDate, startDate, startDate, endDate);
+        return count == 0;
+    }
+
+
 }
