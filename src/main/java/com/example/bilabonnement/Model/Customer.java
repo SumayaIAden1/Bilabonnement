@@ -37,6 +37,9 @@ public class Customer {
     public Customer() {}
 
     // Constructor
+    public Customer() {}
+
+    // Constructor
     public Customer(int customerId, String name, String email, String phoneNumber,
                     String cprNumber, int addressId, LocalDate createdAt, boolean isActive) {
         this.customerId = customerId;
@@ -66,9 +69,17 @@ public class Customer {
         this.name = name;
     }
 
-    public String getEmail() {
-        return email;
-    }
+    // Setters
+    public void setCustomerId(int customerId) { this.customerId = customerId; }
+    public void setFirstName(String firstName) { this.firstName = firstName; }
+    public void setLastName(String lastName) { this.lastName = lastName; }
+    public void setEmail(String email) { this.email = email; }
+    public void setPhoneNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
+    public void setCprNumber(String cprNumber) { this.cprNumber = cprNumber; }
+    public void setAddressId(int addressId) { this.addressId = addressId; }
+    public void setCreatedAt(LocalDate createdAt) { this.createdAt = createdAt; }
+    public void setActive(boolean active) { isActive = active; }
+}
 
     public void setEmail(String email) {
         this.email = email;
