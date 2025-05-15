@@ -25,6 +25,7 @@ public class HomeController
     }
 
 
+    //Login controllers---------------------------------------------------------------------------------------------
     //denne metode tjekker brugeren og gemmer i sessionen hvis det er en bruger med adgang og er aktiv - Isabella
     @PostMapping("/login")
     public String login(@RequestParam String username,
@@ -65,6 +66,8 @@ public class HomeController
         session.invalidate();
         return "redirect:/";
     }
+
+    //--------------------------------------------------------------------------------------------------------------
 
 
     // midlertidig test af databaseforbindelse, man skal bruge http://localhost:9696/test-db for at teste forbindelsen - Isabella
