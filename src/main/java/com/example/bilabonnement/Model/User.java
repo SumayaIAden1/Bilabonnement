@@ -5,17 +5,18 @@ import java.time.LocalDate;
 public class User {
 
         private int userId;
-        private String name;
+        private String username;
         private String password;
         private UserRole userRole;
         private boolean isActive;
         private LocalDate createdAt;
 
 
-        //Tilføjet enum så de kan få forskellig adgang til funktioner på deres intranet
+        //Tilføjet enum så de kan få forskellig adgang til funktioner på deres intranet -Isabella
+        //Rollerne skal skrives med store bogstaver når vi opretter en ny user - Isabella
         public enum UserRole{
             ADMIN,
-            SKADESMEDARBEJDE,
+            SKADESMEDARBEJDER,
             DATAREGISTRERING,
             FORRETNINGSUDVIKLER
         }
@@ -25,9 +26,9 @@ public class User {
     }
 
     // Constructor
-        public User(int userId, String name, String password, UserRole userRole, boolean isActive, LocalDate createdAt) {
+        public User(int userId, String username, String password, UserRole userRole, boolean isActive, LocalDate createdAt) {
             this.userId = userId;
-            this.name = name;
+            this.username = username;
             this.password = password;
             this.userRole = userRole;
             this.isActive = isActive;
@@ -43,12 +44,12 @@ public class User {
             this.userId = userId;
         }
 
-        public String getName() {
-            return name;
+        public String getUsername() {
+            return username;
         }
 
         public void setName(String name) {
-            this.name = name;
+            this.username = name;
         }
 
         public String getPassword() {
@@ -59,7 +60,7 @@ public class User {
             this.password = password;
         }
 
-        public UserRole getRole() {
+        public UserRole getUserRole() {
             return userRole;
         }
 

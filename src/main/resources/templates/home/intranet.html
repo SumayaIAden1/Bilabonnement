@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -55,6 +56,9 @@
   <div class="welcome-text">
     <h1>Bilabonnements intranet</h1>
   </div>
+
+  <p>Velkommen, <strong th:text="${user.username}">Bruger</strong>!</p>
+  <p>Rolle: <span th:text="${user.userRole}">ROLLE</span></p>
 
   <div class="quick-links">
 <h3>Quick links:</h3>

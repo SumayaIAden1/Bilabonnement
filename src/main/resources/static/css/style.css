@@ -164,3 +164,55 @@
     width: 30%;
     font-size: 14px;
 }
+
+/*Login siden-------------------------------------------------------------------------------------------------------*/
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+}
+
+.login-container {
+    width: 350px;
+    margin: 100px auto;
+    padding: 30px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.login-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.login-container input[type="text"],
+.login-container input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.login-container button {
+    width: 100%;
+    padding: 12px;
+    background-color: #005EB8;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.login-container button:hover {
+    background-color: #004494;
+}
+
+.fejlbesked {
+    color: red;
+    font-size: 14px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
