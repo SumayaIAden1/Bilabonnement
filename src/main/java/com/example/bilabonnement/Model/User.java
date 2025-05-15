@@ -7,16 +7,25 @@ public class User {
         private int userId;
         private String name;
         private String password;
-        private String userRole;
+        private UserRole userRole;
         private boolean isActive;
         private LocalDate createdAt;
+
+
+        //Tilføjet enum så de kan få forskellig adgang til funktioner på deres intranet
+        public enum UserRole{
+            ADMIN,
+            SKADESMEDARBEJDE,
+            DATAREGISTRERING,
+            FORRETNINGSUDVIKLER
+        }
 
     public User() {
         // Tom constructor
     }
 
     // Constructor
-        public User(int userId, String name, String password, String userRole, boolean isActive, LocalDate createdAt) {
+        public User(int userId, String name, String password, UserRole userRole, boolean isActive, LocalDate createdAt) {
             this.userId = userId;
             this.name = name;
             this.password = password;
@@ -50,11 +59,11 @@ public class User {
             this.password = password;
         }
 
-        public String getUserRole() {
+        public UserRole getRole() {
             return userRole;
         }
 
-        public void setUserRole(String userRole) {
+        public void setUserRole(UserRole userRole) {
             this.userRole = userRole;
         }
 
