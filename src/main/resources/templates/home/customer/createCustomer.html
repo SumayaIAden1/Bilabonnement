@@ -1,9 +1,18 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
   <title>Opret Kunde</title>
+  <link rel="stylesheet" href="/css/style.css"> <!-- Main CSS -->
+  <link rel="stylesheet" href="/css/customer/createCustomer.css"> <!-- Customer-specific CSS -->
 </head>
 <body>
+
+<header class="top-wrapper">
+  <div class="logo-left">
+    <img src="/images/logo.png" alt="Bilabonnement logo">
+  </div>
+</header>
+
 <h1>Opret Ny Kunde</h1>
 
 <form action="/customers/addCustomer" method="post">
@@ -24,9 +33,23 @@
   <label for="cprNumber">CPR-nummer:</label>
   <input type="text" id="cprNumber" name="cprNumber" th:value="${customer.cprNumber}" required /><br>
 
-  <!-- Adresse ID -->
-  <label for="addressId">Adresse ID:</label>
-  <input type="text" id="addressId" name="addressId" th:value="${customer.addressId}" required /><br>
+  <!-- Address fields (manual input) -->
+
+  <!-- Land -->
+  <label for="country">Land:</label>
+  <input type="text" id="country" name="address.country" th:value="${customer.address.country}" required /><br>
+
+  <!-- By -->
+  <label for="city">By:</label>
+  <input type="text" id="city" name="address.city" th:value="${customer.address.city}" required /><br>
+
+  <!-- Postnummer -->
+  <label for="zip">Postnummer:</label>
+  <input type="text" id="zip" name="address.zip" th:value="${customer.address.zip}" required /><br>
+
+  <!-- Gade -->
+  <label for="street">Gade og hus nr.:</label>
+  <input type="text" id="street" name="address.street" th:value="${customer.address.street}" required /><br>
 
   <!-- Oprettelsesdato -->
   <label for="createdAt">Oprettelsesdato:</label>
@@ -41,5 +64,6 @@
 </form>
 
 <a href="/customers">Tilbage til kundeoversigten</a>
+
 </body>
 </html>

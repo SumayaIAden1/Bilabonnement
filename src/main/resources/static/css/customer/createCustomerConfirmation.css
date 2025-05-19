@@ -1,0 +1,74 @@
+/* createCustomerConfirmation.css */
+
+/* General body styling to match the theme */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container for the confirmation content */
+.confirmation-container {
+    max-width: 600px;
+    margin: 150px auto 20px; /* Increased top margin to push it down */
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    border: 2px solid #ccc;
+}
+
+/* Heading styling */
+.confirmation-container h1 {
+    font-size: 28px;
+    color: #000000;
+    text-align: center;
+    margin: 30px 0;
+}
+
+/* Success message styling */
+.confirmation-container p {
+    font-size: 16px;
+    color: #143c54;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Customer details section */
+.customer-details {
+    margin-bottom: 20px;
+}
+
+.customer-details h3 {
+    font-size: 16px;
+    font-weight: bold;
+    color: #143c54;
+    margin-bottom: 8px;
+}
+
+.customer-details p {
+    font-size: 14px;
+    color: #143c54;
+    margin: 10px 0;
+    text-align: left;
+}
+
+.customer-details strong {
+    color: #143c54;
+    font-weight: bold;
+}
+
+/* Back link styling */
+a {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #005EB8;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    color: #00AEEF;
+}

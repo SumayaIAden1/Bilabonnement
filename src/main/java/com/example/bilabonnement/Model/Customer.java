@@ -1,10 +1,10 @@
 package com.example.bilabonnement.Model;
 
-import java.time.LocalDate;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import jakarta.validation.constraints.Email;
 
+import java.time.LocalDate;
 
 public class Customer {
 
@@ -26,8 +26,7 @@ public class Customer {
     @NotNull(message = "CPR number cannot be null")
     private String cprNumber;
 
-    @NotNull(message = "Address ID cannot be null")
-    private int addressId;
+    private Address address;  // Use Address object
 
     @NotNull(message = "Creation date cannot be null")
     private LocalDate createdAt;
@@ -37,17 +36,14 @@ public class Customer {
     public Customer() {}
 
     // Constructor
-    public Customer() {}
-
-    // Constructor
     public Customer(int customerId, String name, String email, String phoneNumber,
-                    String cprNumber, int addressId, LocalDate createdAt, boolean isActive) {
+                    String cprNumber, Address address, LocalDate createdAt, boolean isActive) {
         this.customerId = customerId;
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.cprNumber = cprNumber;
-        this.addressId = addressId;
+        this.address = address;  // Set address object
         this.createdAt = createdAt;
         this.isActive = isActive;
     }
@@ -69,17 +65,9 @@ public class Customer {
         this.name = name;
     }
 
-    // Setters
-    public void setCustomerId(int customerId) { this.customerId = customerId; }
-    public void setFirstName(String firstName) { this.firstName = firstName; }
-    public void setLastName(String lastName) { this.lastName = lastName; }
-    public void setEmail(String email) { this.email = email; }
-    public void setPhoneNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
-    public void setCprNumber(String cprNumber) { this.cprNumber = cprNumber; }
-    public void setAddressId(int addressId) { this.addressId = addressId; }
-    public void setCreatedAt(LocalDate createdAt) { this.createdAt = createdAt; }
-    public void setActive(boolean active) { isActive = active; }
-}
+    public String getEmail() {
+        return email;
+    }
 
     public void setEmail(String email) {
         this.email = email;
@@ -101,12 +89,12 @@ public class Customer {
         this.cprNumber = cprNumber;
     }
 
-    public int getAddressId() {
-        return addressId;
+    public Address getAddress() {
+        return address;
     }
 
-    public void setAddressId(int addressId) {
-        this.addressId = addressId;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public LocalDate getCreatedAt() {
