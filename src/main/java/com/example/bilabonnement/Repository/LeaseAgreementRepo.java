@@ -38,6 +38,13 @@ public class LeaseAgreementRepo {
                 leaseAgreement.getLocationId());
     }
 
+    //Isabella: til dashboard - se hvor mange biler der er udlejet
+
+    public int countActiveLeases() {
+        String sql = "SELECT COUNT(*) FROM lease_agreement WHERE status = 'Active'";
+        return template.queryForObject(sql, Integer.class);
+    }
+
     /*
     public LeaseAgreement findLeaseAgreementById(int id) {
         String sql = "select * from lease_agreement where lease_id = ?";

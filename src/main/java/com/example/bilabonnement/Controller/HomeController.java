@@ -42,7 +42,7 @@ public class HomeController
         }
         else
         {
-            model.addAttribute("error", "Invalid username or password");
+            model.addAttribute("error", "Forkert brugernavn eller kode");
             return "home/index";
         }
     }

@@ -45,4 +45,10 @@ public class LeaseAgreementService
         return Math.round((leaseAgreement.getMonthlyPrice() / 30.0) * days * 100.0) / 100.0;
     }
 
+    //Isabella - metode der henter udlejede biler fra repo laget (til dashboard - se hvor mange biler der er udlejet)
+    public int getActiveLeaseCount()
+    {
+        return leaseAgreementRepo.countActiveLeases();
+    }
+
 }
