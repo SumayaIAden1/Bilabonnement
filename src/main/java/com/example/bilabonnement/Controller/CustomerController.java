@@ -1,6 +1,6 @@
 package com.example.bilabonnement.Controller;
 
-
+import com.example.bilabonnement.Model.Address;
 import com.example.bilabonnement.Model.Customer;
 import com.example.bilabonnement.Service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,25 +25,42 @@ public class CustomerController {
         return "customer/index"; // templates/customer/index.html
     }
 
-    // Vis form for at oprette kunde
     @GetMapping("/customers/create")
     public String create(Model model) {
-        model.addAttribute("customer", new Customer());
-        return "customer/createCustomer"; // templates/customer/create.html
+        Customer customer = new Customer();
+        customer.setAddress(new Address());
+        model.addAttribute("customer", customer);
+        return "home/customer/createCustomer";  // templates/home/customer/createCustomer.html
     }
 
-    // Tilføj kunde
     @PostMapping("/customers/addCustomer")
     public String addCustomer(@ModelAttribute Customer customer, RedirectAttributes redirectAttributes) {
         try {
-            customerService.addCustomer(customer); // Attempt to add customer
+            // Create and set the Address object
+            Address address = new Address(0, customer.getAddress().getStreet(),
+                    customer.getAddress().getCity(),
+                    customer.getAddress().getZip(),
+                    customer.getAddress().getCountry());
+
+            // Add the customer and address to the database
+            customerService.addCustomerWithAddress(customer, address);
+
+            return "redirect:/customers/confirmation";  // Redirect to the confirmation page
         } catch (IllegalArgumentException e) {
-            // Catch error and add it as a flash attribute
             redirectAttributes.addFlashAttribute("error", e.getMessage());
-            return "redirect:/customers/create"; // Redirect to the create form with error
+            return "redirect:/customers/create";  // Redirect to the create form with error
         }
-        return "redirect:/customers"; // If success, redirect to customer list
     }
+
+
+    @GetMapping("/customers/confirmation")
+    public String confirmation(Model model) {
+        Customer lastCreatedCustomer = customerService.getLastCreatedCustomer();
+        model.addAttribute("message", "Kunden blev oprettet succesfuldt!");
+        model.addAttribute("customer", lastCreatedCustomer);
+        return "home/customer/customerCreatedConfirmation";  // Return to the confirmation page
+    }
+
 
     // Vis specifik kunde
     @GetMapping("/customers/viewOne/{id}")
@@ -56,15 +73,9 @@ public class CustomerController {
     // Vis form for opdatering af kunde
     @GetMapping("/customers/updateOne/{id}")
     public String updateForm(@PathVariable("id") int id, Model model) {
-        model.addAttribute("customer", customerService.getCustomerById(id));
+        Customer customer = customerService.getCustomerById(id);
+        model.addAttribute("customer", customer);  // Add the customer to the model
         return "customer/updateOne"; // templates/customer/updateOne.html
-    }
-
-    // Opdater kunde om omdiriger
-    @PostMapping("/customers/updateCustomer")
-    public String updateCustomer(@ModelAttribute Customer customer) {
-        customerService.updateCustomer(customer.getCustomerId(), customer);
-        return "redirect:/customers";
     }
 
     // Slet en kunde
