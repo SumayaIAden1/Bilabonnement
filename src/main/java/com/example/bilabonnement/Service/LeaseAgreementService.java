@@ -15,6 +15,7 @@ public class LeaseAgreementService
 {
     @Autowired
     LeaseAgreementRepo leaseAgreementRepo;
+
     public List<LeaseAgreement> fetchAll()
     {
         return leaseAgreementRepo.fetchAll();
@@ -30,21 +31,6 @@ public class LeaseAgreementService
     }
 
 
-    public LeaseAgreement findLeaseAgreementById(int id)
-    {
-        return leaseAgreementRepo.findLeaseAgreementById(id);
-    }
-
-    public Boolean deleteLeaseAgreement(int id)
-    {
-        return leaseAgreementRepo.deleteLeaseAgreement(id);
-    }
-
-    public void updateLeaseAgreement(int id, LeaseAgreement leaseAgreement)
-    {
-        leaseAgreementRepo.updateLeaseAgreement(id, leaseAgreement);
-    }
-
     /* Metode til beregning af pris --- ChronoUnit.DAYS.between(...): Beregner antal dage mellem to datoer.*/
     public double calculateTotalPrice(LeaseAgreement leaseAgreement) {
         LocalDate start = leaseAgreement.getStartDate().toLocalDate();
@@ -58,7 +44,5 @@ public class LeaseAgreementService
 
         return Math.round((leaseAgreement.getMonthlyPrice() / 30.0) * days * 100.0) / 100.0;
     }
-
-
 
 }

@@ -38,6 +38,7 @@ public class LeaseAgreementRepo {
                 leaseAgreement.getLocationId());
     }
 
+    /*
     public LeaseAgreement findLeaseAgreementById(int id) {
         String sql = "select * from lease_agreement where lease_id = ?";
         RowMapper<LeaseAgreement> rowMapper = new BeanPropertyRowMapper<>(LeaseAgreement.class);
@@ -64,9 +65,9 @@ public class LeaseAgreementRepo {
                 leaseAgreement.getCustomerId(),
                 leaseAgreement.getLocationId(),
                 id);
-    }
+    } */
 
-    /*Tjekker for om bilen er available i den givne periode*/
+    /*Tjekker for om bilen er available i den givne periode
     public boolean isCarAvailable(int carId, LocalDate startDate, LocalDate endDate) {
         String sql = "SELECT COUNT(*) FROM lease_agreement " +
                 "WHERE car_id = ? AND (" +
@@ -75,7 +76,7 @@ public class LeaseAgreementRepo {
                 ")";
         Integer count = template.queryForObject(sql, Integer.class, carId, endDate, startDate, startDate, endDate);
         return count == 0;
-    }
+    }*/
 
 
 }
