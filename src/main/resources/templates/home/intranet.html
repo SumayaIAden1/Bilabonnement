@@ -1,9 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Intraside for medarbejdere</title>
+  <title>Bilabonnement Intranet</title>
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
@@ -14,7 +13,7 @@
   </div>
 
   <nav class="center-logos">
-    <!-- Vi laver en dynamisk fordeling og adgang ud fra hvem der logger ind - Isabella -->
+    <!-- Dynamisk navigation baseret på brugerrolle - Isabella -->
 
     <th:block th:if="${user.userRole.name() == 'DATAREGISTRERING' or user.userRole.name() == 'ADMIN'}">
       <a href="/lejeaftaler" class="lease-style">
@@ -31,28 +30,11 @@
       </a>
     </th:block>
 
-
     <th:block th:if="${user.userRole.name() == 'SKADESMEDARBEJDER' or user.userRole.name() == 'ADMIN'}">
       <a href="/skade">
         <img src="/images/skader.png" alt="Skade og udbedring">
       </a>
     </th:block>
-
-    <a href="/leaseagreement" class ="lease-style">
-      <img src="/images/lejeaftaler.png" alt="Lejeaftaler">
-    </a>
-    <a href="/biler">
-      <img src="/images/biler.png" alt="Biler">
-    </a>
-    <a href="/kunder">
-      <img src="/images/kunder.png" alt="Biler">
-    </a>
-    <a href="/skade">
-      <img src="/images/skader.png" alt="Skade og udbedring">
-    </a>
-    <a href="/indbakke">
-      <img src="/images/indbakke.png" alt="Indbakke">
-    </a>
 
     <th:block th:if="${user.userRole.name() == 'ADMIN'}">
       <a href="/medarbejder">
@@ -66,17 +48,21 @@
       </a>
     </th:block>
 
-  </nav>
 
+    <a href="/indbakke">
+      <img src="/images/indbakke.png" alt="Indbakke">
+    </a>
+  </nav>
 
   <div class="right-side">
     <div class="search-bar">
       <input type="text" placeholder="Søg...">
       <button>Søg</button>
     </div>
+
     <div class="user-info">
-      <span>Logget ind:</span>
-      <strong>Isabella Joensen</strong>
+      <span>Velkommen, <strong th:text="${user.username}">Bruger</strong></span><br>
+      <span>Rolle: <strong th:text="${user.userRole}">ROLLE</strong></span>
     </div>
   </div>
 </header>
@@ -86,18 +72,14 @@
     <h1>Bilabonnements intranet</h1>
   </div>
 
-  <p>Velkommen, <strong th:text="${user.username}">Bruger</strong>!</p>
-  <p>Rolle: <span th:text="${user.userRole}">ROLLE</span></p>
-
   <div class="quick-links">
-<h3>Quick links:</h3>
+    <h3>Quick links:</h3>
   </div>
 </div>
 
-<!--alt logic mangler-->
 <div class="tabs-wrapper">
   <div class="tabs">
-    <button class="tab-button active" onclick="showTab(event, 'information')">Information</button> <!--active er den knap der er blå, showtab fortæller JavaScript hvilken fane der er aktiv-->
+    <button class="tab-button active" onclick="showTab(event, 'information')">Information</button>
     <button class="tab-button" onclick="showTab(event, 'dashboard')">Nøgletal</button>
     <button class="tab-button" onclick="showTab(event, 'features')">Nye funktioner</button>
   </div>
@@ -128,23 +110,19 @@
   </div>
 </div>
 
-<script> <!--vi skifter til JavaScript her, så vi ikke behøves reloade siden når vi skifter mellem knapperne-->
+<script>
+  // JavaScript til faneblade uden reload - Isabella
   function showTab(event, tabId) {
-    // Fjern aktive klasser fra alt
     const allTabs = document.querySelectorAll('.tab-content');
     const allButtons = document.querySelectorAll('.tab-button');
 
     allTabs.forEach(tab => tab.classList.remove('active-tab'));
     allButtons.forEach(button => button.classList.remove('active'));
 
-    // Tilføj aktiv klasse til valgt indhold og knap
     document.getElementById(tabId).classList.add('active-tab');
     event.target.classList.add('active');
   }
 </script>
-
-</body>
-</html>
 
 </body>
 </html>

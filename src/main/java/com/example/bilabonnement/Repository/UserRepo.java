@@ -79,7 +79,7 @@ public class UserRepo {
         return count > 0; // Return true if user exists, false if not
     }
 
-    // ✅ Login-metode med fuld bruger retur
+    // Login-metode med fuld bruger retur
     public User login(String username, String password) {
         String sql = "SELECT * FROM user WHERE username = ? AND user_password = ?";
         try {

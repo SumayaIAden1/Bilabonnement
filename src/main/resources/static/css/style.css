@@ -32,6 +32,8 @@
 .center-logos {
     display: flex;
     gap: 30px;
+    justify-content: center;
+    flex: 1;
 }
 
 .center-logos a {
@@ -165,7 +167,7 @@
     font-size: 14px;
 }
 
-/*Login siden-------------------------------------------------------------------------------------------------------*/
+/*Login siden/index-------------------------------------------------------------------------------------------------------*/
 body {
     font-family: Arial, sans-serif;
     background-color: #f2f2f2;
