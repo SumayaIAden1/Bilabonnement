@@ -18,4 +18,11 @@ public class HomeController
     public String intranet() {
         return "home/intranet";
     }
+
+    /*@GetMapping("/leaseagreement")
+    public String leaseagreement() {
+        return "leaseagreement";
+    }*/
+
+
 }
