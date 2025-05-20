@@ -3,33 +3,44 @@ package com.example.bilabonnement.Model;
 import java.sql.Date;
 
 public class LeaseAgreement {
+
     private int leaseId;
     private Date startDate;
     private Date endDate;
+    private int startMileage;
+    private int endMileage;
     private double monthlyPrice;
     private double totalPrice;
     private String leaseType;
     private String status;
-    private int carId;
+    private String carRegistrationNumber;
     private int userId;
     private int customerId;
     private int locationId;
 
+
     public LeaseAgreement() {}
 
-    public LeaseAgreement(int leaseId, Date startDate, Date endDate, double monthlyPrice, double totalPrice,
-                          String leaseType, int carId, int userId, int customerId, int locationId) {
+    // Fuld constructor med alle felter
+    public LeaseAgreement(int leaseId, Date startDate, Date endDate, int startMileage, int endMileage,
+                          double monthlyPrice, double totalPrice, String leaseType, String status,
+                          String carRegistrationNumber, int userId, int customerId, int locationId) {
         this.leaseId = leaseId;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.startMileage = startMileage;
+        this.endMileage = endMileage;
         this.monthlyPrice = monthlyPrice;
         this.totalPrice = totalPrice;
         this.leaseType = leaseType;
-        this.carId = carId;
+        this.status = status;
+        this.carRegistrationNumber = carRegistrationNumber;
         this.userId = userId;
         this.customerId = customerId;
         this.locationId = locationId;
     }
+
+    // Getters & Setters
 
     public int getLeaseId() {
         return leaseId;
@@ -53,6 +64,22 @@ public class LeaseAgreement {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    public int getStartMileage() {
+        return startMileage;
+    }
+
+    public void setStartMileage(int startMileage) {
+        this.startMileage = startMileage;
+    }
+
+    public int getEndMileage() {
+        return endMileage;
+    }
+
+    public void setEndMileage(int endMileage) {
+        this.endMileage = endMileage;
     }
 
     public double getMonthlyPrice() {
@@ -87,12 +114,12 @@ public class LeaseAgreement {
         this.status = status;
     }
 
-    public int getCarId() {
-        return carId;
+    public String getCarRegistrationNumber() {
+        return carRegistrationNumber;
     }
 
-    public void setCarId(int carId) {
-        this.carId = carId;
+    public void setCarRegistrationNumber(String carRegistrationNumber) {
+        this.carRegistrationNumber = carRegistrationNumber;
     }
 
     public int getUserId() {

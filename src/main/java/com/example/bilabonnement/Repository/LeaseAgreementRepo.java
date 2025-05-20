@@ -11,36 +11,43 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Repository
-public class LeaseAgreementRepo {
+public class LeaseAgreementRepo
+{
     @Autowired
     JdbcTemplate template;
 
-    public List<LeaseAgreement> fetchAll() {
+    public List<LeaseAgreement> fetchAll()
+    {
         String sql = "select * from lease_agreement";
         RowMapper<LeaseAgreement> rowmapper = new BeanPropertyRowMapper<>(LeaseAgreement.class);
         return template.query(sql, rowmapper);
     }
 
-    public void addLeaseAgreement(LeaseAgreement leaseAgreement) {
-        String sql = "insert into lease_agreement(lease_id, start_date, end_date, monthly_price, total_price, lease_type, status, car_id, user_id, customer_id, location_id) " +
-                "values(?,?,?,?,?,?,?,?,?,?,?)";
+    public void addLeaseAgreement(LeaseAgreement leaseAgreement)
+    {
+        String sql = "INSERT INTO lease_agreement (lease_id, start_date, end_date, start_mileage, end_mileage, monthly_price, total_price, lease_type, status, car_registration_number, user_id, customer_id, location_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
         template.update(sql,
                 leaseAgreement.getLeaseId(),
                 leaseAgreement.getStartDate(),
                 leaseAgreement.getEndDate(),
+                leaseAgreement.getStartMileage(),
+                leaseAgreement.getEndMileage(),
                 leaseAgreement.getMonthlyPrice(),
                 leaseAgreement.getTotalPrice(),
                 leaseAgreement.getLeaseType(),
                 leaseAgreement.getStatus(),
-                leaseAgreement.getCarId(),
+                leaseAgreement.getCarRegistrationNumber(),
                 leaseAgreement.getUserId(),
                 leaseAgreement.getCustomerId(),
-                leaseAgreement.getLocationId());
+                leaseAgreement.getLocationId()
+        );
     }
 
-    //Isabella: til dashboard - se hvor mange biler der er udlejet
+        //Isabella: til dashboard - se hvor mange biler der er udlejet
 
-    public int countActiveLeases() {
+    public int countActiveLeases()
+    {
         String sql = "SELECT COUNT(*) FROM lease_agreement WHERE status = 'Active'";
         return template.queryForObject(sql, Integer.class);
     }
@@ -60,7 +67,7 @@ public class LeaseAgreementRepo {
         } else {
 
         return 0.0;
-        }*/
+        }
     }
 
     /*
@@ -104,4 +111,5 @@ public class LeaseAgreementRepo {
     }*/
 
 
+    }
 }
