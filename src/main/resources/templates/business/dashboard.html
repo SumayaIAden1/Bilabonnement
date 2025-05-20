@@ -1,10 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="da" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Dashboard – Bilabonnement</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
+
+<header class="top-wrapper">
+    <div class="logo-left">
+        <img src="/images/logo.png" alt="Bilabonnement logo">
+    </div>
+</header>
+
+<main class="dashboard-wrapper">
+
+
+    <div class="dashboard-grid">
+
+        <div class="dashboard-card">
+            <h3>Udlejede biler</h3>
+            <p>Antal biler der er udlejet lige nu:</p>
+            <strong th:text="${activeLeases}">0</strong>
+        </div>
+
+        <div class="dashboard-card">
+            <h3>Samlet pris</h3>
+            <p>Samlet pris på udlejede biler:</p>
+            <strong th:text="${#numbers.formatDecimal(totalPrice, 0, 'COMMA', 2, 'POINT')}">0,00</strong> kr.
+            <!--Her formatterer vi f.eks. 15600.0 til 15.600,00 kr.-->
+        </div>
+
+        <!-- Klar til fremtidige KPI’er -->
+        <div class="dashboard-card placeholder">
+            <h3>Kommende funktion</h3>
+            <p>Her kan du fx vise skader, omsætning eller grafer.</p>
+        </div>
+
+    </div>
+</main>
 
 </body>
 </html>
