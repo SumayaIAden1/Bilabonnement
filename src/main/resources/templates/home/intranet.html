@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +17,7 @@
     <!-- Dynamisk navigation baseret på brugerrolle - Isabella -->
 
     <th:block th:if="${user.userRole.name() == 'DATAREGISTRERING' or user.userRole.name() == 'ADMIN'}">
-      <a href="/lejeaftaler" class="lease-style">
+      <a href="/leaseagreement" class="lease-style">
         <img src="/images/lejeaftaler.png" alt="Lejeaftaler">
       </a>
       <a href="/biler">
@@ -48,11 +49,8 @@
       </a>
     </th:block>
 
-
-    <a href="/indbakke">
-      <img src="/images/indbakke.png" alt="Indbakke">
-    </a>
   </nav>
+
 
   <div class="right-side">
     <div class="search-bar">
@@ -77,6 +75,7 @@
   </div>
 </div>
 
+<!--alt logic mangler-->
 <div class="tabs-wrapper">
   <div class="tabs">
     <button class="tab-button active" onclick="showTab(event, 'information')">Information</button>
