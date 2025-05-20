@@ -1,11 +1,11 @@
 package com.example.bilabonnement.Controller;
 
 import com.example.bilabonnement.Model.LeaseAgreement;
-import com.example.bilabonnement.Service.LeaseAgreementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import com.example.bilabonnement.Service.Interface.LeaseAgreementServiceInterface;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ public class LeaseAgreementController
 {
 
     @Autowired
-    LeaseAgreementService leaseAgreementService;
+    LeaseAgreementServiceInterface leaseAgreementService;
 
     //Startside: vis alle lejeaftaler
     @GetMapping("/leaseagreement")
