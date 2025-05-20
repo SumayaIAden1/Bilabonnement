@@ -5,6 +5,8 @@ import com.example.bilabonnement.Model.Customer;
 import com.example.bilabonnement.Repository.CustomerRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -53,9 +55,5 @@ public class CustomerService {
     public Customer getLastCreatedCustomer() {
         return customerRepo.getLastCreatedCustomer();  // Call the repo method
     }
-
-
-
-
 }
 

@@ -3,6 +3,7 @@ package com.example.bilabonnement.Model;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.Email;
 
 import java.time.LocalDate;
 
@@ -33,6 +34,7 @@ public class Customer {
 
     private boolean isActive;
 
+    // Constructor
     public Customer() {}
 
     // Constructor

@@ -47,14 +47,12 @@
     <th:block th:if="${user.userRole.name() == 'ADMIN'}">
       <a href="/medarbejder">
         <img src="/images/medarbejder.png" alt="Medarbejder">
-        <span>MEDARBEJDER</span>
       </a>
     </th:block>
 
     <th:block th:if="${user.userRole.name() == 'FORRETNINGSUDVIKLER' or user.userRole.name() == 'ADMIN'}">
       <a href="/business/dashboard">
         <img src="/images/dashboard.png" alt="Dashboard">
-        <span>DASHBOARD</span>
       </a>
     </th:block>
 
