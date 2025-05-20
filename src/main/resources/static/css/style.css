@@ -19,7 +19,7 @@
     padding-left: 10px;
 }
 
-.lease-style{
+.car-style{
     margin-left: 150px; /*Skal være større end gap i center-logos, ellers kan man ikke se effekten*/
 }
 
@@ -31,18 +31,22 @@
 /* Navigation i midten */
 .center-logos {
     display: flex;
-    gap: 30px;
+    gap: 50px;
     justify-content: center;
-    flex: 1;
+    flex-wrap: wrap;
+    padding: 20px 0;
 }
 
 .center-logos a {
-    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 13px;
     font-weight: bold;
-    padding: 10px 16px;
-    border-radius: 8px;
-    transition: background-color 0.2s ease;
+    color: #005EB8;
     text-decoration: none;
+    transition: transform 0.2s ease;
+    text-align: center;
 }
 
 .center-logos a:hover {
@@ -54,11 +58,21 @@
     height: auto;
     border-radius: 8px;    /* Rund hjørnerne*/
     transition: transform 0.2s ease;
+    object-fit: contain;
+    margin-bottom: 5px;
 }
 
 
 .center-logos a img:hover {
     transform: scale(1.1); /* Lidt zoom ved hover */
+}
+
+
+.center-logos a span {
+    font-size: 13px;
+    font-weight: bold;
+    color: #005EB8;
+    text-transform: uppercase;
 }
 
 
