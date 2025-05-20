@@ -80,6 +80,15 @@
   <label th:for="*{endDate}">Slutdato:</label>
   <input type="date" th:field="*{endDate}" required /><br>
 
+  <!-- Start kilometerstand -->
+  <label th:for="*{startMileage}">Start kilometerstand:</label>
+  <input type="number" th:field="*{startMileage}" required /><br>
+
+  <!-- Slut kilometerstand -->
+  <label th:for="*{endMileage}">Slut kilometerstand:</label>
+  <input type="number" th:field="*{endMileage}" required /><br>
+
+
   <!-- Månedspris -->
   <label th:for="*{monthlyPrice}">Månedspris (DKK):</label>
   <input type="number" step="0.01" th:field="*{monthlyPrice}" required /><br>
@@ -88,13 +97,19 @@
   <label th:for="*{leaseType}">Aftaletype:</label>
   <input type="text" placeholder="Limited / Unlimited" th:field="*{leaseType}" required /><br>
 
-  <!-- Status -->
+  <!-- Status (vælg fra liste – select da det er sensitivt, og derfor matcher dette ENUM) -->
   <label th:for="*{status}">Status:</label>
-  <input type="text" placeholder="Aktiv / Afsluttet" th:field="*{status}" required /><br>
+  <select th:field="*{status}" required>
+    <option value="Active">Active</option>
+    <option value="Completed">Completed</option>
+    <option value="Cancelled">Cancelled</option>
+  </select><br>
 
-  <!-- Bil ID -->
-  <label th:for="*{carId}">Bil ID:</label>
-  <input type="number" th:field="*{carId}" required /><br>
+
+  <!-- Bilens registreringsnummer -->
+  <label th:for="*{carRegistrationNumber}">Registreringsnummer:</label>
+  <input type="text" th:field="*{carRegistrationNumber}" required /><br>
+
 
   <!-- Bruger ID -->
   <label th:for="*{userId}">Bruger ID:</label>

@@ -73,6 +73,12 @@ public class CarRepo
 
     }
 
+    //Metode til at vise bilerne - dropdown
+    public List<String> fetchAllRegistrationNumbers() {
+        String sql = "SELECT registration_number FROM car";
+        return template.queryForList(sql, String.class);
+    }
+
     //-----------------------------------------------------------------------------------------------------------------
 
     //User story 6: Lageroversigt

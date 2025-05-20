@@ -84,14 +84,17 @@
         <th>ID</th>
         <th>Start</th>
         <th>Slut</th>
+        <th>Start km</th>
+        <th>Slut km</th>
         <th>Månedspris</th>
         <th>Totalpris</th>
         <th>Aftaletype</th>
         <th>Status</th>
-        <th>Bil ID</th>
+        <th>Registreringsnummer</th>
         <th>Bruger ID</th>
         <th>Kunde ID</th>
         <th>Lokation ID</th>
+
     </tr>
     </thead>
     <tbody>
@@ -100,15 +103,18 @@
         <td th:text="${lease.leaseId}"></td>
         <td th:text="${lease.startDate}"></td>
         <td th:text="${lease.endDate}"></td>
+        <td th:text="${lease.startMileage}"></td>
+        <td th:text="${lease.endMileage}"></td>
         <td th:text="${lease.monthlyPrice}"></td>
         <td th:text="${lease.totalPrice}"></td>
         <td th:text="${lease.leaseType}"></td>
         <td th:text="${lease.status}"></td>
-        <td th:text="${lease.carId}"></td>
+        <td th:text="${lease.carRegistrationNumber}"></td>
         <td th:text="${lease.userId}"></td>
         <td th:text="${lease.customerId}"></td>
         <td th:text="${lease.locationId}"></td>
     </tr>
+
     </tbody>
 </table>
 

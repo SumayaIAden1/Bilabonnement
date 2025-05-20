@@ -37,6 +37,11 @@ public class CarService
         carRepo.updateCar(id, car);
     }
 
+    //Metode til dropdown (registreringsnumre)
+    public List<String> getAllRegistrationNumbers() {
+        return carRepo.fetchAllRegistrationNumbers();
+    }
+
     //------------------------------------------------------------------------------------------------------------------
 
     //US6
