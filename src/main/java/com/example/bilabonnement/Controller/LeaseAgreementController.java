@@ -1,13 +1,13 @@
 package com.example.bilabonnement.Controller;
 
 import com.example.bilabonnement.Model.LeaseAgreement;
+import com.example.bilabonnement.Service.CarService;
 import com.example.bilabonnement.Service.LeaseAgreementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @Controller
 public class LeaseAgreementController
@@ -16,38 +16,28 @@ public class LeaseAgreementController
     @Autowired
     LeaseAgreementService leaseAgreementService;
 
+    @Autowired
+    CarService carService;
+
     //Startside: vis alle lejeaftaler
     @GetMapping("/leaseagreement")
-    public String index(Model model)
-    {
-        List<LeaseAgreement> leaseAgreement = leaseAgreementService.fetchAll();
-        model.addAttribute("leaseAgreements", new LeaseAgreement());
-        return "leaseagreement/index"; // view: /templates/leaseagreement/index.html
-    }
-
-    @PostMapping("/leaseagreement/create")
-    public String create(@ModelAttribute LeaseAgreement lease, Model model)
-    {
-        leaseAgreementService.addLeaseAgreement(lease);
+    public String index(Model model) {
         model.addAttribute("leaseAgreements", leaseAgreementService.fetchAll());
-        model.addAttribute("leaseAgreement", new LeaseAgreement()); // ryd formular
-        return "leaseagreement/index"; // samme side, men oversigten vises
+        return "leaseagreement/index";
     }
 
     //Vis formular til oprettelse
     @GetMapping("/leaseagreement/create")
-    public String create(Model model)
-    {
+    public String create(Model model) {
         model.addAttribute("leaseAgreement", new LeaseAgreement());
-        return "leaseagreement/create"; // view: /templates/leaseagreement/create.html
+        model.addAttribute("registrationNumbers", carService.getAllRegistrationNumbers()); // dropdown data med gyldige biler
+        return "leaseagreement/create";
     }
 
-
-    //Gem ny aftale
-    @PostMapping("/leaseagreements/createNew")
-    public String createNew(@ModelAttribute LeaseAgreement leaseAgreement)
-    {
+    //Gemmer og redirecter tilbage til leaseagreement siden
+    @PostMapping("/leaseagreement/create")
+    public String create(@ModelAttribute LeaseAgreement leaseAgreement) {
         leaseAgreementService.addLeaseAgreement(leaseAgreement);
-        return "redirect:/leaseagreements";
+        return "redirect:/leaseagreement";
     }
 }
