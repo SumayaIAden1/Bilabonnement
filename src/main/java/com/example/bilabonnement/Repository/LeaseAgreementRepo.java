@@ -45,6 +45,24 @@ public class LeaseAgreementRepo {
         return template.queryForObject(sql, Integer.class);
     }
 
+    //Til dashboard - se pris på nuværende udlejede biler
+
+    public double sumTotalPriceOfLeasedCars()
+    {
+        String sql = "SELECT SUM(total_price) FROM lease_agreement WHERE status = 'active'";
+        Double result = template.queryForObject(sql, Double.class); //Isabella - Jdbc sætning der eksekverer SQL'en , Double.class fortæller Spring at det er decimaltal som værdi
+        return result != null ? result : 0.0; // ? er en kort måde at skrive if/else vi kunne også skrive:
+        /* - Isabella -
+
+        if (result != null) {
+
+         return result;
+        } else {
+
+        return 0.0;
+        }*/
+    }
+
     /*
     public LeaseAgreement findLeaseAgreementById(int id) {
         String sql = "select * from lease_agreement where lease_id = ?";

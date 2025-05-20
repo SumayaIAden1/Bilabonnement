@@ -18,7 +18,15 @@
 
     <div class="info-box">
         <p>Antal biler der er udlejet lige nu: <strong th:text="${activeLeases}">0</strong></p>
+
+        <p>samlet pris på antal udlejede biler:
+            <strong th:text="${#numbers.formatDecimal(totalPrice, 0, 'COMMA', 2, 'POINT')}">0,00</strong> kr.
+        </p>
+        <!--Her formatterer vi f.eks. 15600.0 til 15.600,00 kr.-->
+
     </div>
+
+
 </main>
 
 </body>

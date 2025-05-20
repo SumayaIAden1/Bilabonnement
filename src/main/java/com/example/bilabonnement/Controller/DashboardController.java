@@ -15,18 +15,25 @@ public class DashboardController
     private LeaseAgreementService leaseAgreementService;
 
     @GetMapping("/business/dashboard")
-    public String dashboard(HttpSession session, Model model)
+    public String dashboard(HttpSession session, Model model) //Session henter bruger der er logget ind, vi lægger data i model som thymeleaf kan bruge i HTML
     {
-        User user = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute("user"); //vi henter brugeren fra sessionen, den blev sat når user loggede ind
 
-        if (user == null || user.getUserRole() != User.UserRole.FORRETNINGSUDVIKLER) //sikrer at det kun er forretningsudviklere der kan se dashboard (da man kan ændre html i browseren)
+        if (user == null || user.getUserRole() != User.UserRole.FORRETNINGSUDVIKLER && user.getUserRole() != User.UserRole.ADMIN) //sikrer at det kun er forretningsudviklere og admin der kan se dashboard (da man kan ændre html i browseren)
         {
             return "redirect:/";
         }
 
         int activeLeases = leaseAgreementService.getActiveLeaseCount();
+        double totalPrice = leaseAgreementService.getTotaltPriceOfLeasedCars();
+
+        //Her gør vi tallene klar til at blive vist i Thymeleaf
         model.addAttribute("activeLeases", activeLeases);
+        model.addAttribute("totalPrice", totalPrice);
 
         return "business/dashboard";
+
     }
+
+   
 }

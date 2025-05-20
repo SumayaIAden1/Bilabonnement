@@ -51,4 +51,10 @@ public class LeaseAgreementService
         return leaseAgreementRepo.countActiveLeases();
     }
 
+    //Isabella - metode der henter samlet pris på udlejede biler
+    public double getTotaltPriceOfLeasedCars()
+    {
+        return leaseAgreementRepo.sumTotalPriceOfLeasedCars();
+    }
+
 }
