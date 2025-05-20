@@ -3,6 +3,7 @@ package com.example.bilabonnement.Service;
 
 import com.example.bilabonnement.Model.LeaseAgreement;
 import com.example.bilabonnement.Repository.LeaseAgreementRepo;
+import com.example.bilabonnement.Service.Interface.LeaseAgreementServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +12,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 @Service
-public class LeaseAgreementService
+public class LeaseAgreementService implements LeaseAgreementServiceInterface
 {
     @Autowired
     LeaseAgreementRepo leaseAgreementRepo;
