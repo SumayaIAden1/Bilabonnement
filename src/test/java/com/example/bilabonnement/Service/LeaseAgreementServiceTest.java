@@ -28,4 +28,20 @@ public class LeaseAgreementServiceTest
         assertEquals(3000.0, result, 0.01); //vores forventede resultet 0.01 betyder den max på afvige med det
 
     }
+
+    //Isabella - test af exceptions flow, slutdato før startdato
+    @Test
+    void calculateTotalPrice_shouldThrowExceptionWhenEndDateIsBeforeStartDate()
+    {
+        LeaseAgreement lease = new LeaseAgreement();
+        lease.setMonthlyPrice(3000.0);
+        lease.setStartDate(Date.valueOf(LocalDate.of(2024, 7, 1)));
+        lease.setEndDate(Date.valueOf(LocalDate.of(2024, 6, 1)));
+
+        Exception exception = assertThrows(IllegalArgumentException.class, () ->
+        {
+            leaseAgreementService.calculateTotalPrice(lease);
+        });
+        assertEquals("Slutdato skal være efter startdato", exception.getMessage());
+    }
 }
