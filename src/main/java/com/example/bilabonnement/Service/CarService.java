@@ -8,33 +8,34 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class CarService
-{
+public class CarService {
+
     @Autowired
-    CarRepo carRepo;
-    public List<Car> fetchAll()
-    {
+    private CarRepo carRepo;
+
+    // Henter alle biler
+    public List<Car> fetchAll() {
         return carRepo.fetchAll();
     }
 
-    public void addCar(Car car)
-    {
+    // Tilføjer ny bil
+    public void addCar(Car car) {
         carRepo.addCar(car);
     }
 
-    public Car findCarById(int id)
-    {
-        return carRepo.findCarById(id);
+    // Finder bil ud fra registreringsnummer
+    public Car findCarByRegistration(String registrationNumber) {
+        return carRepo.findCarByRegistration(registrationNumber);
     }
 
-    public Boolean deleteCar(int id)
-    {
-        return carRepo.deleteCar(id);
+    // Sletter bil
+    public boolean deleteCar(String registrationNumber) {
+        return carRepo.deleteCar(registrationNumber);
     }
 
-    public void updateCar(int id, Car car)
-    {
-        carRepo.updateCar(id, car);
+    // Opdaterer bil
+    public void updateCar(String registrationNumber, Car car) {
+        carRepo.updateCar(registrationNumber, car);
     }
 
     //Metode til dropdown (registreringsnumre)

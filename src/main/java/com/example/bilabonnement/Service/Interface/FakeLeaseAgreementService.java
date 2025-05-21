@@ -6,7 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-//test dummy klasse så vi kan teste vores - Isabella
+//test dummy klasse så vi kan teste vores metoder uden at bruge databasen - Isabella
+
 public class FakeLeaseAgreementService implements LeaseAgreementServiceInterface
 {
     public List<LeaseAgreement> fetchAll()

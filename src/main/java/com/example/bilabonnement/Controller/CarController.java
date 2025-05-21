@@ -38,30 +38,30 @@ public class CarController {
     }
 
     // Vis én bil
-    @GetMapping("/cars/viewOne/{id}")
-    public String findCarById(@PathVariable("id") int id, Model model) {
-        model.addAttribute("car", carService.findCarById(id));
+    @GetMapping("/cars/viewOne/{registrationNumber}")
+    public String findCarByRegistration(@PathVariable("registrationNumber") String registrationNumber, Model model) {
+        model.addAttribute("car", carService.findCarByRegistration(registrationNumber));
         return "car/viewOne"; // templates/car/viewOne.html
     }
 
     // Vis formular til opdatering
-    @GetMapping("/cars/updateOne/{id}")
-    public String updateForm(@PathVariable("id") int id, Model model) {
-        model.addAttribute("car", carService.findCarById(id));
+    @GetMapping("/cars/updateOne/{registrationNumber}")
+    public String updateForm(@PathVariable("registrationNumber") String registrationNumber, Model model) {
+        model.addAttribute("car", carService.findCarByRegistration(registrationNumber));
         return "car/updateOne"; // templates/car/updateOne.html
     }
 
     // Gem ændringer
     @PostMapping("/cars/updateCar")
     public String updateCar(@ModelAttribute Car car) {
-        carService.updateCar(car.getCarId(), car);
+        carService.updateCar(car.getRegistrationNumber(), car);
         return "redirect:/cars";
     }
 
     // Slet bil
-    @GetMapping("/cars/deleteOne/{id}")
-    public String deleteCarById(@PathVariable("id") int id) {
-        carService.deleteCar(id);
+    @GetMapping("/cars/deleteOne/{registrationNumber}")
+    public String deleteCar(@PathVariable("registrationNumber") String registrationNumber) {
+        carService.deleteCar(registrationNumber);
         return "redirect:/cars";
     }
 }
