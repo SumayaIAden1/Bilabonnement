@@ -22,7 +22,7 @@ public class CustomerController {
     public String getAllCustomers(Model model) {
         List<Customer> customers = customerService.getAllCustomers();
         model.addAttribute("customers", customers);
-        return "customer/index"; // templates/customer/index.html
+        return "customer/createCustomer"; // templates/customer/index.html
     }
 
     @GetMapping("/customer/create")
@@ -30,7 +30,7 @@ public class CustomerController {
         Customer customer = new Customer();
         customer.setAddress(new Address());
         model.addAttribute("customer", customer);
-        return "redirect:/"; // templates/home/customer/createCustomer.html
+        return "customer/createCustomer";
     }
 
     @PostMapping("/customers/addCustomer")

@@ -80,11 +80,12 @@
     </div>
 </header>
 
-<div th:if="${successMessage}" style="color: green; font-weight: bold; margin-bottom: 1em;">
+<div th:if="${successMessage}" class="success-message">
     <p th:text="${successMessage}"></p>
 </div> <!--Isabella - Succesbesked når man opretter en bil correct -->
 
-<table border="1">
+<div class="table-wrapper">
+<table class="table">
     <thead>
     <tr>
         <th>Registreringsnummer</th>
@@ -120,9 +121,10 @@
     </tr>
     </tbody>
 </table>
+</div>
 
 <br>
-<a href="/cars/create">+ Opret ny bil</a>
+<a href="/cars/create" class="button-outline">Opret ny bil</a>
 
 </body>
 </html>
