@@ -1,0 +1,135 @@
+/* CENTRER SIDEN */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+/* FORMULARENS RAMME */
+form {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+}
+
+/* FELTER + LABELS */
+form label {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-weight: bold;
+}
+
+form input,
+form select {
+    width: 100%;
+    padding: 0.6rem;
+    margin-bottom: 1.2rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* KNAP */
+form button {
+    background-color: #0066cc;
+    color: white;
+    padding: 0.8rem 1.2rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #004999;
+}
+
+/* Wrapper omkring hovedindhold */
+.main-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+/* Tabel styling */
+.table-wrapper table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    border: 1px solid #ccc;
+}
+
+.table-wrapper th,
+.table-wrapper td {
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    text-align: left;
+    font-size: 14px;
+}
+
+.table-wrapper th {
+    background-color: #f4f4f4;
+    color: #143c54;
+}
+
+/* Link til opret-knap */
+.create-link {
+    display: inline-block;
+    margin-bottom: 20px;
+    padding: 10px 15px;
+    background-color: #005EB8;
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.create-link:hover {
+    background-color: #004494;
+}
+
+/* Nulstil margin/padding og sæt box-sizing korrekt */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.welcome-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 0;
+}
+
+.welcome-text h1 {
+    font-size: 28px;
+    color: #143c54;
+    font-weight: bold;
+}
+
+.quick-links h3 {
+    font-size: 16px;
+    color: #555;
+}
+
+.table-wrapper {
+    margin-top: 2rem;
+    overflow-x: auto;
+    border-radius: 10px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+}
+
+.page-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+

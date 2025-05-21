@@ -1,124 +1,102 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Leje aftaler</title>
+    <title>Bilabonnement - Lejeaftaler</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/leaseAgreement.css">
-
 </head>
 <body>
 
-<!-- Wrapper -->
-<header class="top-wrapper">
-    <div class="logo-left">
-        <img src="/images/logo.png" alt="Bilabonnement logo">
-    </div>
+<div class="page-wrapper"> <!-- 💡 Tilføjet wrapper omkring hele layoutet -->
 
-    <nav class="center-logos">
-        <a href="/leaseagreement" class ="lease-style">
-            <img src="/images/lejeaftaler.png" alt="Lejeaftaler">
-        </a>
-        <a href="/biler">
-            <img src="/images/biler.png" alt="Biler">
-        </a>
-        <a href="/kunder">
-            <img src="/images/kunder.png" alt="Biler">
-        </a>
-        <a href="/skade">
-            <img src="/images/skader.png" alt="Skade og udbedring">
-        </a>
-        <a href="/indbakke">
-            <img src="/images/indbakke.png" alt="Indbakke">
-        </a>
-        <a href="/medarbejder">
-            <img src="/images/medarbejder.png" alt="Medarbejder">
-        </a>
-
-        <a href="/dashboard">
-            <img src="/images/dashboard.png" alt="Biler">
-        </a>
-    </nav>
-
-    <div class="right-side">
-        <div class="search-bar">
-            <input type="text" placeholder="Søg...">
-            <button>Søg</button>
+    <!-- Header / navigation -->
+    <header class="top-wrapper">
+        <div class="logo-left">
+            <img src="/images/logo.png" alt="Bilabonnement logo">
         </div>
-        <div class="user-info">
-            <span>Logget ind:</span>
-            <strong>Isabella Joensen</strong>
+
+        <nav class="center-logos">
+            <a href="/leaseagreement" class="lease-style"><img src="/images/lejeaftaler.png" alt="Lejeaftaler"></a>
+            <a href="/biler"><img src="/images/biler.png" alt="Biler"></a>
+            <a href="/kunder"><img src="/images/kunder.png" alt="Kunder"></a>
+            <a href="/skade"><img src="/images/skader.png" alt="Skade og udbedring"></a>
+            <a href="/indbakke"><img src="/images/indbakke.png" alt="Indbakke"></a>
+            <a href="/medarbejder"><img src="/images/medarbejder.png" alt="Medarbejder"></a>
+            <a href="/dashboard"><img src="/images/dashboard.png" alt="Dashboard"></a>
+        </nav>
+
+        <div class="right-side">
+            <div class="search-bar">
+                <input type="text" placeholder="Søg...">
+                <button>Søg</button>
+            </div>
+            <div class="user-info">
+                <span>Logget ind:</span>
+                <strong>Isabella Joensen</strong>
+            </div>
+        </div>
+    </header>
+
+    <!-- Velkomsttekst -->
+    <div class="welcome-wrapper">
+        <div class="welcome-text">
+            <h1>Bilabonnements lejeaftaler</h1>
+        </div>
+        <div class="quick-links">
+            <h3>Quick links:</h3>
         </div>
     </div>
-</header>
 
-<div class="welcome-wrapper">
-    <div class="welcome-text">
-        <h1>Bilabonnements lejeaftaler</h1>
-    </div>
+    <!-- Indhold -->
+    <main class="main-container">
+        <div class="section-header">
+            <h2>Oversigt over lejeaftaler</h2>
+            <a href="/leaseagreement/create-step1" class="create-link">+ Opret ny lejeaftale</a>
+        </div>
 
-    <div class="quick-links">
-        <h3>Quick links:</h3>
-    </div>
-</div>
-<!--        Wrapper                      -->
 
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Lejeaftaler</title>
-    <link rel="stylesheet" href="/css/style.css"> <!-- Din stylesheet -->
-</head>
-<body>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Start</th>
+                    <th>Slut</th>
+                    <th>Start km</th>
+                    <th>Slut km</th>
+                    <th>Månedspris</th>
+                    <th>Totalpris</th>
+                    <th>Aftaletype</th>
+                    <th>Status</th>
+                    <th>Registreringsnummer</th>
+                    <th>Bruger ID</th>
+                    <th>Kunde ID</th>
+                    <th>Lokation ID</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="lease : ${leaseAgreements}">
+                    <td th:text="${lease.leaseId}"></td>
+                    <td th:text="${lease.startDate}"></td>
+                    <td th:text="${lease.endDate}"></td>
+                    <td th:text="${lease.startMileage}"></td>
+                    <td th:text="${lease.endMileage}"></td>
+                    <td th:text="${lease.monthlyPrice}"></td>
+                    <td th:text="${lease.totalPrice}"></td>
+                    <td th:text="${lease.leaseType}"></td>
+                    <td th:text="${lease.status}"></td>
+                    <td th:text="${lease.carRegistrationNumber}"></td>
+                    <td th:text="${lease.userId}"></td>
+                    <td th:text="${lease.customerId}"></td>
+                    <td th:text="${lease.locationId}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
 
-<h2>Bilabonnements lejeaftaler</h2>
-
-<!-- Link til at oprette en ny lejeaftale -->
-<a href="/leaseagreement/create-step1">+ Opret ny lejeaftale</a>
-
-<!-- Tabel over alle lejeaftaler -->
-<table>
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Start</th>
-        <th>Slut</th>
-        <th>Start km</th>
-        <th>Slut km</th>
-        <th>Månedspris</th>
-        <th>Totalpris</th>
-        <th>Aftaletype</th>
-        <th>Status</th>
-        <th>Registreringsnummer</th>
-        <th>Bruger ID</th>
-        <th>Kunde ID</th>
-        <th>Lokation ID</th>
-
-    </tr>
-    </thead>
-    <tbody>
-    <!-- Gennemløb alle lejeaftaler og vis i tabellen -->
-    <tr th:each="lease : ${leaseAgreements}">
-        <td th:text="${lease.leaseId}"></td>
-        <td th:text="${lease.startDate}"></td>
-        <td th:text="${lease.endDate}"></td>
-        <td th:text="${lease.startMileage}"></td>
-        <td th:text="${lease.endMileage}"></td>
-        <td th:text="${lease.monthlyPrice}"></td>
-        <td th:text="${lease.totalPrice}"></td>
-        <td th:text="${lease.leaseType}"></td>
-        <td th:text="${lease.status}"></td>
-        <td th:text="${lease.carRegistrationNumber}"></td>
-        <td th:text="${lease.userId}"></td>
-        <td th:text="${lease.customerId}"></td>
-        <td th:text="${lease.locationId}"></td>
-    </tr>
-
-    </tbody>
-</table>
+</div> <!-- 👈 Lukker page-wrapper -->
 
 </body>
 </html>
-
-
