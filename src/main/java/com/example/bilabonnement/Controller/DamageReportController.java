@@ -26,7 +26,7 @@ public class DamageReportController {
     // Vis formular til oprettelse af ny skade
     @GetMapping("/damages/create")
     public String create(Model model) {
-        model.addAttribute("damageReport", new DamageReport(0, null, "", 0.0, "", false, "", 0, ""));
+        model.addAttribute("damageReport", new DamageReport(0, null, "", null, "", false, "", null, ""));
         return "damage/create"; // templates/damage/create.html
     }
 

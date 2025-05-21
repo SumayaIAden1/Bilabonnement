@@ -6,17 +6,21 @@ public class DamageReport {
     private int reportId;
     private LocalDate date;
     private String description;
-    private double price;
+    private Double price;
     private String inspection;
     private boolean customerPresent;
     private String status;
-    private int carId;
+    private Integer carId;
     private String attachmentPath;
 
-    // Constructor
-    public DamageReport(int reportId, LocalDate date, String description, double price,
+    // Tom konstruktør
+    public DamageReport() {
+    }
+
+    // Konstruktør
+    public DamageReport(int reportId, LocalDate date, String description, Double price,
                         String inspection, boolean customerPresent, String status,
-                        int carId, String attachmentPath) {
+                        Integer carId, String attachmentPath) {
         this.reportId = reportId;
         this.date = date;
         this.description = description;

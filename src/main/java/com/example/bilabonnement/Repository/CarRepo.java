@@ -86,6 +86,13 @@ public class CarRepo {
                 regNumber);
     }
 
+    public Car findCarById(int id) {
+        String sql = "SELECT * FROM car WHERE car_id = ?";
+        RowMapper<Car> rowMapper = new BeanPropertyRowMapper<>(Car.class);
+        return template.queryForObject(sql, rowMapper, id);
+    }
+
+
     // Intern klasse der håndterer mapping fra ResultSet → Car-objekt med enum
     private static class CarRowMapper implements RowMapper<Car> {
         @Override

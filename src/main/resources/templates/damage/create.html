@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="da" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Opret skade – Bilabonnement</title>
+    <link rel="stylesheet" href="/css/style.css?v=1"> <!-- tving browseren til at hente ny version -->
+</head>
+<body>
+
+<header class="top-wrapper">
+    <div class="logo">
+        <img src="/images/logo.png" alt="Bilabonnement logo" width="150">
+        <a th:href="@{/intranet}" class="btn">Gå til Intranet</a>
+    </div>
+</header>
+
+<div class="login-container">
+    <h2>Opret ny skadesrapport</h2>
+
+    <form th:action="@{/damages/createNew}" th:object="${damageReport}" method="post">
+        <div class="form-group">
+            <label for="description">Beskrivelse:</label>
+            <input type="text" th:field="*{description}" id="description" placeholder="Beskriv skaden..." required>
+        </div>
+
+        <div class="form-group">
+            <label for="price">Pris for udbedring af skaden:</label>
+            <input type="text" th:field="*{price}" id="price" placeholder="f.eks. 1500" pattern="^\d+(\.\d{1,2})?$" min="0" required>
+        </div>
+
+        <div class="form-group">
+            <label for="carId">Bilens ID:</label>
+            <input type="text" th:field="*{carId}" id="carId" placeholder="f.eks. 4" pattern="^\d+$" required>
+        </div>
+
+        <button type="submit">Gem</button>
+    </form>
+
+
+</div>
+
+</body>
+</html>

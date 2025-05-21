@@ -1,6 +1,8 @@
 package com.example.bilabonnement.Service;
 
+import com.example.bilabonnement.Model.Car;
 import com.example.bilabonnement.Model.DamageReport;
+import com.example.bilabonnement.Repository.CarRepo;
 import com.example.bilabonnement.Repository.DamageReportRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,6 +11,9 @@ import java.util.List;
 
 @Service
 public class DamageReportService {
+
+    @Autowired
+    private CarRepo carRepo;
 
     @Autowired
     private DamageReportRepo damageReportRepo;
@@ -29,11 +34,20 @@ public class DamageReportService {
     }
 
 
-    // Gemmer en ny skadesrapport i databasen, med validering
-    // Gemmer en ny skadesrapport i databasen
     public void save(DamageReport report) {
+        Car car = carRepo.findCarById(report.getCarId());
+
+        if (!"returneret".equalsIgnoreCase(car.getStatus())) {
+            throw new IllegalStateException("Skader kan kun registreres på returnerede biler.");
+        }
+
+        if (report.getPrice() < 0) {
+            throw new IllegalArgumentException("Prisen må ikke være negativ.");
+        }
+
         damageReportRepo.save(report);
     }
+
 
     // Opdaterer en eksisterende skadesrapport
     public void update(DamageReport report) {
