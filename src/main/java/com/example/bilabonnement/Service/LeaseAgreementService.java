@@ -17,6 +17,7 @@ public class LeaseAgreementService implements LeaseAgreementServiceInterface
     @Autowired
     LeaseAgreementRepo leaseAgreementRepo;
 
+
     public List<LeaseAgreement> fetchAll()
     {
         return leaseAgreementRepo.fetchAll();
@@ -57,5 +58,17 @@ public class LeaseAgreementService implements LeaseAgreementServiceInterface
     {
         return leaseAgreementRepo.sumTotalPriceOfLeasedCars();
     }
+
+    @Override
+    public boolean deleteLeaseAgreement(int id) {
+        return leaseAgreementRepo.deleteLeaseAgreement(id);
+    }
+
+    @Override
+    public LeaseAgreement findById(int id) {
+        return leaseAgreementRepo.findById(id);
+    }
+
+
 
 }

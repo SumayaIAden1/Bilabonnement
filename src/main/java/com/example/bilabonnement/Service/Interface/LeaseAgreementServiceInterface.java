@@ -18,4 +18,8 @@ public interface LeaseAgreementServiceInterface
     int getActiveLeaseCount();
 
     double getTotaltPriceOfLeasedCars();
+
+    boolean deleteLeaseAgreement(int id);
+
+    LeaseAgreement findById(int id);
 }
