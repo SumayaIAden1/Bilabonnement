@@ -80,7 +80,9 @@
     </div>
 </header>
 
-<form action="/cars/addCar" method="post" th:object="${car}">
+
+<div class="table-wrapper">
+<form action="/cars/addCar" method="post" th:object="${car}" class="form-container">
     <label>Registreringsnummer:</label>
     <input type="text" th:field="*{registrationNumber}" required><br>
 
@@ -115,10 +117,10 @@
         <option th:each="model : ${models}" th:value="${model.modelId}" th:text="${model.brand + ' ' + model.modelName}">Model</option>
     </select><br>
 
-    <button type="submit">Opret bil</button>
+    <button type="submit" class="button-outline">Opret bil</button>
 </form>
 
-<a href="/dataentry/cars">Tilbage</a>
-
+<a href="/dataentry/cars" class="back-link">Tilbage</a>
+</div>
 </body>
 </html>

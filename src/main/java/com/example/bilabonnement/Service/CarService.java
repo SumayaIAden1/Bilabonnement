@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class CarService {
@@ -54,4 +55,10 @@ public class CarService {
     }
 
     //------------------------------------------------------------------------------------------------------------------
+
+    /*Isabella - Se status på biler i dashboard*/
+
+    public Map<String, Integer> getCarStatusOverview() {
+        return carRepo.getCarCountByStatus();
+    }
 }
