@@ -7,8 +7,7 @@
 </head>
 <body>
 
-<h1>Biler i databasen</h1>
-
+<h1>Opret ny bil</h1>
 <header class="top-wrapper">
     <div class="logo-left">
         <img src="/images/logo.png" alt="Bilabonnement logo">
@@ -80,50 +79,45 @@
     </div>
 </header>
 
-<div th:if="${successMessage}" style="color: green; font-weight: bold; margin-bottom: 1em;">
-    <p th:text="${successMessage}"></p>
-</div> <!--Isabella - Succesbesked når man opretter en bil correct -->
+<form action="/cars/addCar" method="post" th:object="${car}">
+    <label>Registreringsnummer:</label>
+    <input type="text" th:field="*{registrationNumber}" required><br>
 
-<table border="1">
-    <thead>
-    <tr>
-        <th>Registreringsnummer</th>
-        <th>Stelnummer (VIN)</th>
-        <th>Status</th>
-        <th>Farve</th>
-        <th>Kilometerstand</th>
-        <th>Lokation</th>
-        <th>Mærke</th>
-        <th>Modelnavn</th>
-        <th>Udstyrsniveau</th>
-        <th>CO₂-udledning (g/km)</th>
-        <th>Handlinger</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="car : ${cars}">
-        <td th:text="${car.registrationNumber}">AB12345</td>
-        <td th:text="${car.vinNumber}">VIN123456789</td>
-        <td th:text="${car.status}">Available</td>
-        <td th:text="${car.color}">Sort</td>
-        <td th:text="${car.mileage}">15000</td>
-        <td th:text="${car.location}">København</td>
-        <td th:text="${car.brand}">Toyota</td>
-        <td th:text="${car.modelName}">Yaris</td>
-        <td th:text="${car.equipmentLevel}">Comfort</td>
-        <td th:text="${car.co2Emission}">99</td>
-        <td>
-            <a th:href="@{'/cars/viewOne/' + ${car.registrationNumber}}">Vis</a> |
-            <a th:href="@{'/cars/updateOne/' + ${car.registrationNumber}}">Rediger</a> |
-            <a th:href="@{'/cars/deleteOne/' + ${car.registrationNumber}}">Slet</a>
-        </td>
-    </tr>
-    </tbody>
-</table>
+    <label>Stelnummer (VIN):</label>
+    <input type="text" th:field="*{vinNumber}" required><br>
 
-<br>
-<a href="/cars/create">+ Opret ny bil</a>
+    <label>Status:</label>
+    <select th:field="*{status}">
+        <option value="Available">Available</option>
+        <option value="Rented">Rented</option>
+        <option value="Damaged">Damaged</option>
+        <option value="Returned">Returned</option>
+    </select><br>
+
+    <label>Farve:</label>
+    <input type="text" th:field="*{color}" required><br>
+
+    <label>Købspris:</label>
+    <input type="number" step="0.01" th:field="*{purchasePrice}" required><br>
+
+    <label>Registreringsafgift:</label>
+    <input type="number" step="0.01" th:field="*{registrationFee}" required><br>
+
+    <label>Kilometerstand:</label>
+    <input type="number" th:field="*{mileage}" required><br>
+
+    <label>Lokation:</label>
+    <input type="text" th:field="*{location}" required><br>
+
+    <label>Model:</label>
+    <select th:field="*{modelId}">
+        <option th:each="model : ${models}" th:value="${model.modelId}" th:text="${model.brand + ' ' + model.modelName}">Model</option>
+    </select><br>
+
+    <button type="submit">Opret bil</button>
+</form>
+
+<a href="/dataentry/cars">Tilbage</a>
 
 </body>
 </html>
-
