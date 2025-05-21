@@ -1,5 +1,6 @@
 package com.example.bilabonnement.Repository;
 
+import com.example.bilabonnement.DTO.CarWithModelDTO;
 import com.example.bilabonnement.Model.Car;
 import com.example.bilabonnement.Model.Car.CarStatus;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,21 @@ public class CarRepo {
     public List<Car> fetchAll() {
         String sql = "SELECT * FROM car";
         return template.query(sql, new CarRowMapper());
+    }
+
+    //Isabela - Hent alle biler med model
+    public List<CarWithModelDTO> fetchAllCarsWithModel() {
+        String sql = """
+        SELECT 
+            c.registration_number, c.vin_number, c.status, c.color, c.purchase_price,
+            c.registration_fee, c.mileage, c.location, c.model_id,
+            m.brand, m.model_name, m.equipment_level, m.co2_emission
+        FROM car c
+        JOIN car_model m ON c.model_id = m.model_id
+        """;
+
+        RowMapper<CarWithModelDTO> rowMapper = new BeanPropertyRowMapper<>(CarWithModelDTO.class);
+        return template.query(sql, rowMapper);
     }
 
     // Tilføjer ny bil

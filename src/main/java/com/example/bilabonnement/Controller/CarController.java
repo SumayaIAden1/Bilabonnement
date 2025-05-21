@@ -1,5 +1,6 @@
 package com.example.bilabonnement.Controller;
 
+import com.example.bilabonnement.DTO.CarWithModelDTO;
 import com.example.bilabonnement.Model.Car;
 import com.example.bilabonnement.Service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +17,19 @@ public class CarController {
     private CarService carService;
 
     // Vis alle biler
-    @GetMapping("/cars")
+    /*@GetMapping("/dataentry/cars")
     public String getAllCars(Model model) {
-        List<Car> cars = carService.fetchAll();
+        List<Car> cars = carService.fetchAll(); // Isabella - Vi henter alle biler fra databasen
+        model.addAttribute("cars", cars); // Listen bliver tilgængelig i html
+        return "dataentry/cars";
+    }*/
+
+    //Isbella - alle biler med model
+    @GetMapping("/dataentry/cars")
+    public String getAllCars(Model model) {
+        List<CarWithModelDTO> cars = carService.fetchAllCarsWithModel(); // DTO med car + model
         model.addAttribute("cars", cars);
-        return "car/index"; // templates/car/index.html
+        return "dataentry/cars";
     }
 
     // Vis formular til oprettelse af bil

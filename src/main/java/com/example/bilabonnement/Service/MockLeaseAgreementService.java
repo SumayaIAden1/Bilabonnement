@@ -1,6 +1,7 @@
-package com.example.bilabonnement.Service.Interface;
+package com.example.bilabonnement.Service;
 
 import com.example.bilabonnement.Model.LeaseAgreement;
+import com.example.bilabonnement.Service.Interface.LeaseAgreementServiceInterface;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.List;
 
 //test dummy klasse så vi kan teste vores metoder uden at bruge databasen - Isabella
 
-public class FakeLeaseAgreementService implements LeaseAgreementServiceInterface
+public class MockLeaseAgreementService implements LeaseAgreementServiceInterface
 {
     public List<LeaseAgreement> fetchAll()
     {
