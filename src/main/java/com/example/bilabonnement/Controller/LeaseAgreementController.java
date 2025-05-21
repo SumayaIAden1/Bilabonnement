@@ -30,6 +30,7 @@ public class LeaseAgreementController
     @GetMapping("/leaseagreement")
     public String index(Model model) {
         model.addAttribute("leaseAgreements", leaseAgreementService.fetchAll());
+        //model.addAttribute("user", session.getAttribute("user"));
         return "leaseagreement/index";
     }
 
