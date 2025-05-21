@@ -15,7 +15,7 @@ public class CarModelRepo {
     @Autowired
     private JdbcTemplate template;
 
-    // Hent alle modeller
+    // Isabella - hent alle modeller
     public List<CarModel> fetchAll() {
         String sql = "SELECT * FROM car_model";
         RowMapper<CarModel> rowMapper = new BeanPropertyRowMapper<>(CarModel.class);

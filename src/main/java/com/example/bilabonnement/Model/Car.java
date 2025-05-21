@@ -11,6 +11,8 @@ public class Car {
     private String location;
     private int modelId;
 
+    private CarModel carModel;
+
     public enum CarStatus {
         Available,
         Rented,
@@ -33,6 +35,22 @@ public class Car {
         this.mileage = mileage;
         this.location = location;
         this.modelId = modelId;
+    }
+
+    // Isabella - tilføjet CarModel
+    public Car(String registrationNumber, String vinNumber, CarStatus status, String color,
+               double purchasePrice, double registrationFee, int mileage, String location,
+               int modelId, CarModel carModel) {
+        this.registrationNumber = registrationNumber;
+        this.vinNumber = vinNumber;
+        this.status = status;
+        this.color = color;
+        this.purchasePrice = purchasePrice;
+        this.registrationFee = registrationFee;
+        this.mileage = mileage;
+        this.location = location;
+        this.modelId = modelId;
+        this.carModel = carModel;
     }
 
     // Getters og setters
@@ -106,5 +124,14 @@ public class Car {
 
     public void setModelId(int modelId) {
         this.modelId = modelId;
+    }
+
+
+    public CarModel getCarModel() {
+        return carModel;
+    }
+
+    public void setCarModel(CarModel carModel) {
+        this.carModel = carModel;
     }
 }

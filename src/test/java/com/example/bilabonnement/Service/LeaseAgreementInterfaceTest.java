@@ -1,6 +1,5 @@
 package com.example.bilabonnement.Service;
 
-import com.example.bilabonnement.Service.Interface.FakeLeaseAgreementService;
 import com.example.bilabonnement.Service.Interface.LeaseAgreementServiceInterface;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -10,17 +9,17 @@ public class LeaseAgreementInterfaceTest
 {
 
     @Test
-    void shouldReturnExpectedDataFromFakeService()
+    void shouldReturnExpectedDataFromMockService()
     {
-        // Arrange – brug fake service i stedet for rigtig
-        LeaseAgreementServiceInterface service = new FakeLeaseAgreementService();
+        // Vi bruger mock Service i stedet for den rigtige Service klasse
+        LeaseAgreementServiceInterface service = new MockLeaseAgreementService();
 
-        // Act – kald metoder fra faken
+        // Vi kalder på metoden i mock
         int activeLeases = service.getActiveLeaseCount();
         double totalPrice = service.getTotaltPriceOfLeasedCars();
 
-        // Assert – forvent præcis det vi har defineret i fake
-        assertEquals(2, activeLeases); // Fake returnerer 2
-        assertEquals(56789.0, totalPrice); // Fake returnerer 56789.0
+        // Vi forventer præcis det vi har indsat i mock klassen
+        assertEquals(2, activeLeases); // Mock returnerer 2
+        assertEquals(56789.0, totalPrice); // Mock returnerer 56789.0
     }
 }

@@ -1,6 +1,7 @@
 package com.example.bilabonnement.Service;
 
 import com.example.bilabonnement.Model.Car;
+import com.example.bilabonnement.DTO.CarWithModelDTO;
 import com.example.bilabonnement.Repository.CarRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,11 @@ public class CarService {
     // Henter alle biler
     public List<Car> fetchAll() {
         return carRepo.fetchAll();
+    }
+
+    // Isabella - Hent alle biler med modelinfo (DTO)
+    public List<CarWithModelDTO> fetchAllCarsWithModel() {
+        return carRepo.fetchAllCarsWithModel();
     }
 
     // Tilføjer ny bil

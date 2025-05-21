@@ -18,19 +18,19 @@ public class CustomerController {
     private CustomerService customerService;
 
     // Vis alle kunder
-    @GetMapping("/customers")
+    @GetMapping("/customer")
     public String getAllCustomers(Model model) {
         List<Customer> customers = customerService.getAllCustomers();
         model.addAttribute("customers", customers);
         return "customer/index"; // templates/customer/index.html
     }
 
-    @GetMapping("/customers/create")
+    @GetMapping("/customer/create")
     public String create(Model model) {
         Customer customer = new Customer();
         customer.setAddress(new Address());
         model.addAttribute("customer", customer);
-        return "home/customer/createCustomer";  // templates/home/customer/createCustomer.html
+        return "redirect:/"; // templates/home/customer/createCustomer.html
     }
 
     @PostMapping("/customers/addCustomer")

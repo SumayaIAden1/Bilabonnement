@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1>Biler i databasen</h1>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Registreringsnummer</th>
+        <th>Stelnummer (VIN)</th>
+        <th>Status</th>
+        <th>Farve</th>
+        <th>Kilometerstand</th>
+        <th>Lokation</th>
+        <th>Mærke</th>
+        <th>Modelnavn</th>
+        <th>Udstyrsniveau</th>
+        <th>CO₂-udledning (g/km)</th>
+        <th>Handlinger</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="car : ${cars}">
+        <td th:text="${car.registrationNumber}">AB12345</td>
+        <td th:text="${car.vinNumber}">VIN123456789</td>
+        <td th:text="${car.status}">Available</td>
+        <td th:text="${car.color}">Sort</td>
+        <td th:text="${car.mileage}">15000</td>
+        <td th:text="${car.location}">København</td>
+        <td th:text="${car.brand}">Toyota</td>
+        <td th:text="${car.modelName}">Yaris</td>
+        <td th:text="${car.equipmentLevel}">Comfort</td>
+        <td th:text="${car.co2Emission}">99</td>
+        <td>
+            <a th:href="@{'/cars/viewOne/' + ${car.registrationNumber}}">Vis</a> |
+            <a th:href="@{'/cars/updateOne/' + ${car.registrationNumber}}">Rediger</a> |
+            <a th:href="@{'/cars/deleteOne/' + ${car.registrationNumber}}">Slet</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<br>
+<a href="/cars/create">+ Opret ny bil</a>
+
+</body>
+</html>
+
