@@ -1,31 +1,36 @@
 <!DOCTYPE html>
-<html lang="da" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Gennemse lejeaftale</title>
+    <title>Gennemse Lejeaftale</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/leaseAgreement.css">
 </head>
 <body>
 
-<h1>Gennemse din lejeaftale</h1>
+<main class="main-container">
+    <h2>Trin 3: Gennemse og bekræft oplysninger</h2>
 
-<table>
-    <tr><td>Startdato:</td><td th:text="${leaseAgreement.startDate}"></td></tr>
-    <tr><td>Slutdato:</td><td th:text="${leaseAgreement.endDate}"></td></tr>
-    <tr><td>Start km:</td><td th:text="${leaseAgreement.startMileage}"></td></tr>
-    <tr><td>Slut km:</td><td th:text="${leaseAgreement.endMileage}"></td></tr>
-    <tr><td>Månedspris:</td><td th:text="${leaseAgreement.monthlyPrice}"></td></tr>
-    <tr><td>Totalpris:</td><td th:text="${leaseAgreement.totalPrice}"></td></tr>
-    <tr><td>Status:</td><td th:text="${leaseAgreement.status}"></td></tr>
-    <tr><td>Aftaletype:</td><td th:text="${leaseAgreement.leaseType}"></td></tr>
-    <tr><td>Bil:</td><td th:text="${leaseAgreement.carRegistrationNumber}"></td></tr>
-    <tr><td>Bruger ID:</td><td th:text="${leaseAgreement.userId}"></td></tr>
-    <tr><td>Kunde ID:</td><td th:text="${leaseAgreement.customerId}"></td></tr>
-    <tr><td>Lokation ID:</td><td th:text="${leaseAgreement.locationId}"></td></tr>
-</table>
+    <div class="table-wrapper">
+        <table>
+            <tr><td>Kunde ID:</td><td th:text="${leaseAgreement.customerId}"></td></tr>
+            <tr><td>Bruger ID:</td><td th:text="${leaseAgreement.userId}"></td></tr>
+            <tr><td>Lokation ID:</td><td th:text="${leaseAgreement.locationId}"></td></tr>
+            <tr><td>Bil:</td><td th:text="${leaseAgreement.carRegistrationNumber}"></td></tr>
+            <tr><td>Startdato:</td><td th:text="${leaseAgreement.startDate}"></td></tr>
+            <tr><td>Slutdato:</td><td th:text="${leaseAgreement.endDate}"></td></tr>
+            <tr><td>Start km:</td><td th:text="${leaseAgreement.startMileage}"></td></tr>
+            <tr><td>Slut km:</td><td th:text="${leaseAgreement.endMileage}"></td></tr>
+            <tr><td>Månedspris:</td><td th:text="${leaseAgreement.monthlyPrice} + ' DKK'"></td></tr>
+            <tr><td>Aftaletype:</td><td th:text="${leaseAgreement.leaseType}"></td></tr>
 
-<form th:action="@{/leaseagreement/confirm}" method="post">
-    <button type="submit">Bekræft aftale</button>
-</form>
+        </table>
+    </div>
+
+    <form th:action="@{/leaseagreement/confirm}" th:object="${leaseAgreement}" method="post">
+        <button type="submit">Bekræft og opret aftale</button>
+    </form>
+</main>
 
 </body>
 </html>

@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Size;
 import jakarta.validation.constraints.Email;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Customer {
 
@@ -114,4 +115,9 @@ public class Customer {
     public void setActive(boolean active) {
         isActive = active;
     }
+
+    public interface CustomerService {
+        List<Customer> getAllCustomers();
+    }
+
 }

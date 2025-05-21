@@ -12,85 +12,77 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-
-// Gemmer "leaseAgreement" i sessionen, så det huskes mellem trin 1, 2 og 3 i oprettelsesprocessen.
-// Det betyder, at brugerens data ikke forsvinder mellem side-skift.
+@RequestMapping("/leaseagreement")
 @SessionAttributes("leaseAgreement")
-
-public class LeaseAgreementController
-{
+public class LeaseAgreementController {
 
     @Autowired
-    LeaseAgreementServiceInterface leaseAgreementService;
+    private LeaseAgreementServiceInterface leaseAgreementService;
 
     @Autowired
-    CarService carService;
+    private CarService carService;
+    @Autowired
+    private UserService userService;
 
-    //Startside: vis alle lejeaftaler
-    @GetMapping("/leaseagreement")
-    public String index(Model model) {
+    @Autowired
+    private CustomerService customerService;
+
+
+
+    // Startside: vis alle lejeaftaler
+    @GetMapping("")
+    public String index(Model model, HttpSession session) {
         model.addAttribute("leaseAgreements", leaseAgreementService.fetchAll());
-        //model.addAttribute("user", session.getAttribute("user"));
+        model.addAttribute("user", session.getAttribute("user"));
         return "leaseagreement/index";
     }
 
-    //Vis formular til oprettelse
-    @GetMapping("/leaseagreement/create")
-    public String create(Model model) {
-        model.addAttribute("leaseAgreement", new LeaseAgreement());
-        model.addAttribute("registrationNumbers", carService.getAllRegistrationNumbers()); // dropdown data med gyldige biler
-        return "leaseagreement/create";
-    }
-
-    //Gemmer og redirecter tilbage til leaseagreement siden
-    @PostMapping("/leaseagreement/create")
-    public String create(@ModelAttribute LeaseAgreement leaseAgreement) {
-        leaseAgreementService.addLeaseAgreement(leaseAgreement);
-        return "redirect:/leaseagreement";
-    }
-
-    //Opretter trinvis oprettelse af lejeaftale
-    @GetMapping("/create/step1")
-    public String showStep1(Model model){
+    // Trin 1: vis første formular
+    @GetMapping("/create-step1")
+    public String showStep1(Model model) {
         model.addAttribute("leaseAgreement", new LeaseAgreement());
         model.addAttribute("registrationNumbers", carService.getAllRegistrationNumbers());
         return "leaseagreement/create-step1";
     }
 
-    //Redirecter dig videre til step 2 i processen
-    @PostMapping("/create/step1")
-    public String processStep1(@ModelAttribute("leaseAgreement") LeaseAgreement leaseAgreeement){
+    // Trin 1: modtag data og gå videre til step 2
+    @PostMapping("/create-step1")
+    public String processStep1(@ModelAttribute("leaseAgreement") LeaseAgreement leaseAgreement) {
         return "redirect:/leaseagreement/create-step2";
     }
 
-    //Opretter trin 2 til oprettelse af lejeaftale
+    // Trin 2: vis næste formular
     @GetMapping("/create-step2")
-    public String showStep2(@ModelAttribute("leaseAgreement") LeaseAgreement leaseAgreement){
-        return"leaseagreement/create-step2";
+    public String showStep2(@ModelAttribute("leaseAgreement") LeaseAgreement leaseAgreement, Model model) {
+        model.addAttribute("userList", userService.getAllUsers());
+        model.addAttribute("customerList", customerService.getAllCustomers());
+        //model.addAttribute("locationList", locationService.getAllLocations());
+        return "leaseagreement/create-step2";
     }
 
+
+    // Trin 2: modtag og gå videre til preview
     @PostMapping("/create-step2")
-    public String processStep2(@ModelAttribute("leaseAgreement") LeaseAgreement leaseAgreement){
-        return"redirect:/leaseagreement/preview";
+    public String processStep2(@ModelAttribute("leaseAgreement") LeaseAgreement leaseAgreement) {
+        return "redirect:/leaseagreement/preview";
     }
 
-    // Trin 3: Gennemse og bekræft oplysningerne før oprettelse
+    // Trin 3: vis preview før bekræftelse
     @GetMapping("/preview")
     public String showPreview(@ModelAttribute("leaseAgreement") LeaseAgreement leaseAgreement) {
         return "leaseagreement/preview";
     }
 
-    @GetMapping("/confirm")
-    public String confirmed() {
-        return "leaseagreement/confirm";
-    }
-
-    // Trin 4: Når brugeren trykker “Bekræft”, gemmes lejeaftalen i databasen
+    // Trin 4: bekræft og gem i DB
     @PostMapping("/confirm")
     public String confirm(@ModelAttribute("leaseAgreement") LeaseAgreement leaseAgreement) {
         leaseAgreementService.addLeaseAgreement(leaseAgreement);
         return "redirect:/leaseagreement/confirm";
     }
 
-
+    // Kvitteringsside efter gemt aftale
+    @GetMapping("/confirm")
+    public String confirmed() {
+        return "leaseagreement/confirm";
+    }
 }
