@@ -118,6 +118,7 @@
                         <th>Bruger ID</th>
                         <th>Kunde ID</th>
                         <th>Lokation ID</th>
+                        <th>Handling</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -135,11 +136,15 @@
                         <td th:text="${lease.userId}">7</td>
                         <td th:text="${lease.customerId}">3</td>
                         <td th:text="${lease.locationId}">1</td>
+                        <td>
+                            <a th:href="@{/leaseagreement/edit/{id}(id=${lease.leaseId})}">✏️ Rediger</a> <br> | <br>
+                            <a th:href="@{/leaseagreement/delete/{id}(id=${lease.leaseId})}"
+                               onclick="return confirm('Er du sikker på, at du vil slette denne lejeaftale?');">🗑️ Slet</a>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
             </div>
-            <!-- Indsæt tabellen af lejeaftaler her -->
         </div>
     </div>
 
@@ -199,8 +204,6 @@
 
                 <button type="submit">Gem lejeaftale</button>
             </form>
-
-            <!-- Indsæt formular her -->
         </div>
     </div>
 </div>

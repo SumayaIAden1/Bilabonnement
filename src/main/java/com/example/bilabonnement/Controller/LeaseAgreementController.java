@@ -48,4 +48,20 @@ public class LeaseAgreementController {
         leaseAgreementService.addLeaseAgreement(leaseAgreement);
         return "redirect:/leaseagreement";
     }
+
+    @GetMapping("/delete/{id}")
+    public String deleteLease(@PathVariable int id) {
+        leaseAgreementService.deleteLeaseAgreement(id);
+        return "redirect:/leaseagreement";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String editLease(@PathVariable int id, Model model,HttpSession session) {
+        LeaseAgreement leaseAgreement = leaseAgreementService.findById(id);
+        model.addAttribute("leaseAgreement", leaseAgreement);
+        model.addAttribute("user", session.getAttribute("user"));
+        return "leaseagreement/edit";
+    }
+
+
 }

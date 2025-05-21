@@ -54,6 +54,18 @@ public class LeaseAgreementRepo
 
     //Til dashboard - se pris på nuværende udlejede biler
 
+    public boolean deleteLeaseAgreement(int id) {
+        String sql = "DELETE FROM lease_agreement WHERE lease_id = ?";
+        return template.update(sql, id) > 0;
+    }
+
+    public LeaseAgreement findById(int id) {
+        String sql = "SELECT * FROM lease_agreement WHERE lease_id = ?";
+        RowMapper<LeaseAgreement> rowMapper = new BeanPropertyRowMapper<>(LeaseAgreement.class);
+        return template.queryForObject(sql, rowMapper, id);
+    }
+
+
     public double sumTotalPriceOfLeasedCars()
     {
         String sql = "SELECT SUM(total_price) FROM lease_agreement WHERE status = 'active'";
@@ -70,17 +82,14 @@ public class LeaseAgreementRepo
         }
     }
 
-    /*
+
     public LeaseAgreement findLeaseAgreementById(int id) {
         String sql = "select * from lease_agreement where lease_id = ?";
         RowMapper<LeaseAgreement> rowMapper = new BeanPropertyRowMapper<>(LeaseAgreement.class);
         return template.queryForObject(sql, rowMapper, id);
     }
 
-    public Boolean deleteLeaseAgreement(int id) {
-        String sql = "delete from lease_agreement where lease_id = ?";
-        return template.update(sql, id) > 0;
-    }
+
 
     public void updateLeaseAgreement(int id, LeaseAgreement leaseAgreement) {
         String sql = "UPDATE lease_agreement SET start_date = ?, end_date = ?, monthly_price = ?, total_price = ?, lease_type = ?, status = ?, car_id = ?, user_id = ?, " +
