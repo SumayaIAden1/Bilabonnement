@@ -103,7 +103,7 @@
             Hos Bilabonnement er der følgende lejeaftaler:<br>
 
             <div class="table-wrapper">
-                <table>
+                <table class="table">
                     <thead>
                     <tr>
                         <th>ID</th>
@@ -138,10 +138,11 @@
                         <td th:text="${lease.customerId}">3</td>
                         <td th:text="${lease.locationId}">1</td>
                         <td>
-                            <a th:href="@{/leaseagreement/edit/{id}(id=${lease.leaseId})}">✏️ Rediger</a> <br> | <br>
+                            <a th:href="@{/leaseagreement/edit/{id}(id=${lease.leaseId})}">Rediger</a> |
                             <a th:href="@{/leaseagreement/delete/{id}(id=${lease.leaseId})}"
-                               onclick="return confirm('Er du sikker på, at du vil slette denne lejeaftale?');">🗑️ Slet</a>
+                               onclick="return confirm('Er du sikker på, at du vil slette denne lejeaftale?');">Slet</a>
                         </td>
+
                     </tr>
                     </tbody>
                 </table>
