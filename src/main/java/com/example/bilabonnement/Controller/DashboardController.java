@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -19,6 +20,7 @@ public class DashboardController
 
     @Autowired
     private CarService carService;
+
 
     @GetMapping("/business/dashboard")
     public String dashboard(HttpSession session, Model model) //Session henter bruger der er logget ind, vi lægger data i model som thymeleaf kan bruge i HTML
@@ -36,13 +38,19 @@ public class DashboardController
         //Isabella - Se status på biler i dashboard
         Map<String, Integer> carStatusCounts = carService.getCarStatusOverview();
 
+        //Isabella - metode til at vise status og modelnavn på biler i databasen
+        List<Map<String, Object>> statusModelCounts = carService.getCarCountByStatusAndModel();
+
         //Her gør vi tallene klar til at blive vist i Thymeleaf
         model.addAttribute("activeLeases", activeLeases);
+
         model.addAttribute("totalPrice", totalPrice);
 
         model.addAttribute("user", user);
 
         model.addAttribute("carStatusCounts", carStatusCounts);
+
+        model.addAttribute("statusModelCounts", statusModelCounts);
 
         return "business/dashboard";
 

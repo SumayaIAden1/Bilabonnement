@@ -66,4 +66,11 @@ public class CarService {
     public Map<String, Integer> getCarStatusOverview() {
         return carRepo.getCarCountByStatus();
     }
+
+    //Isabella - metode til at vise status og modelnavn på biler i databasen....----------------------------------------
+
+    public List<Map<String , Object>> getCarCountByStatusAndModel()
+    {
+        return carRepo.getCarCountByStatusAndModel();
+    }
 }

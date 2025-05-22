@@ -127,6 +127,31 @@
             </div>
         </div>
     </div>
+
+
+    <div class="dashboard-wrapper">
+        <h2>Fordeling af biler pr. status og model</h2>
+
+        <div class="table-wrapper">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Status</th>
+                    <th>Modelnavn</th>
+                    <th>Antal</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="entry : ${statusModelCounts}">
+                    <td th:text="${entry['status']}">Status</td>
+                    <td th:text="${entry['model_name']}">Model</td>
+                    <td th:text="${entry['count']}">0</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
 </main>
 
 </body>

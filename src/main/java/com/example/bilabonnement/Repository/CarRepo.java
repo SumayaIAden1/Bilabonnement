@@ -154,6 +154,17 @@ public class CarRepo {
         });
     }
 
+    /*Isabella - metode til at vise status og modelnavn på biler i databasen....------------------------------------------*/
+
+    public List<Map<String, Object>> getCarCountByStatusAndModel()
+    {
+        String sql = "SELECT c.status, m.model_name, COUNT(*) AS count " +
+                "FROM car c " +
+                "JOIN car_model m ON c.model_id = m.model_id " +
+                "GROUP BY c.status, m.model_name " +                            //grupperer efter både status og model
+                "ORDER BY c.status, m.model_name";                              //Sorterer resultatet pænt
+        return template.queryForList(sql);
+    }
 
     /*public Map<String, Integer> getCarCountByStatus()
     {
