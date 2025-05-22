@@ -73,4 +73,11 @@ public class CarService {
     {
         return carRepo.getCarCountByStatusAndModel();
     }
+
+    // Isabella - Henter status-fordeling pr. modelnavn til dashboard
+    public Map<String, Map<String, Integer>> getStatusCountsGroupedByModel() {
+        return carRepo.getStatusCountsGroupedByModel();
+    }
 }
+
+

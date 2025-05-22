@@ -152,6 +152,33 @@
         </div>
     </div>
 
+    <div class="dashboard-wrapper">
+        <h2>Lagerstatus pr. model</h2>
+
+        <div class="table-wrapper">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Modelnavn</th>
+                    <th>Available</th>
+                    <th>Rented</th>
+                    <th>Returned</th>
+                    <th>Damaged</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="entry : ${groupedStatusByModel}">
+                    <td th:text="${entry.key}">Modelnavn</td>
+                    <td th:text="${entry.value['Available'] ?: 0}">0</td>
+                    <td th:text="${entry.value['Rented'] ?: 0}">0</td>
+                    <td th:text="${entry.value['Returned'] ?: 0}">0</td>
+                    <td th:text="${entry.value['Damaged'] ?: 0}">0</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
 </main>
 
 </body>

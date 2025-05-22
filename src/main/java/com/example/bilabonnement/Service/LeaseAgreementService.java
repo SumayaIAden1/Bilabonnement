@@ -17,13 +17,14 @@ public class LeaseAgreementService implements LeaseAgreementServiceInterface
     @Autowired
     LeaseAgreementRepo leaseAgreementRepo;
 
-
+    @Override
     public List<LeaseAgreement> fetchAll()
     {
         return leaseAgreementRepo.fetchAll();
     }
 
     /* Tilføjet Logik bag metoden*/
+    @Override
     public void addLeaseAgreement(LeaseAgreement leaseAgreement)
     {
         double total = calculateTotalPrice(leaseAgreement);
@@ -34,6 +35,7 @@ public class LeaseAgreementService implements LeaseAgreementServiceInterface
 
 
     /* Metode til beregning af pris --- ChronoUnit.DAYS.between(...): Beregner antal dage mellem to datoer.*/
+    @Override
     public double calculateTotalPrice(LeaseAgreement leaseAgreement) {
         LocalDate start = leaseAgreement.getStartDate().toLocalDate();
         LocalDate end = leaseAgreement.getEndDate().toLocalDate();
@@ -48,12 +50,14 @@ public class LeaseAgreementService implements LeaseAgreementServiceInterface
     }
 
     //Isabella - metode der henter udlejede biler fra repo laget (til dashboard - se hvor mange biler der er udlejet)
+    @Override
     public int getActiveLeaseCount()
     {
         return leaseAgreementRepo.countActiveLeases();
     }
 
     //Isabella - metode der henter samlet pris på udlejede biler
+    @Override
     public double getTotaltPriceOfLeasedCars()
     {
         return leaseAgreementRepo.sumTotalPriceOfLeasedCars();
