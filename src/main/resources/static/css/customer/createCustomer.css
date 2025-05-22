@@ -1,4 +1,4 @@
-/* Customer creation form styling */
+/* Overskrift-stil */
 h1 {
     font-size: 28px;
     color: #000000;
@@ -6,6 +6,7 @@ h1 {
     margin: 30px 0;
 }
 
+/* Formular-container */
 form {
     max-width: 600px;
     margin: 0 auto;
@@ -15,6 +16,7 @@ form {
     border: 2px solid #ccc;
 }
 
+/* Labels til input-felter */
 label {
     display: block;
     font-size: 16px;
@@ -23,6 +25,7 @@ label {
     margin-bottom: 8px;
 }
 
+/* Tekst-, e-mail- og datofelter */
 input[type="text"],
 input[type="email"],
 input[type="date"] {
@@ -35,11 +38,13 @@ input[type="date"] {
     box-sizing: border-box;
 }
 
+/* Checkbox-stil */
 input[type="checkbox"] {
     margin: 10px 0;
     vertical-align: middle;
 }
 
+/* Send-knap */
 button[type="submit"] {
     display: block;
     width: 100%;
@@ -54,10 +59,12 @@ button[type="submit"] {
     transition: background-color 0.2s ease;
 }
 
+/* Send-knap ved hover */
 button[type="submit"]:hover {
     background-color: #00AEEF;
 }
 
+/* Tilbage-link */
 a {
     display: block;
     text-align: center;
@@ -68,6 +75,7 @@ a {
     font-weight: bold;
 }
 
+/* Link ved hover */
 a:hover {
     color: #00AEEF;
 }

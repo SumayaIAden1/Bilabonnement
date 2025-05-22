@@ -19,13 +19,13 @@
     <!-- Customer details -->
     <div class="customer-details">
         <h3>Kundeoplysninger</h3>
-        <p><strong>Navn:</strong> <span th:text="${customer.name}"></span></p>
+        <p><strong>Navn:</strong> <span th:text="${customer.customerName}"></span></p>
         <p><strong>Email:</strong> <span th:text="${customer.email}"></span></p>
         <p><strong>Telefon:</strong> <span th:text="${customer.phoneNumber}"></span></p>
         <!-- Tilføj flere kundeoplysninger om nødvendigt -->
     </div>
     <!-- Link til tilbage til kundeoversigten -->
-    <a href="/customers" class="back-link">Tilbage til kundeoversigten</a>
+    <a href="/customers/startpage" class="back-link">Tilbage til kundeportalen</a>
 </div>
 
 </body>

@@ -17,34 +17,36 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
+    // Startside for kunder
+    @GetMapping("/customers/startpage")
+    public String startpage() {
+        return "home/customer/startpage";
+    }
+
+
     // Vis alle kunder
-    @GetMapping("/customer")
+    @GetMapping("/customers")
     public String getAllCustomers(Model model) {
         List<Customer> customers = customerService.getAllCustomers();
         model.addAttribute("customers", customers);
-        return "customer/createCustomer"; // templates/customer/index.html
+        return "customer/index"; // templates/customer/index.html
     }
 
-    @GetMapping("/customer/create")
+
+    // Opret kunde metode
+    @GetMapping("/customers/create")
     public String create(Model model) {
         Customer customer = new Customer();
         customer.setAddress(new Address());
         model.addAttribute("customer", customer);
-        return "customer/createCustomer";
+        return "home/customer/createCustomer";  // templates/home/customer/createCustomer.html
     }
 
+    // Tilføjer selve kunden til databasen efter oprettelse
     @PostMapping("/customers/addCustomer")
     public String addCustomer(@ModelAttribute Customer customer, RedirectAttributes redirectAttributes) {
         try {
-            // Create and set the Address object
-            Address address = new Address(0, customer.getAddress().getStreet(),
-                    customer.getAddress().getCity(),
-                    customer.getAddress().getZip(),
-                    customer.getAddress().getCountry());
-
-            // Add the customer and address to the database
-            customerService.addCustomerWithAddress(customer, address);
-
+            customerService.addCustomerWithAddress(customer);
             return "redirect:/customers/confirmation";  // Redirect to the confirmation page
         } catch (IllegalArgumentException e) {
             redirectAttributes.addFlashAttribute("error", e.getMessage());
@@ -52,7 +54,7 @@ public class CustomerController {
         }
     }
 
-
+    // Bekræftelsessiden for oprettelse af kunde
     @GetMapping("/customers/confirmation")
     public String confirmation(Model model) {
         Customer lastCreatedCustomer = customerService.getLastCreatedCustomer();
@@ -62,7 +64,7 @@ public class CustomerController {
     }
 
 
-    // Vis specifik kunde
+    // Vis specifik kunde med id
     @GetMapping("/customers/viewOne/{id}")
     public String getCustomerById(@PathVariable("id") int id, Model model) {
         Customer customer = customerService.getCustomerById(id);
