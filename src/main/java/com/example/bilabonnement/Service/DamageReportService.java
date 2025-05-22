@@ -37,14 +37,12 @@ public class DamageReportService {
     public void save(DamageReport report) {
         Car car = carRepo.findCarById(report.getCarId());
 
-        if (!"returneret".equalsIgnoreCase(car.getStatus())) {
+        if (car.getStatus() != Car.CarStatus.Returned) {
             throw new IllegalStateException("Skader kan kun registreres på returnerede biler.");
         }
-
         if (report.getPrice() < 0) {
             throw new IllegalArgumentException("Prisen må ikke være negativ.");
         }
-
         damageReportRepo.save(report);
     }
 

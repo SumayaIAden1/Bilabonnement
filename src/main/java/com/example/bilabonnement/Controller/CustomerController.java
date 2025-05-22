@@ -20,7 +20,7 @@ public class CustomerController {
     // Startside for kunder
     @GetMapping("/customers/startpage")
     public String startpage() {
-        return "home/customer/startpage";
+        return "customer/startpage";
     }
 
 
