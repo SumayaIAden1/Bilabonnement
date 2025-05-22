@@ -11,7 +11,9 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class CarRepo {
@@ -133,4 +135,38 @@ public class CarRepo {
     }
 
     //------------------------------------------------------------------------------------------------------------------
+
+    //Isabella - Se status på biler i dashboard
+
+    public Map<String, Integer> getCarCountByStatus() {
+        String sql = "SELECT status, COUNT(*) as count FROM car GROUP BY status";
+
+        return template.query(sql, rs ->
+        {
+            Map<String, Integer> result = new HashMap<>();  //Vi opretter en tom HashMap hvor data fra databasen kommer ind, status er nøglen og værdien er antallet
+            while (rs.next())
+            {
+                String status = rs.getString("status");
+                int count = rs.getInt("count");
+                result.put(status, count);
+            }
+            return result;
+        });
+    }
+
+
+    /*public Map<String, Integer> getCarCountByStatus()
+    {
+        String sql = "SELECT status, COUNT(*) as count FROM car GROUP BY status";
+        Map<String, Integer> result = new HashMap<>();
+
+        template.query(sql, rs ->
+        {
+            result.put(rs.getString("status"), rs.getInt("count"));
+        });
+
+        return result;
+    }*/
+
+
 }

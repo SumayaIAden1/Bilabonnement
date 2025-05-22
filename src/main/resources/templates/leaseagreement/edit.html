@@ -1,17 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Rediger Lejeaftale</title>
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-
 <header class="top-wrapper">
     <div class="logo-left">
-        <a href="/intranet" title="Gå til forsiden">
-            <img src="/images/logo.png" alt="Bilabonnement logo">
-        </a>
+        <img src="/images/logo.png" alt="Bilabonnement logo">
     </div>
 
     <nav class="center-logos">
@@ -80,52 +77,68 @@
     </div>
 </header>
 
-<div th:if="${successMessage}" class="success-message">
-    <p th:text="${successMessage}"></p>
-</div> <!--Isabella - Succesbesked når man opretter en bil correct -->
+<div class="welcome-wrapper">
+    <div class="welcome-text">
+        <h1>Lejeaftaler - Bilabonnement</h1>
+    </div>
 
-<div class="table-wrapper">
-<table class="table">
-    <thead>
-    <tr>
-        <th>Registreringsnummer</th>
-        <th>Stelnummer (VIN)</th>
-        <th>Status</th>
-        <th>Farve</th>
-        <th>Kilometerstand</th>
-        <th>Lokation</th>
-        <th>Mærke</th>
-        <th>Modelnavn</th>
-        <th>Udstyrsniveau</th>
-        <th>CO₂-udledning (g/km)</th>
-        <th>Handlinger</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="car : ${cars}">
-        <td th:text="${car.registrationNumber}">AB12345</td>
-        <td th:text="${car.vinNumber}">VIN123456789</td>
-        <td th:text="${car.status}">Available</td>
-        <td th:text="${car.color}">Sort</td>
-        <td th:text="${car.mileage}">15000</td>
-        <td th:text="${car.location}">København</td>
-        <td th:text="${car.brand}">Toyota</td>
-        <td th:text="${car.modelName}">Yaris</td>
-        <td th:text="${car.equipmentLevel}">Comfort</td>
-        <td th:text="${car.co2Emission}">99</td>
-        <td>
-            <a th:href="@{'/cars/viewOne/' + ${car.registrationNumber}}">Vis</a> |
-            <a th:href="@{'/cars/updateOne/' + ${car.registrationNumber}}">Rediger</a> |
-            <a th:href="@{'/cars/deleteOne/' + ${car.registrationNumber}}">Slet</a>
-        </td>
-    </tr>
-    </tbody>
-</table>
+    <div class="quick-links">
+        <h3>Quick links:</h3>
+    </div>
 </div>
 
-<br>
-<a href="/cars/create" class="button-outline">Opret ny bil</a>
 
+<main class="main-container">
+    <h2>✏️ Rediger Lejeaftale</h2>
+
+    <form th:action="@{/leaseagreement/update/{id}(id=*{leaseId})}"
+          th:object="${leaseAgreement}" method="post">
+
+        <label for="startDate">Startdato</label>
+        <input type="date" id="startDate" th:field="*{startDate}" required>
+
+        <label for="endDate">Slutdato</label>
+        <input type="date" id="endDate" th:field="*{endDate}" required>
+
+        <label for="startMileage">Start km</label>
+        <input type="number" id="startMileage" th:field="*{startMileage}" required>
+
+        <label for="endMileage">Slut km</label>
+        <input type="number" id="endMileage" th:field="*{endMileage}" required>
+
+        <label for="monthlyPrice">Månedspris</label>
+        <input type="number" id="monthlyPrice" th:field="*{monthlyPrice}" step="0.01" required>
+
+        <label for="totalPrice">Totalpris</label>
+        <input type="number" id="totalPrice" th:field="*{totalPrice}" step="0.01" required>
+
+        <label for="leaseType">Aftaletype</label>
+        <select id="leaseType" th:field="*{leaseType}" required>
+            <option value="Limited">Limited</option>
+            <option value="Unlimited">Unlimited</option>
+        </select>
+
+        <label for="status">Status</label>
+        <select id="status" th:field="*{status}" required>
+            <option value="Active">Active</option>
+            <option value="Completed">Completed</option>
+            <option value="Cancelled">Cancelled</option>
+        </select>
+
+        <label for="carRegistrationNumber">Registreringsnummer</label>
+        <input type="text" id="carRegistrationNumber" th:field="*{carRegistrationNumber}" required>
+
+        <label for="userId">Bruger ID</label>
+        <input type="number" id="userId" th:field="*{userId}" required>
+
+        <label for="customerId">Kunde ID</label>
+        <input type="number" id="customerId" th:field="*{customerId}" required>
+
+        <label for="locationId">Lokation ID</label>
+        <input type="number" id="locationId" th:field="*{locationId}" required>
+
+        <button type="submit">Gem ændringer</button>
+    </form>
+</main>
 </body>
 </html>
-

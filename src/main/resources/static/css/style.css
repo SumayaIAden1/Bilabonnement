@@ -174,10 +174,12 @@
 
 .info-box {
     background-color: #ffffff;
-    padding: 20px;
+    padding: 30px;
     border-radius: 10px;
-    border: 2px solid #ccc;
-    width: 30%;
+    border: 1px solid #ccc;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
     font-size: 14px;
 }
 
@@ -315,4 +317,142 @@ main {
     color: #888;
 }
 
-/*------------------------------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------
+   Styling til bil-tabel (biloversigten)
+----------------------------------------------------*/
+.table-wrapper {
+    width: 100%;
+    margin-top: 30px;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.table thead {
+    background-color: #005EB8;
+    color: white;
+}
+
+.table thead th {
+    padding: 12px 15px;
+    text-align: left;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.table tbody td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+}
+
+.table tbody tr:hover {
+    background-color: #f2f8ff;
+}
+
+.table td a {
+    color: #005EB8;
+    font-weight: bold;
+    text-decoration: none;
+    margin: 0 5px;
+}
+
+.table td a:hover {
+    text-decoration: underline;
+}
+
+/*---------------------------------------------------
+   Styling til opret-bil formular
+----------------------------------------------------*/
+.form-container {
+    background-color: white;
+    padding: 30px;
+    margin-top: 40px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.form-container label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+    color: #143c54;
+}
+
+.form-container input,
+.form-container select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+/*.form-container button {
+    background-color: #005EB8;
+    color: white;
+    padding: 12px 20px;
+    font-size: 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}*/
+
+.form-container button:hover {
+    background-color: #004494;
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 20px;
+    color: #005EB8;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+/* Succesmeddelelse */
+.success-message {
+    background-color: #d4edda;
+    border-left: 5px solid #a77f28;
+    padding: 10px 15px;
+    color: #155724;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+/*Bilabonnements knapper styling--------------------------------------------------------------------------------------*/
+
+.button-outline {
+    display: inline-block;
+    padding: 10px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #0077b6; /* Bilabonnement blå */
+    border: 2px solid #0077b6;
+    background-color: white;
+    border-radius: 999px; /* Giver pill-shape */
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.button-outline:hover {
+    background-color: #0077b6;
+    color: white;
+}

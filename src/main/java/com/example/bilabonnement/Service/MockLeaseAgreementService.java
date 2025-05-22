@@ -1,4 +1,4 @@
-package com.example.bilabonnement.Service;
+/*package com.example.bilabonnement.Service;
 
 import com.example.bilabonnement.Model.LeaseAgreement;
 import com.example.bilabonnement.Service.Interface.LeaseAgreementServiceInterface;
@@ -32,4 +32,4 @@ public class MockLeaseAgreementService implements LeaseAgreementServiceInterface
     {
         return 56789.0;
     }
-}
+}*/

@@ -1,6 +1,7 @@
 package com.example.bilabonnement.Controller;
 
 import com.example.bilabonnement.Model.User;
+import com.example.bilabonnement.Service.CarService;
 import com.example.bilabonnement.Service.LeaseAgreementService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,11 +9,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.util.Map;
+
 @Controller
 public class DashboardController
 {
     @Autowired
     private LeaseAgreementService leaseAgreementService;
+
+    @Autowired
+    private CarService carService;
 
     @GetMapping("/business/dashboard")
     public String dashboard(HttpSession session, Model model) //Session henter bruger der er logget ind, vi lægger data i model som thymeleaf kan bruge i HTML
@@ -27,13 +33,22 @@ public class DashboardController
         int activeLeases = leaseAgreementService.getActiveLeaseCount();
         double totalPrice = leaseAgreementService.getTotaltPriceOfLeasedCars();
 
+        //Isabella - Se status på biler i dashboard
+        Map<String, Integer> carStatusCounts = carService.getCarStatusOverview();
+
         //Her gør vi tallene klar til at blive vist i Thymeleaf
         model.addAttribute("activeLeases", activeLeases);
         model.addAttribute("totalPrice", totalPrice);
 
+        model.addAttribute("user", user);
+
+        model.addAttribute("carStatusCounts", carStatusCounts);
+
         return "business/dashboard";
 
     }
+
+
 
    
 }

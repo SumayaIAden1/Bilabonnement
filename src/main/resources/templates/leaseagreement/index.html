@@ -2,41 +2,68 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Leje aftaler</title>
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/leaseAgreement.css">
+    <title>Bilabonnement Lejeaftaler</title>
+</head>
 
+<link rel="stylesheet" href="/css/leaseAgreement.css">
+<link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-
-<!-- Wrapper -->
 <header class="top-wrapper">
     <div class="logo-left">
         <img src="/images/logo.png" alt="Bilabonnement logo">
     </div>
 
     <nav class="center-logos">
-        <a href="/leaseagreement" class ="lease-style">
-            <img src="/images/lejeaftaler.png" alt="Lejeaftaler">
-        </a>
-        <a href="/biler">
-            <img src="/images/biler.png" alt="Biler">
-        </a>
-        <a href="/kunder">
-            <img src="/images/kunder.png" alt="Biler">
-        </a>
-        <a href="/skade">
-            <img src="/images/skader.png" alt="Skade og udbedring">
-        </a>
+        <!-- Dynamisk navigation baseret på brugerrolle - Isabella -->
+
+
+        <th:block th:if="${user.userRole.name() == 'DATAREGISTRERING' or user.userRole.name() == 'ADMIN'}">
+            <a href="/dataentry/cars" class = "car-style">
+                <img src="/images/biler.png" alt="Biler">
+                <span>BILER</span>
+            </a>
+        </th:block>
+
+        <th:block th:if="${user.userRole.name() == 'SKADESMEDARBEJDER' or user.userRole.name() == 'ADMIN'}">
+            <a href="/skade">
+                <img src="/images/skader.png" alt="Skade og udbedring">
+                <span>SKADE OG UDBEDRING</span>
+            </a>
+        </th:block>
+
+        <th:block th:if="${user.userRole.name() == 'DATAREGISTRERING' or user.userRole.name() == 'ADMIN'}">
+            <a href="/leaseagreement">
+                <img src="/images/lejeaftaler.png" alt="Lejeaftaler">
+                <span>LEJEAFTALER</span>
+            </a>
+        </th:block>
+
+        <th:block th:if="${user.userRole.name() == 'FORRETNINGSUDVIKLER' or user.userRole.name() == 'ADMIN' or user.userRole.name() == 'DATAREGISTRERING'}">
+            <a href="/customer/create">
+                <img src="/images/kunder.png" alt="Kunder">
+                <span>KUNDER</span>
+            </a>
+        </th:block>
+
+        <th:block th:if="${user.userRole.name() == 'ADMIN'}">
+            <a href="/medarbejder">
+                <img src="/images/medarbejder.png" alt="Medarbejder">
+                <span>MEDARBEJDER</span>
+            </a>
+        </th:block>
+
+        <th:block th:if="${user.userRole.name() == 'FORRETNINGSUDVIKLER' or user.userRole.name() == 'ADMIN'}">
+            <a href="/business/dashboard">
+                <img src="/images/dashboard.png" alt="Dashboard">
+                <span>DASHBOARD</span>
+            </a>
+        </th:block>
+
+
         <a href="/indbakke">
             <img src="/images/indbakke.png" alt="Indbakke">
-        </a>
-        <a href="/medarbejder">
-            <img src="/images/medarbejder.png" alt="Medarbejder">
-        </a>
-
-        <a href="/dashboard">
-            <img src="/images/dashboard.png" alt="Biler">
+            <span>INDBAKKE</span>
         </a>
     </nav>
 
@@ -45,80 +72,154 @@
             <input type="text" placeholder="Søg...">
             <button>Søg</button>
         </div>
+
         <div class="user-info">
-            <span>Logget ind:</span>
-            <strong>Isabella Joensen</strong>
+            <span>Velkommen, <strong th:text="${user.username}">Bruger</strong></span><br>
+            <span>Rolle: <strong th:text="${user.userRole}">ROLLE</strong></span>
         </div>
     </div>
 </header>
 
 <div class="welcome-wrapper">
     <div class="welcome-text">
-        <h1>Bilabonnements lejeaftaler</h1>
+        <h1>Lejeaftaler - Bilabonnement</h1>
     </div>
 
     <div class="quick-links">
         <h3>Quick links:</h3>
     </div>
 </div>
-<!--        Wrapper                      -->
+<div class="tabs-wrapper">
+    <div class="tabs">
+        <button class="tab-button active" onclick="showTab(event, 'information')">Oversigt over lejeaftale</button>
+        <button class="tab-button" onclick="showTab(event, 'LAformular')">Opret en lejeaftale</button>
+    </div>
 
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Lejeaftaler</title>
-    <link rel="stylesheet" href="/css/style.css"> <!-- Din stylesheet -->
-</head>
-<body>
+    <!-- TAB 1 -->
+    <div id="information" class="tab-content active-tab">
+        <div class="info-box">
+            <strong>Oversigt over lejeaftaler</strong><br><br>
+            Hos Bilabonnement er der følgende lejeaftaler:<br>
 
-<h2>Bilabonnements lejeaftaler</h2>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Startdato</th>
+                        <th>Slutdato</th>
+                        <th>Start km</th>
+                        <th>Slut km</th>
+                        <th>Månedspris</th>
+                        <th>Totalpris</th>
+                        <th>Aftaletype</th>
+                        <th>Status</th>
+                        <th>Reg.nr</th>
+                        <th>Bruger ID</th>
+                        <th>Kunde ID</th>
+                        <th>Lokation ID</th>
+                        <th>Handling</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="lease : ${leaseAgreements}">
+                        <td th:text="${lease.leaseId}">1</td>
+                        <td th:text="${lease.startDate}">2025-01-01</td>
+                        <td th:text="${lease.endDate}">2025-06-01</td>
+                        <td th:text="${lease.startMileage}">10000</td>
+                        <td th:text="${lease.endMileage}">20000</td>
+                        <td th:text="${lease.monthlyPrice}">3000</td>
+                        <td th:text="${lease.totalPrice}">15000</td>
+                        <td th:text="${lease.leaseType}">Limited</td>
+                        <td th:text="${lease.status}">Aktiv</td>
+                        <td th:text="${lease.carRegistrationNumber}">AB12345</td>
+                        <td th:text="${lease.userId}">7</td>
+                        <td th:text="${lease.customerId}">3</td>
+                        <td th:text="${lease.locationId}">1</td>
+                        <td>
+                            <a th:href="@{/leaseagreement/edit/{id}(id=${lease.leaseId})}">✏️ Rediger</a> <br> | <br>
+                            <a th:href="@{/leaseagreement/delete/{id}(id=${lease.leaseId})}"
+                               onclick="return confirm('Er du sikker på, at du vil slette denne lejeaftale?');">🗑️ Slet</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 
-<!-- Link til at oprette en ny lejeaftale -->
-<a href="/leaseagreement/create-step1">+ Opret ny lejeaftale</a>
+    <!-- TAB 2 -->
+    <div id="LAformular" class="tab-content">
+        <div class="info-box">
+            <strong>Oprettelse af en lejeaftale</strong><br><br>
+            Udfyld formularen for at oprette en lejeaftale:<br>
 
-<!-- Tabel over alle lejeaftaler -->
-<table>
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Start</th>
-        <th>Slut</th>
-        <th>Start km</th>
-        <th>Slut km</th>
-        <th>Månedspris</th>
-        <th>Totalpris</th>
-        <th>Aftaletype</th>
-        <th>Status</th>
-        <th>Registreringsnummer</th>
-        <th>Bruger ID</th>
-        <th>Kunde ID</th>
-        <th>Lokation ID</th>
+            <form th:action="@{/leaseagreement/create}" th:object="${leaseAgreement}" method="post">
 
-    </tr>
-    </thead>
-    <tbody>
-    <!-- Gennemløb alle lejeaftaler og vis i tabellen -->
-    <tr th:each="lease : ${leaseAgreements}">
-        <td th:text="${lease.leaseId}"></td>
-        <td th:text="${lease.startDate}"></td>
-        <td th:text="${lease.endDate}"></td>
-        <td th:text="${lease.startMileage}"></td>
-        <td th:text="${lease.endMileage}"></td>
-        <td th:text="${lease.monthlyPrice}"></td>
-        <td th:text="${lease.totalPrice}"></td>
-        <td th:text="${lease.leaseType}"></td>
-        <td th:text="${lease.status}"></td>
-        <td th:text="${lease.carRegistrationNumber}"></td>
-        <td th:text="${lease.userId}"></td>
-        <td th:text="${lease.customerId}"></td>
-        <td th:text="${lease.locationId}"></td>
-    </tr>
+                <label for="leaseId">Lease ID</label>
+                <input type="number" id="leaseId" th:field="*{leaseId}" required>
 
-    </tbody>
-</table>
+                <label for="startDate">Startdato</label>
+                <input type="date" id="startDate" th:field="*{startDate}" required>
 
+                <label for="endDate">Slutdato</label>
+                <input type="date" id="endDate" th:field="*{endDate}" required>
+
+                <label for="startMileage">Start km</label>
+                <input type="number" id="startMileage" th:field="*{startMileage}" required>
+
+                <label for="endMileage">Slut km</label>
+                <input type="number" id="endMileage" th:field="*{endMileage}" required>
+
+                <label for="monthlyPrice">Månedspris</label>
+                <input type="number" id="monthlyPrice" th:field="*{monthlyPrice}" step="0.01" required>
+
+                <label for="totalPrice">Totalpris</label>
+                <input type="number" id="totalPrice" th:field="*{totalPrice}" step="0.01" required>
+
+                <label for="leaseType">Aftaletype</label>
+                <select id="leaseType" th:field="*{leaseType}" required>
+                    <option value="Limited">Limited</option>
+                    <option value="Unlimited">Unlimited</option>
+                </select>
+
+                <label for="status">Status</label>
+                <select id="status" th:field="*{status}" required>
+                    <option value="Active">Active</option>
+                    <option value="Completed">Completed</option>
+                    <option value="Cancelled">Cancelled</option>
+                </select>
+
+                <label for="carRegistrationNumber">Registreringsnummer</label>
+                <input type="text" id="carRegistrationNumber" th:field="*{carRegistrationNumber}" required>
+
+                <label for="userId">Bruger ID</label>
+                <input type="number" id="userId" th:field="*{userId}" required>
+
+                <label for="customerId">Kunde ID</label>
+                <input type="number" id="customerId" th:field="*{customerId}" required>
+
+                <label for="locationId">Lokation ID</label>
+                <input type="number" id="locationId" th:field="*{locationId}" required>
+
+                <button type="submit">Gem lejeaftale</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript til faneblade uden reload -->
+<script>
+    function showTab(event, tabId) {
+        const allTabs = document.querySelectorAll('.tab-content');
+        const allButtons = document.querySelectorAll('.tab-button');
+
+        allTabs.forEach(tab => tab.classList.remove('active-tab'));
+        allButtons.forEach(btn => btn.classList.remove('active'));
+
+        document.getElementById(tabId).classList.add('active-tab');
+        event.target.classList.add('active');
+    }
+</script>
 </body>
 </html>
-
-
