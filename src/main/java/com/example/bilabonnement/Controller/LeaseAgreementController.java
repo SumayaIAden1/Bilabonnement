@@ -63,5 +63,12 @@ public class LeaseAgreementController {
         return "leaseagreement/edit";
     }
 
+    @PostMapping("/update/{id}")
+    public String updateLease(@PathVariable int id, @ModelAttribute LeaseAgreement leaseAgreement) {
+        leaseAgreementService.updateLeaseAgreement(id, leaseAgreement);
+        return "redirect:/leaseagreement";
+    }
+
+
 
 }

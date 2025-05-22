@@ -69,6 +69,11 @@ public class LeaseAgreementService implements LeaseAgreementServiceInterface
         return leaseAgreementRepo.findById(id);
     }
 
+    @Override
+    public void updateLeaseAgreement(int id, LeaseAgreement leaseAgreement) {
+        leaseAgreementRepo.updateLeaseAgreement(id, leaseAgreement);
+    }
+
 
 
 }
