@@ -20,7 +20,7 @@ public class CustomerController {
     // Startside for kunder
     @GetMapping("/customers/startpage")
     public String startpage() {
-        return "customer/startpage";
+        return "/customer/startpage";
     }
 
 
@@ -39,7 +39,7 @@ public class CustomerController {
         Customer customer = new Customer();
         customer.setAddress(new Address());
         model.addAttribute("customer", customer);
-        return "home/customer/createCustomer";  // templates/home/customer/createCustomer.html
+        return "customer/createCustomer";  // templates/home/customer/createCustomer.html
     }
 
     // Tilføjer selve kunden til databasen efter oprettelse
@@ -60,7 +60,7 @@ public class CustomerController {
         Customer lastCreatedCustomer = customerService.getLastCreatedCustomer();
         model.addAttribute("message", "Kunden blev oprettet succesfuldt!");
         model.addAttribute("customer", lastCreatedCustomer);
-        return "home/customer/customerCreatedConfirmation";  // Return to the confirmation page
+        return "customer/customerCreatedConfirmation";  // Return to the confirmation page
     }
 
 
