@@ -22,4 +22,7 @@ public interface LeaseAgreementServiceInterface
     boolean deleteLeaseAgreement(int id);
 
     LeaseAgreement findById(int id);
+
+    void updateLeaseAgreement(int id, LeaseAgreement leaseAgreement);
+
 }

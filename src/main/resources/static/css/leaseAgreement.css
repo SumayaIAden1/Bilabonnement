@@ -1,159 +1,4 @@
-/* Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* Krop */
-body {
-    font-family: 'Segoe UI', sans-serif;
-    background-color: #f9fafb;
-    color: #333;
-    line-height: 1.6;
-}
-
-/* Header */
-.top-wrapper {
-    background-color: #ffffff;
-    border-bottom: 1px solid #ddd;
-    padding: 1rem 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-}
-
-/* Logo */
-.logo-left img {
-    height: 50px;
-}
-
-/* Navigation */
-.center-logos {
-    display: flex;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-    align-items: center;
-}
-
-.center-logos a {
-    text-decoration: none;
-    color: #143c54;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 13px;
-    transition: color 0.2s ease;
-}
-
-.center-logos a:hover {
-    color: #005EB8;
-}
-
-.center-logos img {
-    height: 30px;
-    margin-bottom: 4px;
-}
-
-/* Højre side */
-.right-side {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 0.5rem;
-}
-
-.search-bar input {
-    padding: 0.4rem 0.8rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-.search-bar button {
-    padding: 0.4rem 0.8rem;
-    border: none;
-    background-color: #005EB8;
-    color: white;
-    border-radius: 4px;
-    margin-left: 0.5rem;
-    cursor: pointer;
-}
-
-.search-bar button:hover {
-    background-color: #003d80;
-}
-
-/* Velkomst */
-.welcome-wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 2rem 0;
-    background-color: #e9f1f9;
-}
-
-.welcome-text h1 {
-    font-size: 28px;
-    color: #143c54;
-    font-weight: bold;
-}
-
-.quick-links h3 {
-    font-size: 16px;
-    color: #555;
-}
-
-/* Hovedindhold */
-.main-container {
-    padding: 40px 20px;
-    max-width: 1400px;
-    margin: 0 auto;
-}
-
-.section-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-}
-
-.section-header h2 {
-    font-size: 20px;
-    color: #143c54;
-}
-
-/* Table */
-.table-wrapper {
-    width: 100%;
-    overflow: visible;
-    margin-top: 1.5rem;
-    box-shadow: none;
-    border-radius: 0;
-    border: none;
-}
-
-/* Tabellen selv */
-.table-wrapper table {
-    width: 100%;
-    border-collapse: collapse;
-    background-color: white;
-    border: 1px solid #ccc;
-}
-
-.table-wrapper th,
-.table-wrapper td {
-    padding: 12px 15px;
-    border: 1px solid #ccc;
-    text-align: left;
-    font-size: 14px;
-}
-
-.table-wrapper th {
-    background-color: #f4f4f4;
-    color: #143c54;
-}
-
+/* Unik CSS for lejeaftale-oprettelse og redigering */
 /* Formular */
 form {
     background-color: white;
@@ -209,33 +54,28 @@ form button:hover {
     background-color: #004494;
 }
 
-/* Page wrapper */
-.page-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+/* Tabelvisning */
+.table-wrapper {
+    width: 100%;
+    margin-top: 30px;
 }
 
-/* Mobilvenlig */
-@media (max-width: 768px) {
-    .top-wrapper {
-        flex-direction: column;
-        align-items: flex-start;
-    }
+.table-wrapper table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    border: 1px solid #ccc;
+}
 
-    .center-logos {
-        justify-content: center;
-        width: 100%;
-    }
+.table-wrapper th,
+.table-wrapper td {
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    text-align: left;
+    font-size: 14px;
+}
 
-    .right-side {
-        width: 100%;
-        align-items: flex-start;
-    }
-
-    .section-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1rem;
-    }
+.table-wrapper th {
+    background-color: #f4f4f4;
+    color: #143c54;
 }

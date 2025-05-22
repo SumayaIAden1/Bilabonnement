@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Rediger Lejeaftale</title>
+    <link rel="stylesheet" href="/css/leaseAgreement.css">
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
@@ -12,7 +13,7 @@
     </div>
 
     <nav class="center-logos">
-        <!-- Dynamisk navigation baseret på brugerrolle - Isabella -->
+        <!-- Dynamisk navigation baseret på brugerrolle -->
 
 
         <th:block th:if="${user.userRole.name() == 'DATAREGISTRERING' or user.userRole.name() == 'ADMIN'}">
@@ -79,7 +80,7 @@
 
 <div class="welcome-wrapper">
     <div class="welcome-text">
-        <h1>Lejeaftaler - Bilabonnement</h1>
+        <h1>Rediger - Lejeaftaler</h1>
     </div>
 
     <div class="quick-links">
@@ -89,10 +90,14 @@
 
 
 <main class="main-container">
+    <div class="info-box">
     <h2>✏️ Rediger Lejeaftale</h2>
 
     <form th:action="@{/leaseagreement/update/{id}(id=*{leaseId})}"
           th:object="${leaseAgreement}" method="post">
+
+        <label for="leaseId">Lease ID</label>
+        <input type="number" id="leaseId" th:field="*{leaseId}" required>
 
         <label for="startDate">Startdato</label>
         <input type="date" id="startDate" th:field="*{startDate}" required>
@@ -139,6 +144,7 @@
 
         <button type="submit">Gem ændringer</button>
     </form>
+    </div>
 </main>
 </body>
 </html>

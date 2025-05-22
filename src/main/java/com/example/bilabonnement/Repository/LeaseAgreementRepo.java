@@ -59,6 +59,26 @@ public class LeaseAgreementRepo
         return template.update(sql, id) > 0;
     }
 
+    public void updateLeaseAgreement(int id, LeaseAgreement leaseAgreement) {
+        String sql = "UPDATE lease_agreement SET start_date = ?, end_date = ?, start_mileage = ?, end_mileage = ?, monthly_price = ?, total_price = ?, lease_type = ?, status = ?, car_registration_number = ?, user_id = ?, customer_id = ?, location_id = ? WHERE lease_id = ?";
+
+        template.update(sql,
+                leaseAgreement.getStartDate(),
+                leaseAgreement.getEndDate(),
+                leaseAgreement.getStartMileage(),
+                leaseAgreement.getEndMileage(),
+                leaseAgreement.getMonthlyPrice(),
+                leaseAgreement.getTotalPrice(),
+                leaseAgreement.getLeaseType(),
+                leaseAgreement.getStatus(),
+                leaseAgreement.getCarRegistrationNumber(), // ✅ Korrekt felt
+                leaseAgreement.getUserId(),
+                leaseAgreement.getCustomerId(),
+                leaseAgreement.getLocationId(),
+                id);
+    }
+
+
     public LeaseAgreement findById(int id) {
         String sql = "SELECT * FROM lease_agreement WHERE lease_id = ?";
         RowMapper<LeaseAgreement> rowMapper = new BeanPropertyRowMapper<>(LeaseAgreement.class);
@@ -91,22 +111,6 @@ public class LeaseAgreementRepo
 
 
 
-    public void updateLeaseAgreement(int id, LeaseAgreement leaseAgreement) {
-        String sql = "UPDATE lease_agreement SET start_date = ?, end_date = ?, monthly_price = ?, total_price = ?, lease_type = ?, status = ?, car_id = ?, user_id = ?, " +
-                "customer_id = ?, location_id = ? WHERE lease_id = ?";
-        template.update(sql,
-                leaseAgreement.getStartDate(),
-                leaseAgreement.getEndDate(),
-                leaseAgreement.getMonthlyPrice(),
-                leaseAgreement.getTotalPrice(),
-                leaseAgreement.getLeaseType(),
-                leaseAgreement.getStatus(),
-                leaseAgreement.getCarId(),
-                leaseAgreement.getUserId(),
-                leaseAgreement.getCustomerId(),
-                leaseAgreement.getLocationId(),
-                id);
-    } */
 
     /*Tjekker for om bilen er available i den givne periode
     public boolean isCarAvailable(int carId, LocalDate startDate, LocalDate endDate) {

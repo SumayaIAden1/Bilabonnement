@@ -15,7 +15,7 @@
     </div>
 
     <nav class="center-logos">
-        <!-- Dynamisk navigation baseret på brugerrolle - Isabella -->
+        <!-- Dynamisk navigation baseret på brugerrolle -->
 
 
         <th:block th:if="${user.userRole.name() == 'DATAREGISTRERING' or user.userRole.name() == 'ADMIN'}">
@@ -89,6 +89,7 @@
         <h3>Quick links:</h3>
     </div>
 </div>
+
 <div class="tabs-wrapper">
     <div class="tabs">
         <button class="tab-button active" onclick="showTab(event, 'information')">Oversigt over lejeaftale</button>
