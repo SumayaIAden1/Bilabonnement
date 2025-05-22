@@ -10,18 +10,39 @@ public class Address {
      @NotEmpty sikrer, at feltet ikke er null og ikke er tomt, så det kan ikke være en tom streng ("") eller en tom samling.
      */
 
+    /*
+     * Unikt ID for adressen.
+     * @NotNull sikrer, at addressId altid er angivet (bemærk: med primitiv int kan det teknisk ikke være null,
+     *            men hvis vi skifter til Integer, vil null blive fanget).
+     */
     @NotNull(message = "Address ID cannot be null")
     private int addressId;
 
+    /*
+     * Gade-/vejnavn for adressen.
+     * @NotEmpty sikrer, at strengfeltet ikke er null eller tomt.
+     */
     @NotEmpty(message = "Street cannot be empty")
     private String street;
 
+    /*
+     * Byen hvor adressen ligger.
+     * @NotEmpty sikrer, at byen er angivet og ikke er en tom streng.
+     */
     @NotEmpty(message = "City cannot be empty")
     private String city;
 
+    /*
+     * Postnummer.
+     * @NotEmpty sikrer, at postnummeret er angivet og ikke er tomt.
+     */
     @NotEmpty(message = "Zip code cannot be empty")
     private String zip;
 
+    /*
+     * Land.
+     * @NotEmpty sikrer, at landet er angivet og ikke er en tom streng.
+     */
     @NotEmpty(message = "Country cannot be empty")
     private String country;
 

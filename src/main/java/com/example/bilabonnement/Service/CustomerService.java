@@ -1,10 +1,11 @@
 package com.example.bilabonnement.Service;
 
-import com.example.bilabonnement.Model.Address;
+
 import com.example.bilabonnement.Model.Customer;
 import com.example.bilabonnement.Repository.CustomerRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -14,47 +15,35 @@ public class CustomerService {
     @Autowired
     private CustomerRepo customerRepo;
 
-    // Fetch all customers
+    // Henter alle kunder
     public List<Customer> getAllCustomers() {
         return customerRepo.findAll();
     }
-
-//    public void addCustomerWithAddress(Customer customer, Address address) {
-//        // First insert the address
-//        customerRepo.addAddress(address);  // Assuming you have a repository to handle Address
-//
-//        // Now associate the customer with the created address
-//        customer.setAddress(address);  // Set the address object
-//        customerRepo.addCustomer(customer);
-//    }
-
-    public void addCustomerWithAddress(Customer customer, Address address) {
-        // Insert the address first and get the generated address_id
-        customerRepo.addAddress(address);
-
-        // Now set the generated address_id in the customer object
-        customer.setAddress(address); // The address object now has the correct address_id
-
-        // Now insert the customer with the valid address_id
+    /*
+    Når du annoterer metoden med @Transactional, sørger Spring for, at begge databaseoperationer —
+    indsættelse af adresse og indsættelse af kunde — kører i én og samme transaktion.
+    */
+    @Transactional
+    public void addCustomerWithAddress(Customer customer) {
+        // Indsæt adressen først og få den genererede address_id
+        customerRepo.addAddress(customer.getAddress());
+        // Indsæt nu kunden med den gyldige address_id
         customerRepo.addCustomer(customer);
     }
 
-    // Delete a customer by their ID
+    // Slet en kunde ud fra deres ID
     public boolean deleteById(int customerId) {
         return customerRepo.deleteById(customerId);
     }
 
-    // Get a customer by their ID
+    // Hent en kunde ud fra deres ID
     public Customer getCustomerById(int customerId) {
         return customerRepo.getCustomerById(customerId);
     }
 
-    // Get the last created customer
+    // Hent den sidst oprettede kunde
     public Customer getLastCreatedCustomer() {
-        return customerRepo.getLastCreatedCustomer();  // Call the repo method
+        return customerRepo.getLastCreatedCustomer();  // Kalder repo-metoden
     }
-
-
-
 
 }

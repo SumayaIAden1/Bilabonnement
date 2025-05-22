@@ -1,6 +1,6 @@
 /* createCustomerConfirmation.css */
 
-/* General body styling to match the theme */
+/* Generel styling af body for at matche temaet */
 body {
     font-family: Arial, sans-serif;
     background-color: #f2f2f2;
@@ -8,17 +8,17 @@ body {
     padding: 0;
 }
 
-/* Container for the confirmation content */
+/* Container for bekræftelsesindholdet */
 .confirmation-container {
     max-width: 600px;
-    margin: 150px auto 20px; /* Increased top margin to push it down */
+    margin: 150px auto 20px; /* Øget topmargen for at skubbe den længere ned */
     padding: 20px;
     background-color: #ffffff;
     border-radius: 10px;
     border: 2px solid #ccc;
 }
 
-/* Heading styling */
+/* Stil til overskrift */
 .confirmation-container h1 {
     font-size: 28px;
     color: #000000;
@@ -26,7 +26,7 @@ body {
     margin: 30px 0;
 }
 
-/* Success message styling */
+/* Stil til succesbesked */
 .confirmation-container p {
     font-size: 16px;
     color: #143c54;
@@ -34,7 +34,7 @@ body {
     margin-bottom: 20px;
 }
 
-/* Customer details section */
+/* Sektion for kundedetaljer */
 .customer-details {
     margin-bottom: 20px;
 }
@@ -58,7 +58,7 @@ body {
     font-weight: bold;
 }
 
-/* Back link styling */
+/* Stil til tilbage-link */
 a {
     display: block;
     text-align: center;

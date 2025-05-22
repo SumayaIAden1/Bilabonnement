@@ -18,8 +18,8 @@
 <form action="/customers/addCustomer" method="post">
 
   <!-- Navn -->
-  <label for="name">Navn:</label>
-  <input type="text" id="name" name="name" th:value="${customer.name}" required /><br>
+  <label for="customerName">Navn:</label>
+  <input type="text" id="customerName" name="customerName" th:value="${customer.customerName}" required /><br>
 
   <!-- Email -->
   <label for="email">Email:</label>
@@ -63,7 +63,7 @@
   <button type="submit">Opret Kunde</button>
 </form>
 
-<a href="/customers">Tilbage til kundeoversigten</a>
+<a href="/customers/startpage">Tilbage til kundeportalen</a>
 
 </body>
 </html>

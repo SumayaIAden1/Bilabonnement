@@ -19,31 +19,41 @@ import java.util.Optional;
 @Repository
 public class CustomerRepo {
 
+    // JdbcTemplate bruges til at udføre SQL-forespørgsler mod databasen
     private final JdbcTemplate template;
 
-    // RowMapper to map SQL result to Customer objects (no need for Address RowMapper)
+    // RowMapper konverterer hver database-række til et Customer-objekt
     private final RowMapper<Customer> customerRowMapper = new BeanPropertyRowMapper<>(Customer.class);
 
+    /*
+     * Constructor, Spring injicerer JdbcTemplate automatisk.
+     */
     @Autowired
     public CustomerRepo(JdbcTemplate template) {
         this.template = template;
     }
 
-    // Fetch all customers
+    /*
+     * Henter alle kunder fra databasen.
+     *
+     * @return Liste af alle Customer-objekter
+     */
     public List<Customer> findAll() {
         String sql = "SELECT * FROM customer";
         return template.query(sql, customerRowMapper);
     }
 
-//    public void addAddress(Address address) {
-//        String sql = "INSERT INTO address (street, city, zip, country) VALUES (?, ?, ?, ?)";
-//        template.update(sql, address.getStreet(), address.getCity(), address.getZip(), address.getCountry());
-//    }
-
+    /*
+     * Indsætter en ny adresse i 'address'-tabellen og opdaterer Address-objektet
+     * med den automatisk genererede address_id.
+     *
+     * @param address Adresse-objekt med street, city, zip og country
+     */
     public void addAddress(Address address) {
         String sql = "INSERT INTO address (street, city, zip, country) VALUES (?, ?, ?, ?)";
-        // Insert address and retrieve the generated address_id
         KeyHolder keyHolder = new GeneratedKeyHolder();
+
+        // Udfør INSERT og hent den genererede nøgle (address_id)
         template.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, address.getStreet());
@@ -53,54 +63,74 @@ public class CustomerRepo {
             return ps;
         }, keyHolder);
 
-        // Set the generated address_id back to the address object
+        // Sæt den nye address_id tilbage på Address-objektet
         address.setAddressId(keyHolder.getKey().intValue());
     }
 
-
-//    public void addCustomer(Customer customer) {
-//        String sql = "INSERT INTO customer (customer_name, email, phone_number, cpr_number, address_id, is_active) VALUES (?, ?, ?, ?, ?, ?)";
-//        template.update(sql, customer.getName(), customer.getEmail(), customer.getPhoneNumber(),
-//                customer.getCprNumber(), customer.getAddress().getAddressId(), customer.isActive());
-//    }
-
+    /*
+     * Opretter en ny kunde i 'customer'-tabellen.
+     * Forudsætter at Address allerede er indsat, så address.getAddressId() er sat.
+     *
+     * @param customer Customer-objekt med navn, email, telefon, CPR, adresse og aktiv-status
+     */
     public void addCustomer(Customer customer) {
         String sql = "INSERT INTO customer (customer_name, email, phone_number, cpr_number, address_id, is_active) VALUES (?, ?, ?, ?, ?, ?)";
         template.update(sql,
-                customer.getName(),
+                customer.getCustomerName(),
                 customer.getEmail(),
                 customer.getPhoneNumber(),
                 customer.getCprNumber(),
-                customer.getAddress().getAddressId(),  // Use the generated address_id
+                customer.getAddress().getAddressId(),
                 customer.isActive());
     }
 
-
-    // Delete a customer by their ID
+    /*
+     * Sletter en kunde baseret på customer_id.
+     *
+     * @param customerId ID på kunden der skal slettes
+     * @return true hvis mindst én række blev slettet, ellers false
+     */
     public boolean deleteById(int customerId) {
         String sql = "DELETE FROM customer WHERE customer_id = ?";
         int rowsDeleted = template.update(sql, customerId);
         return rowsDeleted > 0;
     }
 
-    // Get a customer by their ID
+    /*
+     * Henter én kunde baseret på customer_id.
+     *
+     * @param customerId ID på den ønskede kunde
+     * @return Customer-objekt (kaster exception hvis ikke fundet)
+     */
     public Customer getCustomerById(int customerId) {
-        String sql = "SELECT * FROM customer WHERE customer_id = ?";  // Simple query without JOIN
-        return template.queryForObject(sql, customerRowMapper, customerId);  // Map the result directly to a Customer object
+        String sql = "SELECT * FROM customer WHERE customer_id = ?";
+        return template.queryForObject(sql, customerRowMapper, customerId);
     }
 
+    /*
+     * Søger efter en kunde på e-mailadresse.
+     *
+     * @param email Kundens e-mail
+     * @return Optional med Customer hvis fundet, ellers Optional.empty()
+     */
     public Optional<Customer> findByEmail(String email) {
         String sql = "SELECT * FROM customer WHERE email = ?";
         try {
-            return Optional.ofNullable(template.queryForObject(sql, customerRowMapper, email));
+            Customer customer = template.queryForObject(sql, customerRowMapper, email);
+            return Optional.ofNullable(customer);
         } catch (EmptyResultDataAccessException e) {
-            return Optional.empty(); // Return an empty Optional if no customer is found
+            // Returner tom Optional hvis ingen række matcher
+            return Optional.empty();
         }
     }
 
+    /*
+     * Henter den sidst oprettede kunde (baseret på created_date).
+     *
+     * @return Customer-objekt for den nyeste kunde
+     */
     public Customer getLastCreatedCustomer() {
-        String sql = "SELECT * FROM customer ORDER BY created_date DESC LIMIT 1";  // Fetch the most recently created customer
-        return template.queryForObject(sql, customerRowMapper);  // Map the result directly to a Customer object
+        String sql = "SELECT * FROM customer ORDER BY created_date DESC LIMIT 1";
+        return template.queryForObject(sql, customerRowMapper);
     }
 }
-
