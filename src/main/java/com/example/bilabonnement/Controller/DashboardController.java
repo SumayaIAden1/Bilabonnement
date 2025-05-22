@@ -39,7 +39,10 @@ public class DashboardController
         Map<String, Integer> carStatusCounts = carService.getCarStatusOverview();
 
         //Isabella - metode til at vise status og modelnavn på biler i databasen
-        List<Map<String, Object>> statusModelCounts = carService.getCarCountByStatusAndModel();
+        /*List<Map<String, Object>> statusModelCounts = carService.getCarCountByStatusAndModel();*/
+
+        //Isabella - metode til at vise status-fordeling pr. modelnavn i databasen
+        Map<String, Map<String, Integer>> groupedStatusByModel = carService.getStatusCountsGroupedByModel();
 
         //Her gør vi tallene klar til at blive vist i Thymeleaf
         model.addAttribute("activeLeases", activeLeases);
@@ -50,7 +53,9 @@ public class DashboardController
 
         model.addAttribute("carStatusCounts", carStatusCounts);
 
-        model.addAttribute("statusModelCounts", statusModelCounts);
+        /*model.addAttribute("statusModelCounts", statusModelCounts);*/
+
+        model.addAttribute("groupedStatusByModel", groupedStatusByModel);
 
         return "business/dashboard";
 

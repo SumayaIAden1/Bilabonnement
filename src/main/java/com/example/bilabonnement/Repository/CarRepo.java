@@ -156,7 +156,7 @@ public class CarRepo {
 
     /*Isabella - metode til at vise status og modelnavn på biler i databasen....------------------------------------------*/
 
-    public List<Map<String, Object>> getCarCountByStatusAndModel()
+   /* public List<Map<String, Object>> getCarCountByStatusAndModel()
     {
         String sql = "SELECT c.status, m.model_name, COUNT(*) AS count " +
                 "FROM car c " +
@@ -164,11 +164,11 @@ public class CarRepo {
                 "GROUP BY c.status, m.model_name " +                            //grupperer efter både status og model
                 "ORDER BY c.status, m.model_name";                              //Sorterer resultatet pænt
         return template.queryForList(sql);
-    }
+    }*/
 
     /*Isabella - metode til at vise status-fordeling pr. modelnavn i databasen...------------------------------------------*/
 
-    public Map<String, Map<String, Integer>> getStatusCountsGroupedByModel()
+   /* public Map<String, Map<String, Integer>> getStatusCountsGroupedByModel()
     {
         String sql = "SELECT m.model_name, c.status, COUNT(*) AS count " +
                 "FROM car c " +
@@ -193,7 +193,7 @@ public class CarRepo {
 
             return result;
         });
-    }
+    }*/
 
 
     /*Isabella - returner biler og deres*/
@@ -210,6 +210,41 @@ public class CarRepo {
 
         return result;
     }*/
+
+    public Map<String, Map<String, Integer>> getStatusCountsGroupedByModel() {
+        String sql = "SELECT m.model_name, c.status, COUNT(*) AS count " +
+                "FROM car c " +
+                "JOIN car_model m ON c.model_id = m.model_id " +
+                "GROUP BY m.model_name, c.status " +
+                "ORDER BY m.model_name, c.status";
+
+        Map<String, Map<String, Integer>> result = new HashMap<>();
+
+        try {
+            template.query(sql, rs -> {
+                while (rs.next()) {
+                    String modelName = rs.getString("model_name");
+                    String status = rs.getString("status");
+                    int count = rs.getInt("count"); // evt. prøv "COUNT" hvis fejlslag
+
+                    System.out.println("DEBUG row: model=" + modelName + ", status=" + status + ", count=" + count);
+
+                    // Byg nested map
+                    result.computeIfAbsent(modelName, k -> new HashMap<>()).put(status, count);
+                }
+                return null;
+            });
+
+            System.out.println("DEBUG result map: " + result);
+
+        } catch (Exception e) {
+            System.err.println("Fejl i getStatusCountsGroupedByModel: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
 
 
 }

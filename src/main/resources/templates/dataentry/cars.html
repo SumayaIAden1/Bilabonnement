@@ -112,7 +112,20 @@
     <tr th:each="car : ${cars}">
         <td th:text="${car.registrationNumber}">AB12345</td>
         <td th:text="${car.vinNumber}">VIN123456789</td>
-        <td th:text="${car.status}">Available</td>
+        <td>
+            <form th:action="@{/cars/updateStatus}" method="post">
+                <input type="hidden" name="registrationNumber" th:value="${car.registrationNumber}" />
+
+                <select name="status" onchange="this.form.submit()">
+                    <option th:each="s : ${T(com.example.bilabonnement.Model.Car.CarStatus).values()}"
+                            th:value="${s}"
+                            th:text="${s}"
+                            th:selected="${s.name() == car.status}">
+                    </option>
+                </select>
+            </form>
+        </td>
+
         <td th:text="${car.color}">Sort</td>
         <td th:text="${car.mileage}">15000</td>
         <td th:text="${car.location}">København</td>

@@ -17,7 +17,7 @@ public class Car {
         Available,
         Rented,
         Damaged,
-        Returned,
+        Returned
     }
 
     //Isabella - her skal enum matche 100% det der står i SQL, da vi også har brugt enum der.
