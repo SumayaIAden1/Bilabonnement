@@ -456,3 +456,16 @@ main {
     background-color: #0077b6;
     color: white;
 }
+
+/*Bil søgefelt design--------------------------------------------------------------------------------------*/
+.model-search-wrapper {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.model-search-input {
+    padding: 8px;
+    width: 250px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}

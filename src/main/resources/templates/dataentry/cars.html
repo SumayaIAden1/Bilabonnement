@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Bil</title>
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
@@ -85,7 +85,13 @@
 </div> <!--Isabella - Succesbesked når man opretter en bil correct -->
 
 <div class="table-wrapper">
-<table class="table">
+    <div class="model-search-wrapper">
+        <label for="modelSearch">🔍 Søg efter bilmodel:</label>
+        <input type="text" id="modelSearch" class="model-search-input" placeholder="F.eks. Sandero eller Captur" onkeyup="filterByModel()">
+    </div>
+
+
+    <table class="table">
     <thead>
     <tr>
         <th>Registreringsnummer</th>
@@ -99,6 +105,7 @@
         <th>Udstyrsniveau</th>
         <th>CO₂-udledning (g/km)</th>
         <th>Handlinger</th>
+
     </tr>
     </thead>
     <tbody>
@@ -125,6 +132,21 @@
 
 <br>
 <a href="/cars/create" class="button-outline">Opret ny bil</a>
+
+<!-- JS til filtrering og søgning efter bil -->
+<script>
+// Filtrer biler ud fra modelnavn
+    function filterByModel() {
+        const input = document.getElementById("modelSearch").value.toLowerCase();
+        const rows = document.querySelectorAll(".table tbody tr");
+
+        rows.forEach(row => {
+            const model = row.cells[7].textContent.toLowerCase(); // 8. kolonne = modelnavn
+            row.style.display = model.includes(input) ? "" : "none";
+        });
+    }
+</script>
+
 
 </body>
 </html>
