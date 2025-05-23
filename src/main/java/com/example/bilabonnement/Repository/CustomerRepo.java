@@ -38,9 +38,56 @@ public class CustomerRepo {
      *
      * @return Liste af alle Customer-objekter
      */
-    public List<Customer> findAll() {
-        String sql = "SELECT * FROM customer";
-        return template.query(sql, customerRowMapper);
+//    public List<Customer> findAll() {
+//        String sql = "SELECT * FROM customer";
+//        return template.query(sql, customerRowMapper);
+//    }
+
+    /**
+     * Fetch ALL customers together with their Address in one go.
+     */
+    public List<Customer> findAllWithAddress() {
+        String sql = """
+            
+            SELECT
+          c.customer_id,
+          c.customer_name,
+          c.email,
+          c.phone_number,
+          c.cpr_number,
+          c.is_active,
+          a.address_id   AS addr_id,
+          a.country      AS addr_country,
+          a.city         AS addr_city,
+          a.zip          AS addr_zip,
+          a.street       AS addr_street
+        FROM customer c
+        JOIN address a
+          ON c.address_id = a.address_id
+            """;
+
+        return template.query(sql, new RowMapper<>() {
+            @Override
+            public Customer mapRow(java.sql.ResultSet rs, int rowNum) throws java.sql.SQLException {
+                Address addr = new Address();
+                addr.setAddressId(rs.getInt("addr_id"));
+                addr.setCountry(rs.getString("addr_country"));
+                addr.setCity(rs.getString("addr_city"));
+                addr.setZip(rs.getString("addr_zip"));
+                addr.setStreet(rs.getString("addr_street"));
+
+                Customer cust = new Customer();
+                cust.setCustomerId(rs.getInt("customer_id"));
+                cust.setCustomerName(rs.getString("customer_name"));
+                cust.setEmail(rs.getString("email"));
+                cust.setPhoneNumber(rs.getString("phone_number"));
+                cust.setCprNumber(rs.getString("cpr_number"));
+                cust.setActive(rs.getBoolean("is_active"));
+                cust.setAddress(addr);
+
+                return cust;
+            }
+        });
     }
 
     /*

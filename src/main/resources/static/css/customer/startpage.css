@@ -50,6 +50,7 @@ body {
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.2s ease;
+    margin-bottom: 10px; /* Add spacing between buttons */
 }
 
 /* Skift baggrundsfarve ved hover */

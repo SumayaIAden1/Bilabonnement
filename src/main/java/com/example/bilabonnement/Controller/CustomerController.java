@@ -25,11 +25,11 @@ public class CustomerController {
 
 
     // Vis alle kunder
-    @GetMapping("/customers")
+    @GetMapping("/customers/overview")
     public String getAllCustomers(Model model) {
         List<Customer> customers = customerService.getAllCustomers();
         model.addAttribute("customers", customers);
-        return "customer/index"; // templates/customer/index.html
+        return "customer/overview";
     }
 
 

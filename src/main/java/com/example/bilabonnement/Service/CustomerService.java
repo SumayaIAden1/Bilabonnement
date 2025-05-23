@@ -15,9 +15,13 @@ public class CustomerService {
     @Autowired
     private CustomerRepo customerRepo;
 
+    public CustomerService(CustomerRepo customerRepo) {
+        this.customerRepo = customerRepo;
+    }
+
     // Henter alle kunder
     public List<Customer> getAllCustomers() {
-        return customerRepo.findAll();
+        return customerRepo.findAllWithAddress();
     }
     /*
     Når du annoterer metoden med @Transactional, sørger Spring for, at begge databaseoperationer —
