@@ -104,6 +104,7 @@
         <th>Modelnavn</th>
         <th>Udstyrsniveau</th>
         <th>CO₂-udledning (g/km)</th>
+        <th>Pris pr. måned</th>
         <th>Handlinger</th>
 
     </tr>
@@ -133,6 +134,7 @@
         <td th:text="${car.modelName}">Yaris</td>
         <td th:text="${car.equipmentLevel}">Comfort</td>
         <td th:text="${car.co2Emission}">99</td>
+        <td th:text="${car.monthlyPrice}">3.500</td>
         <td>
             <a th:href="@{'/cars/viewOne/' + ${car.registrationNumber}}">Vis</a> |
             <a th:href="@{'/cars/updateOne/' + ${car.registrationNumber}}">Rediger</a> |

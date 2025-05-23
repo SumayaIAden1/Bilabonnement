@@ -82,6 +82,8 @@ public class CarService {
         return carRepo.getStatusCountsGroupedByModel();
     }
 
+    /*Isabella- find pris pr. måned-----------------------------------------------------------------------------------*/
+
 
     //Sumaya - Ændrer status på alle biler, og vises i dropDown i LeaseAgreement
     public List<Car> getAvailableCars() {
@@ -101,6 +103,10 @@ public class CarService {
         Car car = carRepo.findCarByRegistration(registrationNumber); // du har denne metode
         car.setStatus(Car.CarStatus.valueOf(newStatus)); // enum
         carRepo.updateCar(registrationNumber, car); // du har også denne
+    }
+
+    public double findMonthlyPriceByRegistration(String registrationNumber) {
+        return carRepo.findMonthlyPriceByRegistration(registrationNumber);
     }
 
 
