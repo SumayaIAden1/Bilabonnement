@@ -98,6 +98,10 @@ public class CarService {
         return availableCars;
     }
 
+    public double findMonthlyPriceByRegistration(String registrationNumber) {
+        return carRepo.findMonthlyPriceByRegistration(registrationNumber);
+    }
+
 
 }
 

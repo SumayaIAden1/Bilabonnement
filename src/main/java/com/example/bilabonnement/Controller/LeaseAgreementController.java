@@ -35,7 +35,10 @@ public class LeaseAgreementController {
             model.addAttribute("cars", carService.getAvailableCars());
             model.addAttribute("user", session.getAttribute("user"));
 
-
+        //Isabella - Hvis der ikke allerede er sat et aktivt faneblad, sætter vi det til "information" som standard
+        if (!model.containsAttribute("activeTab")) {
+            model.addAttribute("activeTab", "information");
+        }
         // hvis du bruger dropdowns senere:
         // model.addAttribute("registrationNumbers", carService.getAllRegistrationNumbers());
         // model.addAttribute("userList", userService.getAllUsers());
@@ -44,11 +47,30 @@ public class LeaseAgreementController {
         return "leaseagreement/index";
     }
 
+
     @PostMapping("/create")
     public String create(@ModelAttribute("leaseAgreement") LeaseAgreement leaseAgreement) {
         leaseAgreementService.addLeaseAgreement(leaseAgreement);
         return "redirect:/leaseagreement";
     }
+
+    @PostMapping("/monthly-price")
+    public String getMonthlyPrice(@ModelAttribute("leaseAgreement") LeaseAgreement leaseAgreement,
+                                  Model model, HttpSession session) {
+        double price = carService.findMonthlyPriceByRegistration(leaseAgreement.getCarRegistrationNumber());
+        leaseAgreement.setMonthlyPrice(price);
+
+        model.addAttribute("leaseAgreement", leaseAgreement);
+        model.addAttribute("leaseAgreements", leaseAgreementService.fetchAll());
+        model.addAttribute("cars", carService.getAvailableCars());
+        model.addAttribute("user", session.getAttribute("user"));
+
+        // Isabella - Sætter fanebladet, så brugeren forbliver på "Opret lejeaftale"
+        model.addAttribute("activeTab", "LAformular");
+
+        return "leaseagreement/index";
+    }
+
 
     @GetMapping("/delete/{id}")
     public String deleteLease(@PathVariable int id) {

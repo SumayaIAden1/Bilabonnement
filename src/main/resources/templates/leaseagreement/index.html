@@ -92,12 +92,20 @@
 
 <div class="tabs-wrapper">
     <div class="tabs">
-        <button class="tab-button active" onclick="showTab(event, 'information')">Oversigt over lejeaftale</button>
-        <button class="tab-button" onclick="showTab(event, 'LAformular')">Opret en lejeaftale</button>
+        <button class="tab-button" onclick="showTab(event, 'information')"
+                th:classappend="${activeTab} == 'information' ? ' active' : ''">
+            Oversigt over lejeaftale
+        </button>
+        <button class="tab-button" onclick="showTab(event, 'LAformular')"
+                th:classappend="${activeTab} == 'LAformular' ? ' active' : ''">
+            Opret en lejeaftale
+        </button>
     </div>
 
+
+
     <!-- TAB 1 -->
-    <div id="information" class="tab-content active-tab">
+    <div id="information" class="tab-content" th:classappend="${activeTab} == 'information' ? ' active-tab' : ''">
         <div class="info-box">
             <strong>Oversigt over lejeaftaler</strong><br><br>
             Hos Bilabonnement er der følgende lejeaftaler:<br>
@@ -142,7 +150,6 @@
                             <a th:href="@{/leaseagreement/delete/{id}(id=${lease.leaseId})}"
                                onclick="return confirm('Er du sikker på, at du vil slette denne lejeaftale?');">Slet</a>
                         </td>
-
                     </tr>
                     </tbody>
                 </table>
@@ -150,8 +157,9 @@
         </div>
     </div>
 
+
     <!-- TAB 2 -->
-    <div id="LAformular" class="tab-content">
+    <!--<div id="LAformular" class="tab-content">
         <div class="info-box">
             <strong>Oprettelse af en lejeaftale</strong><br><br>
             Udfyld formularen for at oprette en lejeaftale:<br>
@@ -168,8 +176,8 @@
                 <label for="endDate">Slutdato</label>
                 <input type="date" id="endDate" th:field="*{endDate}" required>
 
-                <!-- dropdown så brugeren kun kan vælge registreringsnumre som allerede findes i databasen
-               på den måde overholder jeres foreign key-relation -->
+                 dropdown så brugeren kun kan vælge registreringsnumre som allerede findes i databasen
+               på den måde overholder jeres foreign key-relation -
                 <label for="carRegistrationNumber">Registreringsnummer</label>
                 <select id="carRegistrationNumber" name="carRegistrationNumber"
                         th:field="*{carRegistrationNumber}" required onchange="this.form.submit()">
@@ -179,7 +187,20 @@
                             th:text="${car.registrationNumber}"
                             th:selected="${car.registrationNumber == leaseAgreement.carRegistrationNumber}">
                     </option>
-                </select>
+                </select>-->
+
+                <!-- Formular 1: Kun dropdown -->
+                <!--<form th:action="@{/leaseagreement/monthly-price}" th:object="${leaseAgreement}" method="post">
+                    <label for="carRegistrationNumber">Registreringsnummer</label>
+                    <select id="carRegistrationNumber" th:field="*{carRegistrationNumber}" onchange="this.form.submit()">
+                        <option value="">-- Vælg en bil --</option>
+                        <option th:each="car : ${cars}"
+                                th:value="${car.registrationNumber}"
+                                th:text="${car.registrationNumber}"
+                                th:selected="${car.registrationNumber == leaseAgreement.carRegistrationNumber}">
+                        </option>
+                    </select>
+                </form>
 
                 <label for="monthlyPrice">Månedspris</label>
                 <input type="number" id="monthlyPrice" th:field="*{monthlyPrice}" step="0.01" readonly>
@@ -191,10 +212,10 @@
                 <input type="number" id="endMileage" th:field="*{endMileage}" required>
 
 
-                <!--<label for="totalPrice">Totalpris</label>
+                <label for="totalPrice">Totalpris</label>
                 <input type="number" id="totalPrice" th:field="*{totalPrice}" step="0.01" required> Isabella: bliver udregnet automatisk i controller-->
 
-                <label for="leaseType">Aftaletype</label>
+                <!--<label for="leaseType">Aftaletype</label>
                 <select id="leaseType" th:field="*{leaseType}" required>
                     <option value="Limited">Limited</option>
                     <option value="Unlimited">Unlimited</option>
@@ -221,9 +242,80 @@
             </form>
         </div>
     </div>
-</div>
+</div>-->
 
-<!-- JavaScript til faneblade uden reload -->
+    <!-- Formular 1: Kun dropdown -->
+    <!-- TAB 2 -->
+    <div id="LAformular" class="tab-content" th:classappend="${activeTab} == 'LAformular' ? ' active-tab' : ''">
+        <div class="info-box">
+            <strong>Oprettelse af en lejeaftale</strong><br><br>
+            Udfyld formularen for at oprette en lejeaftale:<br>
+
+            <!-- Formular 1: Dropdown til valg af bil -->
+            <form th:action="@{/leaseagreement/monthly-price}" th:object="${leaseAgreement}" method="post">
+                <label for="carRegistrationNumber">Registreringsnummer</label>
+                <select id="carRegistrationNumber" th:field="*{carRegistrationNumber}" onchange="this.form.submit()">
+                    <option value="">-- Vælg en bil --</option>
+                    <option th:each="car : ${cars}"
+                            th:value="${car.registrationNumber}"
+                            th:text="${car.registrationNumber}"
+                            th:selected="${car.registrationNumber == leaseAgreement.carRegistrationNumber}">
+                    </option>
+                </select>
+            </form>
+
+            <!-- Formular 2: Vises når bil er valgt -->
+            <th:block th:if="${leaseAgreement.carRegistrationNumber != null}">
+                <form th:action="@{/leaseagreement/create}" th:object="${leaseAgreement}" method="post">
+                    <label for="monthlyPrice">Månedspris</label>
+                    <input type="number" id="monthlyPrice" th:field="*{monthlyPrice}" step="0.01" readonly>
+
+                    <label for="leaseId">Lease ID</label>
+                    <input type="number" id="leaseId" th:field="*{leaseId}" required>
+
+                    <label for="startDate">Startdato</label>
+                    <input type="date" id="startDate" th:field="*{startDate}" required>
+
+                    <label for="endDate">Slutdato</label>
+                    <input type="date" id="endDate" th:field="*{endDate}" required>
+
+                    <label for="startMileage">Start km</label>
+                    <input type="number" id="startMileage" th:field="*{startMileage}" required>
+
+                    <label for="endMileage">Slut km</label>
+                    <input type="number" id="endMileage" th:field="*{endMileage}" required>
+
+                    <label for="leaseType">Aftaletype</label>
+                    <select id="leaseType" th:field="*{leaseType}" required>
+                        <option value="Limited">Limited</option>
+                        <option value="Unlimited">Unlimited</option>
+                    </select>
+
+                    <label for="status">Status</label>
+                    <select id="status" th:field="*{status}" required>
+                        <option value="Active">Active</option>
+                        <option value="Completed">Completed</option>
+                        <option value="Cancelled">Cancelled</option>
+                    </select>
+
+                    <label for="userId">Bruger ID</label>
+                    <input type="number" id="userId" th:field="*{userId}" required>
+
+                    <label for="customerId">Kunde ID</label>
+                    <input type="number" id="customerId" th:field="*{customerId}" required>
+
+                    <label for="locationId">Lokation ID</label>
+                    <input type="number" id="locationId" th:field="*{locationId}" required>
+
+                    <button type="submit">Gem lejeaftale</button>
+                </form>
+            </th:block>
+        </div>
+    </div>
+
+
+
+    <!-- JavaScript til faneblade uden reload -->
 <script>
     function showTab(event, tabId) {
         const allTabs = document.querySelectorAll('.tab-content');
