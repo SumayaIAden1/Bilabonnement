@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Kundeoversigt</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/customer/overview.css">
+</head>
+<body>
+
+<header class="top-wrapper">
+    <div class="logo-left">
+        <img src="/images/logo.png" alt="Bilabonnement logo">
+    </div>
+</header>
+
+<div class="overview-container">
+    <h1>Kundeoversigt</h1>
+    <p>Se alle registrerede kunder nedenfor.</p>
+
+    <div class="table-wrapper">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Navn</th>
+                <th>Email</th>
+                <th>Telefon</th>
+                <th>CPR</th>
+                <th>Aktiv</th>
+                <th>Gade</th>
+                <th>By</th>
+                <th>Postnummer</th>
+                <th>Land</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="cust : ${customers}">
+                <td th:text="${cust.customerId}">1</td>
+                <td th:text="${cust.customerName}">Acme Corp</td>
+                <td th:text="${cust.email}">acme@example.com</td>
+                <td th:text="${cust.phoneNumber}">+45 12 34 56 78</td>
+                <td th:text="${cust.cprNumber}">123456-7890</td>
+                <td th:text="${cust.active ? 'Ja' : 'Nej'}">Ja</td>
+                <td th:text="${cust.address.street}">Main St 123</td>
+                <td th:text="${cust.address.city}">Copenhagen</td>
+                <td th:text="${cust.address.zip}">1050</td>
+                <td th:text="${cust.address.country}">Denmark</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <p th:if="${#lists.isEmpty(customers)}" class="no-data-message">
+        Ingen kunder fundet.
+    </p>
+
+    <a href="/customers/startpage" class="overview-button">Tilbage</a>
+</div>
+
+</body>
+</html>

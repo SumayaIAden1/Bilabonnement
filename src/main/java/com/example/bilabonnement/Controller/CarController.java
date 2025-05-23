@@ -66,19 +66,38 @@ public class CarController {
         return "car/viewOne"; // templates/car/viewOne.html
     }
 
-    // Vis formular til opdatering
+    // Isabella - opdater bilens status
     @GetMapping("/cars/updateOne/{registrationNumber}")
-    public String updateForm(@PathVariable("registrationNumber") String registrationNumber, Model model) {
+    public String updateForm(@PathVariable("registrationNumber")
+                                 String registrationNumber,
+                                 Model model,
+                                 HttpSession session)
+    {
+
         model.addAttribute("car", carService.findCarByRegistration(registrationNumber));
-        return "car/updateOne"; // templates/car/updateOne.html
+        model.addAttribute("statuses", Car.CarStatus.values());
+        model.addAttribute("user", session.getAttribute("user"));
+        return "car/updateOne";
     }
 
-    // Gem ændringer
-    @PostMapping("/cars/updateCar")
-    public String updateCar(@ModelAttribute Car car) {
+    @PostMapping("/cars/updateStatus")
+    public String updateCarStatus(@RequestParam String registrationNumber,
+                                  @RequestParam String status) {
+        // Find den rigtige bil fra databasen
+        Car car = carService.findCarByRegistration(registrationNumber);
+
+        // Sæt status korrekt
+        car.setStatus(Car.CarStatus.valueOf(status));
+
+        // Opdater bilen i databasen
         carService.updateCar(car.getRegistrationNumber(), car);
-        return "redirect:/cars";
+
+        // Gå tilbage til biloversigten
+        return "redirect:/dataentry/cars";
     }
+
+
+
 
     // Slet bil
     @GetMapping("/cars/deleteOne/{registrationNumber}")

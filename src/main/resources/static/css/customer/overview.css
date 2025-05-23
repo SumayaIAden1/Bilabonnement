@@ -1,0 +1,110 @@
+/* Overview Container */
+.overview-container {
+    margin: 50px auto;
+    padding: 20px;
+    text-align: center;
+    width: 90%; /* Allow container to grow, but limit to 90% of viewport width */
+    max-width: none; /* Remove max-width constraint */
+    display: flex; /* Use flexbox for consistent spacing */
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center elements horizontally */
+    gap: 20px; /* Add spacing between child elements */
+}
+
+/* Overview Heading */
+.overview-container h1 {
+    font-size: 28px;
+    color: #000000;
+    margin: 20px 0;
+}
+
+/* Overview Text */
+.overview-container p {
+    font-size: 16px;
+    color: #143c54;
+    margin-bottom: 20px;
+}
+
+/* Table Styling */
+.table-wrapper {
+    width: 100%;
+    margin-top: 0; /* Remove margin-top since gap handles spacing */
+    overflow-x: auto; /* Ensure table is scrollable on small screens */
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+Lot of code in the middle
+
+.table thead {
+    background-color: #005EB8;
+    color: white;
+}
+
+.table thead th {
+    padding: 12px 15px;
+    text-align: center; /* Center text horizontally */
+    vertical-align: middle; /* Center text vertically */
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.table tbody td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #ddd;
+    text-align: center; /* Center text horizontally */
+    vertical-align: middle; /* Center text vertically */
+    font-size: 14px;
+}
+
+.table tbody tr:hover {
+    background-color: #f2f8ff;
+}
+
+.table td a {
+    color: #005EB8;
+    font-weight: bold;
+    text-decoration: none;
+    margin: 0 5px;
+}
+
+.table td a:hover {
+    text-decoration: underline;
+}
+
+/* No Data Message */
+.no-data-message {
+    font-size: 16px;
+    color: #143c54;
+    text-align: center;
+    margin: 0; /* Remove margin since gap handles spacing */
+    padding: 10px;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-radius: 6px;
+}
+
+/* Overview Button */
+.overview-button {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #005EB8;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.overview-button:hover {
+    background-color: #00AEEF;
+}
