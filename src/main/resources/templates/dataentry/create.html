@@ -40,7 +40,7 @@
         </th:block>
 
         <th:block th:if="${user.userRole.name() == 'FORRETNINGSUDVIKLER' or user.userRole.name() == 'ADMIN' or user.userRole.name() == 'DATAREGISTRERING'}">
-            <a href="/customer/create">
+            <a href="/customers/startpage">
                 <img src="/images/kunder.png" alt="Kunder">
                 <span>KUNDER</span>
             </a>
@@ -116,6 +116,10 @@
     <select th:field="*{modelId}">
         <option th:each="model : ${models}" th:value="${model.modelId}" th:text="${model.brand + ' ' + model.modelName}">Model</option>
     </select><br>
+
+    <label for="imageUrl">Billed-URL</label>
+    <input type="text" id="imageUrl" th:field="*{imageUrl}" placeholder="https://...jpg">
+
 
     <button type="submit" class="button-outline">Opret bil</button>
 </form>

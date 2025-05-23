@@ -79,3 +79,15 @@ form button:hover {
     background-color: #f4f4f4;
     color: #143c54;
 }
+
+/* Rediger, slet og vis design */
+.table td a {
+    color: #005EB8;
+    font-weight: bold;
+    text-decoration: none;
+    margin: 0 5px;
+}
+
+.table td a:hover {
+    text-decoration: underline;
+}

@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Map;
 
+import static org.apache.coyote.ActionCode.AVAILABLE;
+
 @Service
 public class CarService {
 
@@ -80,6 +82,22 @@ public class CarService {
     }
 
     /*Isabella- find pris pr. måned-----------------------------------------------------------------------------------*/
+
+
+    public List<Car> getAvailableCars() {
+        List<Car> allCars = (List<Car>) carRepo.fetchAll();
+        List<Car> availableCars = new ArrayList<>();
+
+        for (Car car : allCars) {
+            if (car.getStatus() == Car.CarStatus.Available) {
+                availableCars.add(car);
+            }
+        }
+
+        return availableCars;
+    }
+
+
 }
 
 

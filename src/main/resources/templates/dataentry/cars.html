@@ -40,7 +40,7 @@
         </th:block>
 
         <th:block th:if="${user.userRole.name() == 'FORRETNINGSUDVIKLER' or user.userRole.name() == 'ADMIN' or user.userRole.name() == 'DATAREGISTRERING'}">
-            <a href="/customer/create">
+            <a href="/customers/startpage">
                 <img src="/images/kunder.png" alt="Kunder">
                 <span>KUNDER</span>
             </a>
@@ -140,6 +140,7 @@
             <a th:href="@{'/cars/updateOne/' + ${car.registrationNumber}}">Rediger</a> |
             <a th:href="@{'/cars/deleteOne/' + ${car.registrationNumber}}">Slet</a>
         </td>
+
     </tr>
     </tbody>
 </table>

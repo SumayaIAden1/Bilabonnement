@@ -25,7 +25,7 @@ public class Car {
     public Car() {}
 
     public Car(String registrationNumber, String vinNumber, CarStatus status, String color,
-               double purchasePrice, double registrationFee, int mileage, String location, int modelId) {
+               double purchasePrice, double registrationFee, int mileage, String location, int modelId, String imageURL) {
         this.registrationNumber = registrationNumber;
         this.vinNumber = vinNumber;
         this.status = status;
@@ -35,6 +35,7 @@ public class Car {
         this.mileage = mileage;
         this.location = location;
         this.modelId = modelId;
+        //this.imageURL = imageURL;
     }
 
     // Isabella - tilføjet CarModel
@@ -134,4 +135,5 @@ public class Car {
     public void setCarModel(CarModel carModel) {
         this.carModel = carModel;
     }
+
 }
