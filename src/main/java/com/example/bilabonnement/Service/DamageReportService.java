@@ -33,9 +33,9 @@ public class DamageReportService {
         return damageReportRepo.findByCarId(carId);
     }
 
-
     public void save(DamageReport report) {
-        Car car = carRepo.findCarById(report.getCarId());
+        Car car = carRepo.findCarByRegistration(report.getRegistrationNumber());
+
 
         if (car.getStatus() != Car.CarStatus.Returned) {
             throw new IllegalStateException("Skader kan kun registreres på returnerede biler.");
