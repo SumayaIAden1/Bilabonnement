@@ -13,6 +13,29 @@
     z-index: 1;
 }
 
+/*Login page styling */
+.login-page {
+    height: 100vh;
+    background: linear-gradient(to bottom, #337fba 0%, #337fba 50%, #ffffff 50%, #ffffff 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-note {
+    margin-top: 15px;
+    font-size: 13px;
+    color: #666;
+    text-align: center;
+}
+
+.login-note::before {
+    color: #005EB8;
+    font-weight: bold;
+}
+
+/*--------------------------------------*/
+
 .logo-left {
   /*  position: absolute; */
     position: relative;
@@ -156,6 +179,7 @@
     display: flex;
     gap: 20px;
     margin-bottom: 20px;
+    padding-left: 43px;
 }
 
 .tab-button {
@@ -180,6 +204,8 @@
 .tab-content.active-tab {
     display: flex;
     gap: 30px;
+    padding-left: 40px; /*tilføjer luft fra venstre kant*/
+    padding-right: 40px; /*tilføjer luft fra højre kant*/
 }
 
 .info-box {
@@ -197,9 +223,11 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
+    /*background-color: #f2f2f2;*/
     margin: 0;
     padding: 0;
+    background-color: #f8fbfd
+
 }
 
 /* Centrer hele siden omkring login-boksen */
@@ -333,6 +361,7 @@ main {
 .table-wrapper {
     width: 100%;
     margin-top: 30px;
+    padding: 40px;
 }
 
 .table {
