@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static org.apache.coyote.ActionCode.AVAILABLE;
+
 
 @Service
 public class CarService {
@@ -83,6 +83,7 @@ public class CarService {
     }
 
 
+    //Sumaya - Ændrer status på alle biler, og vises i dropDown i LeaseAgreement
     public List<Car> getAvailableCars() {
         List<Car> allCars = (List<Car>) carRepo.fetchAll();
         List<Car> availableCars = new ArrayList<>();
@@ -94,6 +95,12 @@ public class CarService {
         }
 
         return availableCars;
+    }
+
+    public void updateCarStatus(String registrationNumber, String newStatus) {
+        Car car = carRepo.findCarByRegistration(registrationNumber); // du har denne metode
+        car.setStatus(Car.CarStatus.valueOf(newStatus)); // enum
+        carRepo.updateCar(registrationNumber, car); // du har også denne
     }
 
 

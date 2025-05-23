@@ -47,6 +47,12 @@ public class LeaseAgreementController {
     @PostMapping("/create")
     public String create(@ModelAttribute("leaseAgreement") LeaseAgreement leaseAgreement) {
         leaseAgreementService.addLeaseAgreement(leaseAgreement);
+
+        // Hvis lejeaftalen er aktiv → opdater bilen til Rented
+        if (leaseAgreement.getStatus().equalsIgnoreCase("Active")) {
+            carService.updateCarStatus(leaseAgreement.getCarRegistrationNumber(), "Rented");
+
+        }
         return "redirect:/leaseagreement";
     }
 
@@ -67,6 +73,11 @@ public class LeaseAgreementController {
     @PostMapping("/update/{id}")
     public String updateLease(@PathVariable int id, @ModelAttribute LeaseAgreement leaseAgreement) {
         leaseAgreementService.updateLeaseAgreement(id, leaseAgreement);
+
+        if (leaseAgreement.getStatus().equalsIgnoreCase("Completed") ||
+                leaseAgreement.getStatus().equalsIgnoreCase("Cancelled")) {
+            carService.updateCarStatus(leaseAgreement.getCarRegistrationNumber(), "Available");
+        }
         return "redirect:/leaseagreement";
     }
 
