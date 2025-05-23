@@ -25,7 +25,7 @@
 }
 
 .car-style{
-     margin-left: 25px; /*Skal være større end gap i center-logos, ellers kan man ikke se effekten*/
+     margin-left: 250px; /*Skal være større end gap i center-logos, ellers kan man ikke se effekten*/
 }
 
 .logo-left img {

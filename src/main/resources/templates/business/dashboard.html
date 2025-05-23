@@ -26,7 +26,7 @@
         </th:block>
 
         <th:block th:if="${user.userRole.name() == 'SKADESMEDARBEJDER' or user.userRole.name() == 'ADMIN'}">
-            <a href="/skade">
+            <a href="/damages/create">
                 <img src="/images/skader.png" alt="Skade og udbedring">
                 <span>SKADE OG UDBEDRING</span>
             </a>

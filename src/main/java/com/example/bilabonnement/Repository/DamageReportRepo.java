@@ -29,7 +29,7 @@ public class DamageReportRepo {
                     rs.getString("inspection"),
                     rs.getBoolean("customerPresent"),
                     rs.getString("status"),
-                    rs.getInt("carId"),
+                    rs.getString("registrationNumber"),
                     rs.getString("attachmentPath")
             );
         }
@@ -65,7 +65,7 @@ public class DamageReportRepo {
                 report.getInspection(),
                 report.isCustomerPresent(),
                 report.getStatus(),
-                report.getCarId(),
+                report.getRegistrationNumber(),
                 report.getAttachmentPath()
         );
     }
@@ -80,7 +80,7 @@ public class DamageReportRepo {
                 report.getInspection(),
                 report.isCustomerPresent(),
                 report.getStatus(),
-                report.getCarId(),
+                report.getRegistrationNumber(),
                 report.getAttachmentPath(),
                 report.getReportId()
         );

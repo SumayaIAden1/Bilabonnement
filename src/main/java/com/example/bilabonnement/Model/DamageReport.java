@@ -6,11 +6,11 @@ public class DamageReport {
     private int reportId;
     private LocalDate date;
     private String description;
-    private Double price;
+    private double price;
     private String inspection;
+    private String registrationNumber;
     private boolean customerPresent;
     private String status;
-    private Integer carId;
     private String attachmentPath;
 
     // Tom konstruktør
@@ -18,9 +18,9 @@ public class DamageReport {
     }
 
     // Konstruktør
-    public DamageReport(int reportId, LocalDate date, String description, Double price,
+    public DamageReport(int reportId, LocalDate date, String description, double price,
                         String inspection, boolean customerPresent, String status,
-                        Integer carId, String attachmentPath) {
+                        String registrationNumber, String attachmentPath) {
         this.reportId = reportId;
         this.date = date;
         this.description = description;
@@ -28,7 +28,7 @@ public class DamageReport {
         this.inspection = inspection;
         this.customerPresent = customerPresent;
         this.status = status;
-        this.carId = carId;
+        this.registrationNumber = registrationNumber;
         this.attachmentPath = attachmentPath;
     }
 
@@ -51,6 +51,14 @@ public class DamageReport {
 
     public String getDescription() {
         return description;
+    }
+
+    public String getRegistrationNumber() {
+        return registrationNumber;
+    }
+
+    public void setRegistrationNumber(String registrationNumber) {
+        this.registrationNumber = registrationNumber;
     }
 
     public void setDescription(String description) {
@@ -87,14 +95,6 @@ public class DamageReport {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public int getCarId() {
-        return carId;
-    }
-
-    public void setCarId(int carId) {
-        this.carId = carId;
     }
 
     public String getAttachmentPath() {

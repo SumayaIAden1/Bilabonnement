@@ -40,16 +40,26 @@ public class CustomerController {
 
 
     // Opret kunde metode
-    @GetMapping("/customer/create")
-    public String create(Model model) {
+    @GetMapping("/customers/create")
+    public String create(HttpSession session, Model model) {
+
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            return "redirect:/";
+        }
+        model.addAttribute("user", user);
+
+
         Customer customer = new Customer();
         customer.setAddress(new Address());
         model.addAttribute("customer", customer);
-        return "customer/createCustomer";  // templates/home/customer/createCustomer.html
+
+        return "customer/createCustomer";
     }
 
+
     // Tilføjer selve kunden til databasen efter oprettelse
-    @PostMapping("/customer/addCustomer")
+    @PostMapping("/customers/addCustomer")
     public String addCustomer(@ModelAttribute Customer customer, RedirectAttributes redirectAttributes) {
         try {
             customerService.addCustomerWithAddress(customer);
