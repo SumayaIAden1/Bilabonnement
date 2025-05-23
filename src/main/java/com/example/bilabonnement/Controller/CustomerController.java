@@ -2,7 +2,9 @@ package com.example.bilabonnement.Controller;
 
 import com.example.bilabonnement.Model.Address;
 import com.example.bilabonnement.Model.Customer;
+import com.example.bilabonnement.Model.User;
 import com.example.bilabonnement.Service.CustomerService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,10 +19,14 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
-    // Startside for kunder
     @GetMapping("/customers/startpage")
-    public String startpage() {
-        return "/customer/startpage";
+    public String startpage(HttpSession session, Model model) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            return "redirect:/";
+        }
+        model.addAttribute("user", user);
+        return "customer/startpage";
     }
 
 
@@ -86,4 +92,6 @@ public class CustomerController {
         customerService.deleteById(id);
         return "redirect:/customers";
     }
+
+
 }
