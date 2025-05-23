@@ -1,7 +1,9 @@
 package com.example.bilabonnement.Controller;
 
 import com.example.bilabonnement.Model.DamageReport;
+import com.example.bilabonnement.Model.User;
 import com.example.bilabonnement.Service.DamageReportService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
