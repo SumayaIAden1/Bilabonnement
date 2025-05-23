@@ -6,8 +6,11 @@ import com.example.bilabonnement.Repository.CarRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import static org.apache.coyote.ActionCode.AVAILABLE;
 
 @Service
 public class CarService {
@@ -78,6 +81,22 @@ public class CarService {
     public Map<String, Map<String, Integer>> getStatusCountsGroupedByModel() {
         return carRepo.getStatusCountsGroupedByModel();
     }
+
+
+    public List<Car> getAvailableCars() {
+        List<Car> allCars = (List<Car>) carRepo.fetchAll();
+        List<Car> availableCars = new ArrayList<>();
+
+        for (Car car : allCars) {
+            if (car.getStatus() == Car.CarStatus.Available) {
+                availableCars.add(car);
+            }
+        }
+
+        return availableCars;
+    }
+
+
 }
 
 

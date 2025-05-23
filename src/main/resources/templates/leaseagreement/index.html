@@ -158,6 +158,7 @@
 
             <form th:action="@{/leaseagreement/create}" th:object="${leaseAgreement}" method="post">
 
+
                 <label for="leaseId">Lease ID</label>
                 <input type="number" id="leaseId" th:field="*{leaseId}" required>
 
@@ -192,8 +193,17 @@
                     <option value="Cancelled">Cancelled</option>
                 </select>
 
+
+                <!-- dropdown så brugeren kun kan vælge registreringsnumre som allerede findes i databasen
+                på den måde overholder jeres foreign key-relation -->
                 <label for="carRegistrationNumber">Registreringsnummer</label>
-                <input type="text" id="carRegistrationNumber" th:field="*{carRegistrationNumber}" required>
+                <select id="carRegistrationNumber" th:field="*{carRegistrationNumber}" required>
+                    <option th:each="car : ${cars}"
+                            th:value="${car.registrationNumber}"
+                            th:text="${car.registrationNumber}">
+                    </option>
+                </select>
+
 
                 <label for="userId">Bruger ID</label>
                 <input type="number" id="userId" th:field="*{userId}" required>

@@ -10,7 +10,6 @@ public class Car {
     private int mileage;
     private String location;
     private int modelId;
-    private String imageUrl;
 
     private CarModel carModel;
 
@@ -137,11 +136,4 @@ public class Car {
         this.carModel = carModel;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
 }
