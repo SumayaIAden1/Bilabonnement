@@ -31,7 +31,8 @@ public class LeaseAgreementController {
     @GetMapping("")
     public String index(Model model, HttpSession session) {
             model.addAttribute("leaseAgreements", leaseAgreementService.fetchAll());
-            model.addAttribute("leaseAgreement", new LeaseAgreement()); // 👈 dette manglede før!
+            model.addAttribute("leaseAgreement", new LeaseAgreement());
+            model.addAttribute("cars", carService.getAvailableCars());
             model.addAttribute("user", session.getAttribute("user"));
 
 
