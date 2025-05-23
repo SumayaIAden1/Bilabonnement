@@ -34,7 +34,7 @@ public class CustomerController {
 
 
     // Opret kunde metode
-    @GetMapping("/customers/create")
+    @GetMapping("/customer/create")
     public String create(Model model) {
         Customer customer = new Customer();
         customer.setAddress(new Address());
@@ -43,7 +43,7 @@ public class CustomerController {
     }
 
     // Tilføjer selve kunden til databasen efter oprettelse
-    @PostMapping("/customers/addCustomer")
+    @PostMapping("/customer/addCustomer")
     public String addCustomer(@ModelAttribute Customer customer, RedirectAttributes redirectAttributes) {
         try {
             customerService.addCustomerWithAddress(customer);

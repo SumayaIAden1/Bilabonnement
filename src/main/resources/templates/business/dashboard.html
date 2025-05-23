@@ -107,6 +107,57 @@
     </div>
 
     <div class="dashboard-wrapper">
+        <h2>Aktuel flådestatus (graf)</h2>
+        <canvas id="fleetStatusChart" width="400" height="200"></canvas>
+    </div>
+
+    <!-- Tilføj Chart.js via CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script th:inline="javascript">
+        // Thymeleaf-injektion af data
+        const fleetStatusData = {
+            labels: ['Udlejede', 'Ledige', 'Skadede', 'Klar til afhentning'],
+            datasets: [{
+                label: 'Antal biler',
+                data: [
+                    [[${carStatusCounts['Rented'] ?: 0}]],
+                    [[${carStatusCounts['Available'] ?: 0}]],
+                    [[${carStatusCounts['Damaged'] ?: 0}]],
+                    [[${carStatusCounts['Returned'] ?: 0}]]
+                ],
+                backgroundColor: 'rgba(0, 123, 255, 0.6)',
+                borderColor: 'rgba(0, 123, 255, 1)',
+                borderWidth: 1
+            }]
+        };
+
+        const config = {
+            type: 'bar',
+            data: fleetStatusData,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        precision: 0
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        };
+
+        new Chart(
+            document.getElementById('fleetStatusChart'),
+            config
+        );
+    </script>
+
+
+    <!--<div class="dashboard-wrapper">
         <h2>Aktuel flådestatus</h2>
         <div class="dashboard-grid">
             <div class="dashboard-card">
@@ -126,7 +177,7 @@
                 <strong th:text="${carStatusCounts['Returned'] ?: 0}">0</strong>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!--
     <div class="dashboard-wrapper">

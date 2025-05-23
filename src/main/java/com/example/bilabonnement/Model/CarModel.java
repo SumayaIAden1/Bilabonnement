@@ -6,16 +6,18 @@ public class CarModel {
     private String modelName;
     private String equipmentLevel;
     private double co2Emission;
+    private double monthlyPrice; // ✅ Tilføjet felt
 
     public CarModel() {
     }
 
-    public CarModel(int modelId, String brand, String modelName, String equipmentLevel, double co2Emission) {
+    public CarModel(int modelId, String brand, String modelName, String equipmentLevel, double co2Emission, double monthlyPrice) {
         this.modelId = modelId;
         this.brand = brand;
         this.modelName = modelName;
         this.equipmentLevel = equipmentLevel;
         this.co2Emission = co2Emission;
+        this.monthlyPrice = monthlyPrice;
     }
 
     // Getters og setters
@@ -58,5 +60,13 @@ public class CarModel {
 
     public void setCo2Emission(double co2Emission) {
         this.co2Emission = co2Emission;
+    }
+
+    public double getMonthlyPrice() {
+        return monthlyPrice;
+    }
+
+    public void setMonthlyPrice(double monthlyPrice) {
+        this.monthlyPrice = monthlyPrice;
     }
 }

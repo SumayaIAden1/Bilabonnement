@@ -78,6 +78,8 @@ public class CarService {
     public Map<String, Map<String, Integer>> getStatusCountsGroupedByModel() {
         return carRepo.getStatusCountsGroupedByModel();
     }
+
+    /*Isabella- find pris pr. måned-----------------------------------------------------------------------------------*/
 }
 
 

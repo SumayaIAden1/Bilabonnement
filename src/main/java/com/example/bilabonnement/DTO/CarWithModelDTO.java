@@ -12,6 +12,7 @@ public class CarWithModelDTO {
     private String modelName;
     private String equipmentLevel;
     private double co2Emission;
+    private double monthlyPrice;
 
     // Getters & setters
     public String getRegistrationNumber() {
@@ -92,6 +93,14 @@ public class CarWithModelDTO {
 
     public void setCo2Emission(double co2Emission) {
         this.co2Emission = co2Emission;
+    }
+
+    public double getMonthlyPrice() {
+        return monthlyPrice;
+    }
+
+    public void setMonthlyPrice(double monthlyPrice) {
+        this.monthlyPrice = monthlyPrice;
     }
 }
 

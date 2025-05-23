@@ -1,4 +1,4 @@
-/*package com.example.bilabonnement.Service;
+package com.example.bilabonnement.Service;
 
 import com.example.bilabonnement.Service.Interface.LeaseAgreementServiceInterface;
 import org.junit.jupiter.api.Test;
@@ -22,4 +22,4 @@ public class LeaseAgreementInterfaceTest
         assertEquals(2, activeLeases); // Mock returnerer 2
         assertEquals(56789.0, totalPrice); // Mock returnerer 56789.0
     }
-}*/
+}

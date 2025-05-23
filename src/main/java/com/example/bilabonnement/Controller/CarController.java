@@ -105,4 +105,7 @@ public class CarController {
         carService.deleteCar(registrationNumber);
         return "redirect:/cars";
     }
+
+    /*Isabella - find pris pr. måned----------------------------------------------------------------------------------*/
 }
+
