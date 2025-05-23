@@ -479,3 +479,28 @@ main {
     border-radius: 6px;
     border: 1px solid #ccc;
 }
+
+/*Dashboard----------------------------------------------------------------------------------------------------------*/
+.dashboard-layout {
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr;
+    gap: 40px;
+    padding: 40px;
+}
+
+.left-panel, .center-panel, .right-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.chart-box, .table-box {
+    background-color: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+/*Script tabel-------------------------*/
+
+
