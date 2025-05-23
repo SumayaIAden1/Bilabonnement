@@ -168,14 +168,28 @@
                 <label for="endDate">Slutdato</label>
                 <input type="date" id="endDate" th:field="*{endDate}" required>
 
+                <!-- dropdown så brugeren kun kan vælge registreringsnumre som allerede findes i databasen
+               på den måde overholder jeres foreign key-relation -->
+                <label for="carRegistrationNumber">Registreringsnummer</label>
+                <select id="carRegistrationNumber" name="carRegistrationNumber"
+                        th:field="*{carRegistrationNumber}" required onchange="this.form.submit()">
+                    <option value="">-- Vælg en bil --</option>
+                    <option th:each="car : ${cars}"
+                            th:value="${car.registrationNumber}"
+                            th:text="${car.registrationNumber}"
+                            th:selected="${car.registrationNumber == leaseAgreement.carRegistrationNumber}">
+                    </option>
+                </select>
+
+                <label for="monthlyPrice">Månedspris</label>
+                <input type="number" id="monthlyPrice" th:field="*{monthlyPrice}" step="0.01" readonly>
+
                 <label for="startMileage">Start km</label>
                 <input type="number" id="startMileage" th:field="*{startMileage}" required>
 
                 <label for="endMileage">Slut km</label>
                 <input type="number" id="endMileage" th:field="*{endMileage}" required>
 
-                <label for="monthlyPrice">Månedspris</label>
-                <input type="number" id="monthlyPrice" th:field="*{monthlyPrice}" step="0.01" required>
 
                 <!--<label for="totalPrice">Totalpris</label>
                 <input type="number" id="totalPrice" th:field="*{totalPrice}" step="0.01" required> Isabella: bliver udregnet automatisk i controller-->
@@ -191,17 +205,6 @@
                     <option value="Active">Active</option>
                     <option value="Completed">Completed</option>
                     <option value="Cancelled">Cancelled</option>
-                </select>
-
-
-                <!-- dropdown så brugeren kun kan vælge registreringsnumre som allerede findes i databasen
-                på den måde overholder jeres foreign key-relation -->
-                <label for="carRegistrationNumber">Registreringsnummer</label>
-                <select id="carRegistrationNumber" th:field="*{carRegistrationNumber}" required>
-                    <option th:each="car : ${cars}"
-                            th:value="${car.registrationNumber}"
-                            th:text="${car.registrationNumber}">
-                    </option>
                 </select>
 
 
