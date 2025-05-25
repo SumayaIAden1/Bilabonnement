@@ -7,7 +7,8 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import java.time.LocalDate;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 @Repository
@@ -79,11 +80,41 @@ public class LeaseAgreementRepo
     }
 
 
+    public LeaseAgreement findActiveLeaseByRegistrationNumber(String regNumber) {
+        String sql = "SELECT * FROM lease_agreement WHERE car_registration_number = ? AND status = 'Active'";
+        return template.queryForObject(sql, new LeaseAgreementRowMapper(), regNumber);
+    }
+
+    // Intern klasse til mapping af LeaseAgreement
+    private static class LeaseAgreementRowMapper implements RowMapper<LeaseAgreement> {
+        @Override
+        public LeaseAgreement mapRow(ResultSet rs, int rowNum) throws SQLException {
+            LeaseAgreement lease = new LeaseAgreement();
+            lease.setLeaseId(rs.getInt("lease_id"));
+            lease.setStartDate(rs.getDate("start_date"));
+            lease.setEndDate(rs.getDate("end_date"));
+            lease.setStartMileage(rs.getInt("start_mileage"));
+            lease.setEndMileage(rs.getInt("end_mileage"));
+            lease.setMonthlyPrice(rs.getDouble("monthly_price"));
+            lease.setTotalPrice(rs.getDouble("total_price"));
+            lease.setLeaseType(rs.getString("lease_type"));
+            lease.setStatus(rs.getString("status"));
+            lease.setCarRegistrationNumber(rs.getString("car_registration_number"));
+            lease.setUserId(rs.getInt("user_id"));
+            lease.setCustomerId(rs.getInt("customer_id"));
+            lease.setLocationId(rs.getInt("location_id"));
+            return lease;
+        }
+    }
+
+
+
     public LeaseAgreement findById(int id) {
         String sql = "SELECT * FROM lease_agreement WHERE lease_id = ?";
         RowMapper<LeaseAgreement> rowMapper = new BeanPropertyRowMapper<>(LeaseAgreement.class);
         return template.queryForObject(sql, rowMapper, id);
     }
+
 
 
     public double sumTotalPriceOfLeasedCars()

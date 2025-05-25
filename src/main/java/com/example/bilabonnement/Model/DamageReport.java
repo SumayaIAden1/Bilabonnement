@@ -7,7 +7,8 @@ public class DamageReport {
     private LocalDate date;
     private String description;
     private double price;
-    private String inspection;
+    private int leaseId;
+    private String inspector;
     private String registrationNumber;
     private boolean customerPresent;
     private String status;
@@ -18,14 +19,15 @@ public class DamageReport {
     }
 
     // Konstruktør
-    public DamageReport(int reportId, LocalDate date, String description, double price,
-                        String inspection, boolean customerPresent, String status,
+    public DamageReport(int reportId, LocalDate date, String description, double price, int leaseId,
+                        String inspector, boolean customerPresent, String status,
                         String registrationNumber, String attachmentPath) {
         this.reportId = reportId;
         this.date = date;
         this.description = description;
         this.price = price;
-        this.inspection = inspection;
+        this.leaseId = leaseId;
+        this.inspector = inspector;
         this.customerPresent = customerPresent;
         this.status = status;
         this.registrationNumber = registrationNumber;
@@ -73,12 +75,20 @@ public class DamageReport {
         this.price = price;
     }
 
-    public String getInspection() {
-        return inspection;
+    public int getLeaseId() {
+        return leaseId;
     }
 
-    public void setInspection(String inspection) {
-        this.inspection = inspection;
+    public void setLeaseId(int leaseId) {
+        this.leaseId = leaseId;
+    }
+
+    public String getInspector() {
+        return inspector;
+    }
+
+    public void setInspector(String inspector) {
+        this.inspector = inspector;
     }
 
     public boolean isCustomerPresent() {
