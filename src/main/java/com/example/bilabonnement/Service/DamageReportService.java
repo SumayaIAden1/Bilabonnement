@@ -2,11 +2,14 @@ package com.example.bilabonnement.Service;
 
 import com.example.bilabonnement.Model.Car;
 import com.example.bilabonnement.Model.DamageReport;
+import com.example.bilabonnement.Model.LeaseAgreement;
 import com.example.bilabonnement.Repository.CarRepo;
 import com.example.bilabonnement.Repository.DamageReportRepo;
+import com.example.bilabonnement.Repository.LeaseAgreementRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -17,6 +20,9 @@ public class DamageReportService {
 
     @Autowired
     private DamageReportRepo damageReportRepo;
+
+    @Autowired
+    private LeaseAgreementRepo leaseAgreementRepo;
 
     // Returnerer en liste med alle skadesrapporter
     public List<DamageReport> findAll() {
@@ -30,7 +36,7 @@ public class DamageReportService {
 
     // Finder alle skadesrapporter, der er knyttet til en bestemt bil
     public List<DamageReport> findByCarId(int carId) {
-        return damageReportRepo.findByCarId(carId);
+        return damageReportRepo.findByLeaseId(carId);
     }
 
     public void save(DamageReport report) {
@@ -43,6 +49,15 @@ public class DamageReportService {
         if (report.getPrice() < 0) {
             throw new IllegalArgumentException("Prisen må ikke være negativ.");
         }
+        if (report.getDate() == null) {
+            report.setDate(LocalDate.now());
+        }
+        report.setStatus("Afventer");
+
+        LeaseAgreement lease = leaseAgreementRepo.findActiveLeaseByRegistrationNumber(report.getRegistrationNumber());
+        report.setLeaseId(lease.getLeaseId());
+
+
         damageReportRepo.save(report);
     }
 

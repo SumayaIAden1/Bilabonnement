@@ -39,12 +39,17 @@ public class UserService {
     }
 
     // Find a user by their name
-    public User findByName(String name) {
-        return userRepo.findByName(name);
+    public User findByUsername(String name) {
+        return userRepo.findByUsername(name);
     }
 
     // Validate login credentials (username and password)
     public boolean validateLogin(String username, String password) {
         return userRepo.validateLogin(username, password);
     }
+
+    public User getUserByUsername(String username) {
+        return userRepo.findByUsername(username);
+    }
+
 }

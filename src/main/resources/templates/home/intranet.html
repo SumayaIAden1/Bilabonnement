@@ -95,22 +95,183 @@
     <button class="tab-button" onclick="showTab(event, 'features')">Nye funktioner</button>
   </div>
 
+  <!--Isabella - Alt er mock data for at skabe et realistisk billede af hvordan intranettet kunne se ud-->
   <div id="information" class="tab-content active-tab">
     <div class="info-box">
       <strong>Nyheder</strong><br><br>
-      Hos Bilabonnement...<br>
-      Ny leder...
+
+      <!--Nyhed 1-->
+      <div style="display: flex; gap: 12px; align-items: flex-start; margin-bottom: 20px;">
+        <img src="/images/dashboard.png" alt="Dashboard ikon"
+             style="width: 100px; height: auto; border-radius: 6px; object-fit: contain;">
+        <div>
+          <strong>27. maj 2025</strong><br>
+          Nyt dashboard med lagerstatus er nu tilgængeligt.<br>
+          <a href="/business/dashboard" style="color: #005EB8; font-weight: bold;">Gå til Dashboard</a>
+        </div>
+      </div>
+      <br>
+      <!--Nyhed 2-->
+      <div style="display: flex; gap: 10px; align-items: flex-start;">
+        <img src="/images/nyheder/fiat.png" alt="Citroën C3 Aircross"
+             style="width: 100px; height: auto; border-radius: 6px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
+        <div>
+          <strong>28. maj 2025</strong><br>
+          Vores nye elbil: <strong>Fiat 500e Icon Pack 118 HK</strong><br>
+          <a href="https://bilabonnement.dk/se-alle-biler#/201?modelName=Fiat_500e_Icon_Pack_118_HK"
+             target="_blank" style="color: #005EB8; font-weight: bold;">
+            Se bilen på vores hjemmeside
+          </a>
+        </div>
+      </div>
+
+      <br>
+
+      <!-- Nyhed 3: Ny medarbejder -->
+      <div style="display: flex; gap: 12px; align-items: flex-start; margin-top: 20px;">
+        <img src="/images/nyheder/rasmus.png" alt="Rasmus Jakobsen"
+             style="width: 80px; height: auto; border-radius: 6px; object-fit: cover; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
+        <div>
+          <strong>29. maj 2025</strong><br>
+          Vi byder velkommen til <strong>Rasmus Jakobsen</strong>, vores nye medarbejder i dataregistrerings teamet.<br>
+        </div>
+      </div>
+
+      <br>
+
+      <!-- Nyhed 4: Sommerfest -->
+      <div style="display: flex; gap: 12px; align-items: flex-start; margin-top: 20px;">
+        <img src="/images/nyheder/sommerfest.png" alt="Sommerfest ikon"
+             style="width: 80px; height: auto; border-radius: 6px; object-fit: cover; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
+        <div>
+          <strong>30. maj 2025</strong><br>
+          Vi inviterer alle medarbejdere til årets sommerfest fredag d. <strong>14. juni</strong>!<br>
+          Der vil være god mad, kolde drikke og live musik – og selvfølgelig fantastisk selskab.<br><br>
+          Tilmeld dig senest <strong>7. juni</strong> via formularen:<br>
+          <a href="/events/sommerfest-2025" style="color: #005EB8; font-weight: bold;">Tilmeldingsformular</a>
+        </div>
+      </div>
+
+      <!-- Nyhed 6: Systemforbedring -->
+      <div style="display: flex; gap: 12px; align-items: flex-start; margin-top: 20px;">
+        <img src="/images/biler.png" alt="System ikon"
+             style="width: 100px; height: auto; border-radius: 6px; object-fit: contain; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
+        <div>
+          <strong>1. juni 2025</strong><br>
+          Vi har opdateret systemet, så du nu kan ændre bilens status hurtigere og mere overskueligt.<br>
+          Ændringen gælder både for nye og eksisterende biler og kræver ingen ekstra trin.<br>
+          <a href="/dataentry/cars" style="color: #005EB8; font-weight: bold;">Gå til biloversigt</a>
+        </div>
+      </div>
+
     </div>
-    <div class="info-box">
-      <strong>Dine kontakter hos Bilabonnement</strong><br><br>
-      Ved spørgsmål til brugen...
+
+
+    <div class="info-box" style="font-size: 14px; line-height: 1.3;">
+      <strong style="font-size: 16px;">Dine kontakter hos Bilabonnement</strong><br><br>
+
+      <div style="margin-bottom: 14px;">
+        <strong>HR & ansættelser</strong><br>
+        Sofie Holm – <em>Kontakt vedr. ansættelseskontrakter, ferie og sygdom</em><br>
+        hr@bilabonnement.dk |  12 34 56 78
+      </div>
+      <br>
+
+      <div style="margin-bottom: 14px;">
+        <strong>IT-support & systemfejl</strong><br>
+        Tobias Andersen – <em>Hjælper med login, fejl i systemet og tekniske problemer</em><br>
+        it@bilabonnement.dk |  23 45 67 89
+      </div>
+      <br>
+
+      <div style="margin-bottom: 14px;">
+        <strong>Dataregistrering</strong><br>
+        Louise Birkholm – <em>Spørgsmål til oprettelse, statusændringer eller bildata</em><br>
+        data@bilabonnement.dk |  34 56 78 90
+      </div>
+      <br>
+
+      <div>
+        <strong>Skader & udbedring</strong><br>
+        Jonas Madsen – <em>Kontakt ved skader, mangler eller skadesrapporter</em><br>
+        skader@bilabonnement.dk |  98 76 54 32
+      </div>
+      <br>
+
+      <div style="margin-bottom: 14px;">
+        <strong>Kundeservice</strong><br>
+        Camilla Jensen – <em>Spørgsmål fra kunder, lejeaftaler og afhentning</em><br>
+        kunder@bilabonnement.dk |  45 67 89 01
+      </div>
+      <br>
+
+      <div style="margin-bottom: 14px;">
+        <strong>Salgsafdeling</strong><br>
+        Morten Kristensen – <em>Kontakt om videresalg, opkøb og samarbejdspartnere</em><br>
+        salg@bilabonnement.dk |  56 78 90 12
+      </div>
+      <br>
+
+      <div>
+        <strong>Forretningsudvikling</strong><br>
+        Line Vestergaard – <em>Input til forbedringer, analyser og strategiske spørgsmål</em><br>
+        business@bilabonnement.dk |  67 89 01 23
+      </div>
+
     </div>
+
+
     <div class="info-box">
       <strong>Meddelelser</strong><br><br>
-      <strong>Maria:</strong> Hej allesammen...<br>
-      <strong>Peter:</strong> Alle medarbejdere...
+
+      <div style="margin-bottom: 10px;">
+        <strong>Maria (HR):</strong><br>
+        Husk at registrere ferie i systemet senest fredag d. 31. maj.
+      </div>
+
+      <br>
+
+      <div style="margin-bottom: 10px;">
+        <strong>Peter (IT):</strong><br>
+        Dashboardet kører nu stabilt igen efter opdatering. Kontakt os hvis du oplever fejl.
+      </div>
+
+      <br>
+
+      <div style="margin-bottom: 10px;">
+        <strong>Louise (Data):</strong><br>
+        Alle biler med status “Skadet” skal være opdateret inden torsdag kl. 14.
+      </div>
+
+      <br>
+
+      <div style="margin-bottom: 10px;">
+        <strong>Camilla (Kundeservice):</strong><br>
+        Vi oplever øget tryk på telefonerne – hjælp gerne med hurtig opdatering af lejeaftaler.
+      </div>
+
+      <br>
+
+      <div>
+        <strong>Sofie (Ledelsen):</strong><br>
+        Tak for jeres indsats i maj! Vi glæder os til at se jer til sommerfesten d. 14. juni
+      </div>
+
+      <br>
+
+      <!-- Skriv ny meddelelse (mock) -->
+      <div style="border-top: 1px solid #ccc; padding-top: 10px;">
+        <label for="mock-message" style="font-weight: bold;">Skriv ny meddelelse:</label><br>
+        <textarea id="mock-message" rows="3" placeholder="Skriv din meddelelse her..." disabled
+                  style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 6px; margin-top: 6px; resize: none; background-color: #f4f4f4; color: #888;"></textarea>
+        <button disabled
+                style="margin-top: 8px; padding: 6px 12px; border: none; border-radius: 6px; background-color: #cccccc; color: white; cursor: not-allowed;">
+          Send
+        </button>
+        <p style="font-size: 12px; color: #999; margin-top: 6px;"><em>(Funktion ikke tilgængelig endnu)</em></p>
+      </div>
+
     </div>
-  </div>
 
   <div id="dashboard" class="tab-content">
     <p>Her skal der være generelle nøgletal for firmaet...</p>
