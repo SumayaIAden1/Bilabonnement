@@ -479,3 +479,14 @@ main {
     border-radius: 6px;
     border: 1px solid #ccc;
 }
+
+/* Solgte biler - tabel design--------------------------------------------------------------------------------------*/
+.sold-table {
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+}
+
+.sold-table thead {
+    background-color: #002855;
+    color: white;
+}
