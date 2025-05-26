@@ -19,6 +19,7 @@
         <!-- Fejlbesked hvis login mislykkes -->
         <div th:if="${error}" class="fejlbesked" th:text="${error}"></div>
 
+        <!--Isabella - task 0.1 Login metode-->
         <form action="/login" method="post">
             <input type="text" name="username" placeholder="Brugernavn" required>
             <input type="password" name="password" placeholder="Adgangskode" required>

@@ -3,7 +3,7 @@
 .top-wrapper {
     display: flex;
   /*  justify-content: space-between; */
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
     flex-wrap: nowrap;
     padding: 5px 20px; /*første værdi er top og bund, anden værdi er venstre og højre */
@@ -47,9 +47,9 @@
     /* padding-left: 10px; */
 }
 
-.car-style{
-     margin-left: 250px; /*Skal være større end gap i center-logos, ellers kan man ikke se effekten*/
-}
+/*.car-style{
+     margin-left: 150px; /*Skal være større end gap i center-logos, ellers kan man ikke se effekten*/
+/*}*/
 
 .logo-left img {
     width: 250px;  /*Logoets størrelse */
@@ -63,7 +63,7 @@
     gap: 40px;
     justify-content: center;
     flex-wrap: nowrap;
-    padding: 0;
+    padding-left: 150px;
     /*  flex-wrap: wrap;
       padding: 20px 0; */
 }
@@ -78,6 +78,7 @@
     text-decoration: none;
     transition: transform 0.2s ease;
     text-align: center;
+    justify-content: center;
 }
 
 .center-logos a:hover {
