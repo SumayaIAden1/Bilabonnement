@@ -22,22 +22,27 @@ public class CarController {
     @Autowired
     private CarModelService carModelService;
 
-    // Vis alle biler
-    /*@GetMapping("/dataentry/cars")
-    public String getAllCars(Model model) {
-        List<Car> cars = carService.fetchAll(); // Isabella - Vi henter alle biler fra databasen
-        model.addAttribute("cars", cars); // Listen bliver tilgængelig i html
-        return "dataentry/cars";
-    }*/
-
-    //Isbella - alle biler med model
+    //Sumaya - Ny metode til at hente alle biler, men også sortere ud når en bil er solgt
     @GetMapping("/dataentry/cars")
     public String getAllCars(Model model, HttpSession session) {
-        List<CarWithModelDTO> cars = carService.fetchAllCarsWithModel();
-        model.addAttribute("cars", cars);
-        model.addAttribute("user", session.getAttribute("user")); // Skal være med så så brugeren er tilgængelig for Thymeleaf
+        List<CarWithModelDTO> allCars = carService.fetchAllCarsWithModel();
+
+        // Biler der er solgt
+        List<CarWithModelDTO> soldCars = allCars.stream()
+                .filter(car -> car.getStatus().equalsIgnoreCase("Sold"))
+                .toList();
+
+        // Biler der ikke er solgt
+        List<CarWithModelDTO> visibleCars = allCars.stream()
+                .filter(car -> !car.getStatus().equalsIgnoreCase("Sold"))
+                .toList();
+
+        model.addAttribute("cars", visibleCars);
+        model.addAttribute("soldCars", soldCars);
+        model.addAttribute("user", session.getAttribute("user"));
         return "dataentry/cars";
     }
+
 
     @GetMapping("/cars/create")
     public String createCarForm(Model model, HttpSession session) {
@@ -96,15 +101,6 @@ public class CarController {
         return "redirect:/dataentry/cars";
     }
 
-
-
-
-    // Slet bil
-    @GetMapping("/cars/deleteOne/{registrationNumber}")
-    public String deleteCar(@PathVariable("registrationNumber") String registrationNumber) {
-        carService.deleteCar(registrationNumber);
-        return "redirect:/cars";
-    }
 
     /*Isabella - find pris pr. måned----------------------------------------------------------------------------------*/
 }

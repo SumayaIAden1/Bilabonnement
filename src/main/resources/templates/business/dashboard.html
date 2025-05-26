@@ -18,7 +18,6 @@
     <nav class="center-logos">
         <!-- Dynamisk navigation baseret på brugerrolle - Isabella -->
 
-
         <th:block th:if="${user.userRole.name() == 'DATAREGISTRERING' or user.userRole.name() == 'ADMIN'}">
             <a href="/dataentry/cars" class = "car-style">
                 <img src="/images/biler.png" alt="Biler">
@@ -47,25 +46,12 @@
             </a>
         </th:block>
 
-        <th:block th:if="${user.userRole.name() == 'ADMIN'}">
-            <a href="/medarbejder">
-                <img src="/images/medarbejder.png" alt="Medarbejder">
-                <span>MEDARBEJDER</span>
-            </a>
-        </th:block>
-
         <th:block th:if="${user.userRole.name() == 'FORRETNINGSUDVIKLER' or user.userRole.name() == 'ADMIN'}">
             <a href="/business/dashboard">
                 <img src="/images/dashboard.png" alt="Dashboard">
                 <span>DASHBOARD</span>
             </a>
         </th:block>
-
-
-        <a href="/indbakke">
-            <img src="/images/indbakke.png" alt="Indbakke">
-            <span>INDBAKKE</span>
-        </a>
     </nav>
 
     <div class="right-side">
@@ -117,6 +103,7 @@
                         <th>Rented</th>
                         <th>Returned</th>
                         <th>Damaged</th>
+                        <th>Sold</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -126,6 +113,7 @@
                         <td th:text="${entry.value['Rented'] ?: 0}">0</td>
                         <td th:text="${entry.value['Returned'] ?: 0}">0</td>
                         <td th:text="${entry.value['Damaged'] ?: 0}">0</td>
+                        <td th:text="${entry.value['Sold'] ?: 0}">0</td>
                     </tr>
                     </tbody>
                 </table>
@@ -149,12 +137,14 @@
                         [[${carStatusCounts['Available'] ?: 0}]],
                         [[${carStatusCounts['Damaged'] ?: 0}]],
                         [[${carStatusCounts['Returned'] ?: 0}]]
+                       // [[${carStatusCounts['Sold'] ?: 0}]] -- en ny til oversigt over solgte biler
                     ],
                     backgroundColor: [
                         "#005EB8", // Udlejede – mørk blå
                         "#0077CC", // Ledige – mellemblå
                         "#3399FF", // Skadede – klar blå
                         "#66B2FF"  // Returneret – lys blå
+                       // "#c6e0ff"  // Returneret – lysere blå - en ny til oversigt over solgte biler
                     ],
                     borderRadius: 6
                 }]

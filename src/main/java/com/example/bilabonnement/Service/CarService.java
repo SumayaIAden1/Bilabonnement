@@ -99,17 +99,17 @@ public class CarService {
         return availableCars;
     }
 
+    //Sumaya - opdatere bilerne efter deres status
     public void updateCarStatus(String registrationNumber, String newStatus) {
-        Car car = carRepo.findCarByRegistration(registrationNumber); // du har denne metode
-        car.setStatus(Car.CarStatus.valueOf(newStatus)); // enum
-        carRepo.updateCar(registrationNumber, car); // du har også denne
+        Car car = carRepo.findCarByRegistration(registrationNumber);
+        car.setStatus(Car.CarStatus.valueOf(newStatus));
+        carRepo.updateCar(registrationNumber, car);
     }
+
 
     public double findMonthlyPriceByRegistration(String registrationNumber) {
         return carRepo.findMonthlyPriceByRegistration(registrationNumber);
     }
-
-
 }
 
 
