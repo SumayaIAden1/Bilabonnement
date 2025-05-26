@@ -37,6 +37,13 @@
             </a>
         </th:block>
 
+        <th:block th:if="${user.userRole.name() == 'ADMIN'}">
+            <a href="/medarbejder">
+                <img src="/images/medarbejder.png" alt="Medarbejder">
+                <span>MEDARBEJDER</span>
+            </a>
+        </th:block>
+
         <th:block th:if="${user.userRole.name() == 'FORRETNINGSUDVIKLER' or user.userRole.name() == 'ADMIN' or user.userRole.name() == 'DATAREGISTRERING'}">
             <a href="/customers/startpage">
                 <img src="/images/kunder.png" alt="Kunder">
@@ -44,13 +51,17 @@
             </a>
         </th:block>
 
-
         <th:block th:if="${user.userRole.name() == 'FORRETNINGSUDVIKLER' or user.userRole.name() == 'ADMIN'}">
             <a href="/business/dashboard">
                 <img src="/images/dashboard.png" alt="Dashboard">
                 <span>DASHBOARD</span>
             </a>
         </th:block>
+
+        <a href="/indbakke">
+            <img src="/images/indbakke.png" alt="Indbakke">
+            <span>INDBAKKE</span>
+        </a>
     </nav>
 
     <div class="right-side">
