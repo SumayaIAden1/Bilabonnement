@@ -71,7 +71,10 @@
   <div class="content-wrapper">
     <h1>Opret ny kunde</h1>
 
-    <form action="/customers/addCustomer" method="post" class="create-customer-form">
+    <form action="/customers/addCustomer"
+          th:object="${customer}"
+          method="post"
+          class="create-customer-form">
       <!-- Navn -->
       <label for="customerName">Navn:</label>
       <input type="text" id="customerName" name="customerName"
@@ -84,8 +87,12 @@
 
       <!-- Telefon -->
       <label for="phoneNumber">Telefon:</label>
-      <input type="text" id="phoneNumber" name="phone"
+      <input type="text" id="phoneNumber" name="phoneNumber"
              th:value="${customer.phoneNumber}" required/>
+
+      <label for="cprNumber">CPR-nummer:</label>
+      <input type="text" id="cprNumber" name="cprNumber"
+             th:value="${customer.cprNumber}" required/>
 
       <!-- Adresse -->
       <label for="country">Land:</label>
@@ -109,12 +116,12 @@
       <input type="date" id="createdAt" name="createdAt"
              th:value="${customer.createdAt}" required/>
 
-      <!-- Aktiv -->
-      <label for="isActive" class="checkbox-label">
-        <input type="checkbox" id="isActive" name="isActive"
-               th:checked="${customer.isActive}"/>
-        Aktiv
-      </label>
+      <div>
+        <label for="active">Aktiv kunde:</label>
+        <!-- this single line expands into a hidden + checkbox for boolean binding -->
+        <input type="checkbox" th:field="*{active}" id="active"/>
+      </div>
+
 
       <!-- Submit -->
       <button type="submit">Opret kunde</button>

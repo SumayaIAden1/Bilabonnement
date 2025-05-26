@@ -67,18 +67,6 @@ public class UserController {
         return "redirect:/users";
     }
 
-    /*// Valider login
-    @PostMapping("/users/login")
-    public String validateLogin(@RequestParam String username, @RequestParam String password, Model model) {
-        boolean valid = userService.validateLogin(username, password);
-        if (valid) {
-            return "redirect:/dashboard"; // eller anden relevant side
-        } else {
-            model.addAttribute("error", "Ugyldigt brugernavn eller adgangskode");
-            return "user/login"; // vis login-side igen
-        }
-    }*/
-
     @PostMapping("/users/login")
     public String validateLogin(@RequestParam String username, @RequestParam String password, Model model, HttpSession session) {
         User user = userService.getUserByUsername(username);
@@ -91,7 +79,6 @@ public class UserController {
             return "user/login";
         }
     }
-
 
 
 }
