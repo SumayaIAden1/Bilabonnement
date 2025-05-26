@@ -17,7 +17,7 @@
 
 
       <th:block th:if="${user.userRole.name() == 'DATAREGISTRERING' or user.userRole.name() == 'ADMIN'}">
-      <a href="/dataentry/cars" class = "car-style">
+      <a href="/dataentry/cars">
         <img src="/images/biler.png" alt="Biler">
         <span>BILER</span>
       </a>
@@ -62,6 +62,7 @@
     <div class="user-info">
       <span>Velkommen, <strong th:text="${user.username}">Bruger</strong></span><br>
       <span>Rolle: <strong th:text="${user.userRole}">ROLLE</strong></span>
+      <a href="/logout" class="logout-link">Log ud</a>
     </div>
 
     <a href="/logout" class="logout-link">Log ud</a>
@@ -121,7 +122,7 @@
       <!-- Nyhed 3: Ny medarbejder -->
       <div style="display: flex; gap: 12px; align-items: flex-start; margin-top: 20px;">
         <img src="/images/nyheder/rasmus.png" alt="Rasmus Jakobsen"
-             style="width: 80px; height: auto; border-radius: 6px; object-fit: cover; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
+             style="width: 100px; height: auto; border-radius: 6px; object-fit: cover; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
         <div>
           <strong>29. maj 2025</strong><br>
           Vi byder velkommen til <strong>Rasmus Jakobsen</strong>, vores nye medarbejder i dataregistrerings teamet.<br>
@@ -133,7 +134,7 @@
       <!-- Nyhed 4: Sommerfest -->
       <div style="display: flex; gap: 12px; align-items: flex-start; margin-top: 20px;">
         <img src="/images/nyheder/sommerfest.png" alt="Sommerfest ikon"
-             style="width: 80px; height: auto; border-radius: 6px; object-fit: cover; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
+             style="width: 100px; height: auto; border-radius: 6px; object-fit: cover; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
         <div>
           <strong>30. maj 2025</strong><br>
           Vi inviterer alle medarbejdere til årets sommerfest fredag d. <strong>14. juni</strong>!<br>

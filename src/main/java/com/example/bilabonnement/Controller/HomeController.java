@@ -25,7 +25,7 @@ public class HomeController
     }
 
 
-    //Login controllers---------------------------------------------------------------------------------------------
+    //task 0.2---------------------------------------------------------------------------------------------
     //denne metode tjekker brugeren og gemmer i sessionen hvis det er en bruger med adgang og er aktiv - Isabella
     @PostMapping("/login")
     public String login(@RequestParam String username,
@@ -46,6 +46,8 @@ public class HomeController
             return "home/index";
         }
     }
+
+
 
     @GetMapping("/intranet")
     public String intranet(HttpSession session, Model model)
@@ -74,25 +76,15 @@ public class HomeController
     // midlertidig test af databaseforbindelse, man skal bruge http://localhost:9696/test-db for at teste forbindelsen - Isabella
     @GetMapping("/test-db")
     @ResponseBody
-    public String testDb() {
-        try {
+    public String testDb()
+    {
+        try
+        {
             int antal = userRepo.getAllUsers().size();
             return "✅ Forbindelse virker! Antal brugere: " + antal;
-        } catch (Exception e) {
+        } catch (Exception e)
+        {
             return "❌ Fejl ved databaseforbindelse: " + e.getMessage();
         }
     }
-
-
-
-
-
-    /*@GetMapping("/leaseagreement")
-    public String leaseagreement() {
-        return "leaseagreement";
-    }*/
-
-
-
-
 }
