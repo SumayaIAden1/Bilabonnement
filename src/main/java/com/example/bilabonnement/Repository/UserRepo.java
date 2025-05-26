@@ -62,7 +62,7 @@ public class UserRepo {
     }
 
     // Find a user by their name
-    public User findByName(String name) {
+    public User findByUsername(String name) {
         String sql = "SELECT * FROM user WHERE username = ?";
         RowMapper<User> rowMapper = new BeanPropertyRowMapper<>(User.class);
         try {
@@ -71,6 +71,7 @@ public class UserRepo {
             return null; // Return null if no user is found with the given name
         }
     }
+
 
     // Validate login credentials (username and password)
     public boolean validateLogin(String username, String password) {
@@ -97,6 +98,7 @@ public class UserRepo {
             return null;
         }
     }
+
 }
 
 

@@ -13,6 +13,29 @@
     z-index: 1;
 }
 
+/*Login page styling */
+.login-page {
+    height: 100vh;
+    background: linear-gradient(to bottom, #337fba 0%, #337fba 50%, #ffffff 50%, #ffffff 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-note {
+    margin-top: 15px;
+    font-size: 13px;
+    color: #666;
+    text-align: center;
+}
+
+.login-note::before {
+    color: #005EB8;
+    font-weight: bold;
+}
+
+/*--------------------------------------*/
+
 .logo-left {
   /*  position: absolute; */
     position: relative;
@@ -180,6 +203,8 @@
 .tab-content.active-tab {
     display: flex;
     gap: 30px;
+    padding-left: 40px; /*tilføjer luft fra venstre kant*/
+    padding-right: 40px; /*tilføjer luft fra højre kant*/
 }
 
 .info-box {
@@ -200,6 +225,8 @@ body {
     background-color: #f2f2f2;
     margin: 0;
     padding: 0;
+    background-color: #f8fbfd
+
 }
 
 /* Centrer hele siden omkring login-boksen */
@@ -333,7 +360,9 @@ main {
 .table-wrapper {
     width: 100%;
     margin-top: 30px;
+    padding: 40px;
 }
+
 
 .table {
     width: 100%;
@@ -479,6 +508,30 @@ main {
     border-radius: 6px;
     border: 1px solid #ccc;
 }
+
+/*Dashboard----------------------------------------------------------------------------------------------------------*/
+.dashboard-layout {
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr;
+    gap: 40px;
+    padding: 40px;
+}
+
+.left-panel, .center-panel, .right-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.chart-box, .table-box {
+    background-color: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+/*Script tabel-------------------------*/
+
 
 /* Solgte biler - tabel design--------------------------------------------------------------------------------------*/
 .sold-table {

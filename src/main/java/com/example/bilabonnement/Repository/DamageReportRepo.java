@@ -22,73 +22,91 @@ public class DamageReportRepo {
         @Override
         public DamageReport mapRow(ResultSet rs, int rowNum) throws SQLException {
             return new DamageReport(
-                    rs.getInt("reportId"),
-                    rs.getObject("date", LocalDate.class),
+                    rs.getInt("report_id"),
+                    rs.getObject("report_date", LocalDate.class),
                     rs.getString("description"),
-                    rs.getDouble("price"),
-                    rs.getString("inspection"),
-                    rs.getBoolean("customerPresent"),
+                    rs.getDouble("total_price"),
+                    rs.getInt("lease_id"),
+                    rs.getString("inspector"),
+                    rs.getBoolean("customer_present"),
                     rs.getString("status"),
-                    rs.getString("registrationNumber"),
-                    rs.getString("attachmentPath")
+                    rs.getString("registration_number"),
+                    rs.getString("attachment_path")
             );
+
         }
     };
 
     // Henter alle skadesrapporter
     public List<DamageReport> findAll() {
-        String sql = "SELECT * FROM damage_reports";
+        String sql = "SELECT * FROM damage_report";
         return jdbcTemplate.query(sql, rowMapper);
     }
 
     // Henter én skadesrapport baseret på ID
     public DamageReport findById(int id) {
-        String sql = "SELECT * FROM damage_reports WHERE reportId = ?";
+        String sql = "SELECT * FROM damage_report WHERE report_id = ?";
         return jdbcTemplate.queryForObject(sql, rowMapper, id);
     }
 
     // Henter alle skadesrapporter for en bestemt bil
-    public List<DamageReport> findByCarId(int carId) {
-        String sql = "SELECT * FROM damage_reports WHERE carId = ?";
-        return jdbcTemplate.query(sql, rowMapper, carId);
+    public List<DamageReport> findByLeaseId(int leaseId) {
+        String sql = "SELECT * FROM damage_report WHERE lease_id = ?";
+        return jdbcTemplate.query(sql, rowMapper, leaseId);
     }
 
     // Gemmer en ny skadesrapport
     public void save(DamageReport report) {
-        String sql = "INSERT INTO damage_reports (reportId, date, description, price, inspection, customerPresent, status, carId, attachmentPath) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO damage_report (" +
+                "report_date, description, total_price, inspector, customer_present, status, lease_id, registration_number, attachment_path" +
+                ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
         jdbcTemplate.update(sql,
-                report.getReportId(),
                 report.getDate(),
                 report.getDescription(),
                 report.getPrice(),
-                report.getInspection(),
+                report.getInspector(),
                 report.isCustomerPresent(),
                 report.getStatus(),
+                report.getLeaseId(),
                 report.getRegistrationNumber(),
                 report.getAttachmentPath()
         );
     }
 
+
     // Opdaterer en eksisterende skadesrapport
     public void update(DamageReport report) {
-        String sql = "UPDATE damage_reports SET date = ?, description = ?, price = ?, inspection = ?, customerPresent = ?, status = ?, carId = ?, attachmentPath = ? WHERE reportId = ?";
+        String sql = "UPDATE damage_report SET " +
+                "report_date = ?, " +
+                "description = ?, " +
+                "total_price = ?, " +
+                "inspector = ?, " +
+                "customer_present = ?, " +
+                "status = ?, " +
+                "lease_id = ?, " +
+                "registration_number = ?, " +
+                "attachment_path = ? " +
+                "WHERE report_id = ?";
+
         jdbcTemplate.update(sql,
                 report.getDate(),
                 report.getDescription(),
                 report.getPrice(),
-                report.getInspection(),
+                report.getInspector(),
                 report.isCustomerPresent(),
                 report.getStatus(),
+                report.getLeaseId(),
                 report.getRegistrationNumber(),
                 report.getAttachmentPath(),
                 report.getReportId()
         );
     }
 
+
     // Sletter en skadesrapport baseret på ID
     public void deleteById(int id) {
-        String sql = "DELETE FROM damage_reports WHERE reportId = ?";
+        String sql = "DELETE FROM damage_report WHERE report_id = ?";
         jdbcTemplate.update(sql, id);
     }
 }
