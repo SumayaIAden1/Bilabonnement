@@ -24,23 +24,23 @@ public class CustomerRepo {
      * Custom mapper that populates both Customer and its nested Address.
      */
     private final RowMapper<Customer> customerWithAddressMapper = (rs, rowNum) -> {
-        Address addr = new Address();
-        addr.setAddressId(rs.getInt("addr_id"));
-        addr.setCountry(rs.getString("addr_country"));
-        addr.setCity(rs.getString("addr_city"));
-        addr.setZip(rs.getString("addr_zip"));
-        addr.setStreet(rs.getString("addr_street"));
+        Address address = new Address();
+        address.setAddressId(rs.getInt("address_id"));
+        address.setCountry(rs.getString("country"));
+        address.setCity(rs.getString("city"));
+        address.setZip(rs.getString("zip"));
+        address.setStreet(rs.getString("street"));
 
-        Customer cust = new Customer();
-        cust.setCustomerId(rs.getInt("customer_id"));
-        cust.setCustomerName(rs.getString("customer_name"));
-        cust.setEmail(rs.getString("email"));
-        cust.setPhoneNumber(rs.getString("phone_number"));
-        cust.setCprNumber(rs.getString("cpr_number"));
-        cust.setActive(rs.getBoolean("is_active"));
-        cust.setAddress(addr);
+        Customer customer = new Customer();
+        customer.setCustomerId(rs.getInt("customer_id"));
+        customer.setCustomerName(rs.getString("customer_name"));
+        customer.setEmail(rs.getString("email"));
+        customer.setPhoneNumber(rs.getString("phone_number"));
+        customer.setCprNumber(rs.getString("cpr_number"));
+        customer.setActive(rs.getBoolean("is_active"));
+        customer.setAddress(address);
 
-        return cust;
+        return customer;
     };
 
     @Autowired
@@ -60,11 +60,11 @@ public class CustomerRepo {
               c.phone_number,
               c.cpr_number,
               c.is_active,
-              a.address_id   AS addr_id,
-              a.country      AS addr_country,
-              a.city         AS addr_city,
-              a.zip          AS addr_zip,
-              a.street       AS addr_street
+              a.address_id,
+              a.country,
+              a.city,
+              a.zip,
+              a.street
             FROM customer c
             JOIN address a ON c.address_id = a.address_id
             """;
@@ -76,26 +76,31 @@ public class CustomerRepo {
      */
     public List<Customer> searchWithAddress(String keyword) {
         String sql = """
-            SELECT
-              c.customer_id,
-              c.customer_name,
-              c.email,
-              c.phone_number,
-              c.cpr_number,
-              c.is_active,
-              a.address_id   AS addr_id,
-              a.country      AS addr_country,
-              a.city         AS addr_city,
-              a.zip          AS addr_zip,
-              a.street       AS addr_street
-            FROM customer c
-            JOIN address a ON c.address_id = a.address_id
-            WHERE LOWER(c.customer_name) LIKE ?
-               OR LOWER(c.email)         LIKE ?
-               OR LOWER(c.phone_number)  LIKE ?
-            """;
+        SELECT
+          c.customer_id,
+          c.customer_name,
+          c.email,
+          c.phone_number,
+          c.cpr_number,
+          c.is_active,
+          a.address_id,
+          a.country,
+          a.city,
+          a.zip,
+          a.street
+        FROM customer c
+        JOIN address a ON c.address_id = a.address_id
+        WHERE LOWER(c.customer_name) LIKE ?
+           OR LOWER(c.email)         LIKE ?
+           OR LOWER(c.phone_number)  LIKE ?
+        """;
+
         String term = "%" + keyword.toLowerCase() + "%";
-        return template.query(sql, new Object[]{term, term, term}, customerWithAddressMapper);
+        return template.query(
+                sql,
+                new Object[]{ term, term, term },
+                customerWithAddressMapper
+        );
     }
 
     public void addAddress(Address address) {
@@ -145,7 +150,25 @@ public class CustomerRepo {
     }
 
     public Customer getLastCreatedCustomer() {
-        String sql = "SELECT * FROM customer ORDER BY created_date DESC LIMIT 1";
+        String sql = """
+        SELECT
+          c.customer_id,
+          c.customer_name,
+          c.email,
+          c.phone_number,
+          c.cpr_number,
+          c.is_active,
+          a.address_id,
+          a.country,
+          a.city,
+          a.zip,
+          a.street
+        FROM customer c
+        JOIN address a ON c.address_id = a.address_id
+        ORDER BY c.created_date DESC
+        LIMIT 1
+        """;
         return template.queryForObject(sql, customerWithAddressMapper);
     }
+
 }
