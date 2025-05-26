@@ -6,7 +6,7 @@ public class CarModel {
     private String modelName;
     private String equipmentLevel;
     private double co2Emission;
-    private double monthlyPrice; // ✅ Tilføjet felt
+    private double monthlyPrice;
 
     public CarModel() {
     }

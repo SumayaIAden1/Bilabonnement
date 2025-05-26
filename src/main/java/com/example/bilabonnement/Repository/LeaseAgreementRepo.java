@@ -17,6 +17,7 @@ public class LeaseAgreementRepo
     @Autowired
     JdbcTemplate template;
 
+    //Sumaya - Henter alle lejeaftaler
     public List<LeaseAgreement> fetchAll()
     {
         String sql = "select * from lease_agreement";
@@ -24,10 +25,12 @@ public class LeaseAgreementRepo
         return template.query(sql, rowmapper);
     }
 
+    //Sumaya - opretter en ny lejeaftale
     public void addLeaseAgreement(LeaseAgreement leaseAgreement)
     {
         String sql = "INSERT INTO lease_agreement (lease_id, start_date, end_date, start_mileage, end_mileage, monthly_price, total_price, lease_type, status, car_registration_number, user_id, customer_id, location_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
+        // Indsætter værdier i databasen vha. JdbcTemplate
         template.update(sql,
                 leaseAgreement.getLeaseId(),
                 leaseAgreement.getStartDate(),
@@ -45,8 +48,7 @@ public class LeaseAgreementRepo
         );
     }
 
-        //Isabella: til dashboard - se hvor mange biler der er udlejet
-
+    //Isabella: til dashboard - se hvor mange biler der er udlejet
     public int countActiveLeases()
     {
         String sql = "SELECT COUNT(*) FROM lease_agreement WHERE status = 'Active'";
@@ -55,14 +57,21 @@ public class LeaseAgreementRepo
 
     //Til dashboard - se pris på nuværende udlejede biler
 
+    // Sumaya - sletter en lejeaftale fra databasen baseret på lease_id
     public boolean deleteLeaseAgreement(int id) {
         String sql = "DELETE FROM lease_agreement WHERE lease_id = ?";
+
+        // Sumaya - Udfører en DELETE i databasen og returnerer true, hvis det lykkes at slette en lejeaftale.
+        // Hvis der ikke findes nogen lejeaftale med det givne ID, bliver der ikke slettet noget – og metoden returnerer false.
         return template.update(sql, id) > 0;
     }
 
+
+    // Sumaya - Opdaterer en eksisterende lejeaftale i databasen baseret på lease_id (primærnøglen)
     public void updateLeaseAgreement(int id, LeaseAgreement leaseAgreement) {
         String sql = "UPDATE lease_agreement SET start_date = ?, end_date = ?, start_mileage = ?, end_mileage = ?, monthly_price = ?, total_price = ?, lease_type = ?, status = ?, car_registration_number = ?, user_id = ?, customer_id = ?, location_id = ? WHERE lease_id = ?";
 
+        // Indsætter værdier i databasen vha. JdbcTemplate
         template.update(sql,
                 leaseAgreement.getStartDate(),
                 leaseAgreement.getEndDate(),
@@ -72,11 +81,11 @@ public class LeaseAgreementRepo
                 leaseAgreement.getTotalPrice(),
                 leaseAgreement.getLeaseType(),
                 leaseAgreement.getStatus(),
-                leaseAgreement.getCarRegistrationNumber(), // ✅ Korrekt felt
+                leaseAgreement.getCarRegistrationNumber(),
                 leaseAgreement.getUserId(),
                 leaseAgreement.getCustomerId(),
                 leaseAgreement.getLocationId(),
-                id);
+                id); // lease_id bruges til at finde den lejeaftale der skal opdateres
     }
 
 
@@ -107,11 +116,14 @@ public class LeaseAgreementRepo
         }
     }
 
-
-
+    // Sumaya - Finder en lejeaftale i databasen baseret på dens lease_id
     public LeaseAgreement findById(int id) {
+
+        // Hent alle felter fra lease_agreement, hvor lease_id matcher den angivne id
         String sql = "SELECT * FROM lease_agreement WHERE lease_id = ?";
         RowMapper<LeaseAgreement> rowMapper = new BeanPropertyRowMapper<>(LeaseAgreement.class);
+
+        // Udfører og returnerer den fundne lejeaftale som et LeaseAgreement-objekt
         return template.queryForObject(sql, rowMapper, id);
     }
 
@@ -130,30 +142,7 @@ public class LeaseAgreementRepo
         } else {
 
         return 0.0;
-        }
-    }
-
-
-    public LeaseAgreement findLeaseAgreementById(int id) {
-        String sql = "select * from lease_agreement where lease_id = ?";
-        RowMapper<LeaseAgreement> rowMapper = new BeanPropertyRowMapper<>(LeaseAgreement.class);
-        return template.queryForObject(sql, rowMapper, id);
-    }
-
-
-
-
-    /*Tjekker for om bilen er available i den givne periode
-    public boolean isCarAvailable(int carId, LocalDate startDate, LocalDate endDate) {
-        String sql = "SELECT COUNT(*) FROM lease_agreement " +
-                "WHERE car_id = ? AND (" +
-                "(start_date <= ? AND end_date >= ?) OR " +
-                "(start_date <= ? AND end_date >= ?)" +
-                ")";
-        Integer count = template.queryForObject(sql, Integer.class, carId, endDate, startDate, startDate, endDate);
-        return count == 0;
-    }*/
-
-
+        }*/
     }
 }
+

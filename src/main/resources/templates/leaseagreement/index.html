@@ -117,8 +117,8 @@
 
 
 
+
 <!-- TAB 1 -->
-    <!-- TAB 1 -->
     <div id="information" class="tab-content" th:classappend="${activeTab} == 'information' ? ' active-tab' : ''">
         <div class="info-box">
             <strong>Oversigt over lejeaftaler</strong><br><br>
@@ -276,12 +276,15 @@
     <!-- JavaScript til faneblade uden reload -->
 <script>
     function showTab(event, tabId) {
+        // Skjuler alle faner og fjerner markering fra knapper,
+        // så kun den valgte fane vises og knappen ser aktiv ud
         const allTabs = document.querySelectorAll('.tab-content');
         const allButtons = document.querySelectorAll('.tab-button');
 
         allTabs.forEach(tab => tab.classList.remove('active-tab'));
         allButtons.forEach(btn => btn.classList.remove('active'));
 
+        // Viser det valgte faneblad og gør knappen aktiv
         document.getElementById(tabId).classList.add('active-tab');
         event.target.classList.add('active');
     }

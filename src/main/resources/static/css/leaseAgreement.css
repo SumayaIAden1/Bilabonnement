@@ -1,5 +1,8 @@
-/* Unik CSS for lejeaftale-oprettelse og redigering */
-/* Formular */
+
+
+/* ------------------------------- Sumaya - Unik CSS for lejeaftale-oprettelse og redigering -------------------------*/
+
+/* -------------------------------Formular --------------------------------------------------------------*/
 form {
     background-color: white;
     padding: 2rem;
@@ -38,7 +41,8 @@ form button:hover {
     background-color: #004999;
 }
 
-/* Link til opret-knap */
+
+/* -------------------------------Link til opret-knap --------------------------------------------------------------*/
 .create-link {
     display: inline-block;
     margin-bottom: 20px;
@@ -54,7 +58,7 @@ form button:hover {
     background-color: #004494;
 }
 
-/* Tabelvisning */
+/* ------------------------------- Tabelvisning -------------------------------------------------------------- */
 .table-wrapper {
     width: 100%;
     margin-top: 30px;
@@ -80,7 +84,7 @@ form button:hover {
     color: #143c54;
 }
 
-/* Rediger, slet og vis design */
+/*------------------------------- Rediger, slet og vis design --------------------------------------------------------*/
 .table td a {
     color: #005EB8;
     font-weight: bold;

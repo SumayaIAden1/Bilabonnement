@@ -48,7 +48,7 @@ public class CarService {
         carRepo.updateCar(registrationNumber, car);
     }
 
-    //Metode til dropdown (registreringsnumre)
+    //Sumaya - Metode der returnerer en liste med alle bilers registreringsnumre - bruges i dropdown
     public List<String> getAllRegistrationNumbers() {
         return carRepo.fetchAllRegistrationNumbers();
     }
@@ -87,9 +87,13 @@ public class CarService {
 
     //Sumaya - Ændrer status på alle biler, og vises i dropDown i LeaseAgreement
     public List<Car> getAvailableCars() {
+        // Henter alle biler fra databasen via carRepo
         List<Car> allCars = (List<Car>) carRepo.fetchAll();
+
+        // Opretter en ny liste til biler, der er ledige
         List<Car> availableCars = new ArrayList<>();
 
+        // Gennemgår alle biler og tilføjer kun dem med status "Available"
         for (Car car : allCars) {
             if (car.getStatus() == Car.CarStatus.Available) {
                 availableCars.add(car);
@@ -101,8 +105,13 @@ public class CarService {
 
     //Sumaya - opdatere bilerne efter deres status
     public void updateCarStatus(String registrationNumber, String newStatus) {
+        // Finder bilen i databasen ud fra dens registreringsnummer
         Car car = carRepo.findCarByRegistration(registrationNumber);
+
+        // Sætter bilens nye status ud fra en tekststreng (f.eks. "Available", "Rented")
         car.setStatus(Car.CarStatus.valueOf(newStatus));
+
+        // Opdaterer bilens information i databasen
         carRepo.updateCar(registrationNumber, car);
     }
 
