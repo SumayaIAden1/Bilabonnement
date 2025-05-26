@@ -11,7 +11,9 @@
 <body>
 <header class="top-wrapper">
     <div class="logo-left">
+        <a href="/intranet" title="Gå til forsiden">
         <img src="/images/logo.png" alt="Bilabonnement logo">
+    </a>
     </div>
 
     <nav class="center-logos">
@@ -90,21 +92,33 @@
     </div>
 </div>
 
-<div class="tabs-wrapper">
+<!--<div class="tabs-wrapper">
     <div class="tabs">
         <button class="tab-button" onclick="showTab(event, 'information')"
                 th:classappend="${activeTab} == 'information' ? ' active' : ''">
-            Oversigt over lejeaftale
+            Oversigt over lejeaftaler
         </button>
         <button class="tab-button" onclick="showTab(event, 'LAformular')"
                 th:classappend="${activeTab} == 'LAformular' ? ' active' : ''">
             Opret en lejeaftale
         </button>
-    </div>
+    </div>-->
+
+<div class="tabs">
+    <button class="tab-button" onclick="showTab(event, 'information')" th:classappend="${activeTab} == 'information' ? ' active' : ''">
+        Oversigt over lejeaftaler
+    </button>
+    <button class="tab-button" onclick="showTab(event, 'LAformular')" th:classappend="${activeTab} == 'LAformular' ? ' active' : ''">
+        Opret en lejeaftale
+    </button>
+    <button class="tab-button" onclick="showTab(event, 'afslut')" th:classappend="${activeTab} == 'afslut' ? ' active' : ''">
+        Afslut en lejeaftale
+    </button>
+</div>
 
 
 
-    <!-- TAB 1 -->
+<!-- TAB 1 -->
     <div id="information" class="tab-content" th:classappend="${activeTab} == 'information' ? ' active-tab' : ''">
         <div class="info-box">
             <strong>Oversigt over lejeaftaler</strong><br><br>
@@ -307,11 +321,38 @@
                     <label for="locationId">Lokation ID</label>
                     <input type="number" id="locationId" th:field="*{locationId}" required>
 
-                    <button type="submit">Gem lejeaftale</button>
+                    <button type="submit">Opret lejeaftale</button>
                 </form>
             </th:block>
         </div>
     </div>
+
+    <!-- TAB 3: Afslut en lejeaftale -->
+        <div id="afslut" class="tab-content" th:classappend="${activeTab} == 'afslut' ? ' active-tab' : ''">
+        <div class="info-box">
+            <div th:if="${successMessage}" class="success-message">
+                <p th:text="${successMessage}"></p>
+            </div>
+
+            <strong>Afslut en lejeaftale</strong><br><br>
+            Vælg en aktiv lejeaftale du vil afslutte:
+
+            <form th:action="@{/leaseagreement/complete}" method="post">
+                <label for="completeLeaseId">Lease ID</label>
+                <select id="completeLeaseId" name="leaseId" required>
+                    <option value="">-- Vælg en aktiv lejeaftale --</option>
+                    <option th:each="lease : ${leaseAgreements}"
+                            th:if="${lease.status == 'Active'}"
+                            th:value="${lease.leaseId}"
+                            th:text="'ID ' + ${lease.leaseId} + ' | ' + ${lease.carRegistrationNumber}">
+                    </option>
+                </select>
+                <br><br>
+                <button type="submit" class="btn btn-primary">Afslut lejeaftale</button>
+            </form>
+        </div>
+    </div>
+
 
 
 
