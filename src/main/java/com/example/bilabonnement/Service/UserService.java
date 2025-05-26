@@ -13,43 +13,9 @@ public class UserService {
     @Autowired
     private UserRepo userRepo;
 
-    // Create a new user
-    public void saveUser(User user) {
-        userRepo.createUser(user);
-    }
-
-    // Get all users
-    public List<User> getAllUsers() {
-        return userRepo.getAllUsers();
-    }
-
-    // Get a user by their ID
-    public User getUserById(int id) {
-        return userRepo.getUserById(id);
-    }
-
-    // Update a user's information
-    public void updateUser(User user) {
-        userRepo.updateUser(user);
-    }
-
-    // Delete a user by ID
-    public void deleteUser(int id) {
-        userRepo.deleteUser(id);
-    }
-
-    // Find a user by their name
-    public User findByUsername(String name) {
-        return userRepo.findByUsername(name);
-    }
-
-    // Validate login credentials (username and password)
-    public boolean validateLogin(String username, String password) {
-        return userRepo.validateLogin(username, password);
-    }
-
-    public User getUserByUsername(String username) {
-        return userRepo.findByUsername(username);
+    //1.1.2: Service-metode der kalder login-metoden i repo (Isabella)
+    public User login(String username, String password) {
+        return userRepo.login(username, password);
     }
 
 }
