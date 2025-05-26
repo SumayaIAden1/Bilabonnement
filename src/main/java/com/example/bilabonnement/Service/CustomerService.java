@@ -35,6 +35,10 @@ public class CustomerService {
         customerRepo.addCustomer(customer);
     }
 
+    public List<Customer> searchCustomers(String keyword) {
+        return customerRepo.searchWithAddress(keyword);
+    }
+
     // Slet en kunde ud fra deres ID
     public boolean deleteById(int customerId) {
         return customerRepo.deleteById(customerId);

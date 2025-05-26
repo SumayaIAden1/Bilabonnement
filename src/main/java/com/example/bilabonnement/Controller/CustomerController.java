@@ -29,14 +29,29 @@ public class CustomerController {
         return "customer/startpage";
     }
 
-
-    // Vis alle kunder
     @GetMapping("/customers/overview")
-    public String getAllCustomers(Model model) {
-        List<Customer> customers = customerService.getAllCustomers();
+    public String getAllCustomers(
+            @RequestParam(value = "keyword", required = false) String keyword,
+            HttpSession session,
+            Model model
+    ) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            return "redirect:/";
+        }
+        model.addAttribute("user", user);
+
+        List<Customer> customers;
+        if (keyword != null && !keyword.isBlank()) {
+            customers = customerService.searchCustomers(keyword);
+            model.addAttribute("keyword", keyword);
+        } else {
+            customers = customerService.getAllCustomers();
+        }
         model.addAttribute("customers", customers);
         return "customer/overview";
     }
+
 
 
     // Opret kunde metode
