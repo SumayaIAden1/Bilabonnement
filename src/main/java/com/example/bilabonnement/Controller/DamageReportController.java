@@ -37,17 +37,37 @@ public class DamageReportController {
 
         // original logic
         model.addAttribute("damageReport",
-                new DamageReport(0, null, "", 0.0, "", false, "", null, "")
-        );
+                new DamageReport());
         return "damage/create"; // templates/damage/create.html
     }
 
 
     // Gem ny skadesrapport
-    @PostMapping("/damages/createNew")
-    public String createNew(@ModelAttribute DamageReport damageReport) {
+    /*@PostMapping("/damages/createNew")
+    public String createNew(@ModelAttribute DamageReport damageReport,
+    @SessionAttribute("user") User currentUser) {
+        damageReport.setInspection(currentUser.getUsername());
         damageReportService.save(damageReport);
         return "redirect:/damages";
+    }*/
+
+    @PostMapping("/damages/createNew")
+    public String createNew(@ModelAttribute DamageReport damageReport, Model model, HttpSession session) {
+        User currentUser = (User) session.getAttribute("user");
+
+        if (currentUser != null) {
+            damageReport.setInspector(currentUser.getUsername());
+        } else {
+            damageReport.setInspector("admin");
+        }
+
+        damageReportService.save(damageReport);
+
+        model.addAttribute("damageReport", new DamageReport());
+        model.addAttribute("successMessage", "Skaden blev oprettet");
+        model.addAttribute("user", currentUser); // for at undgå Thymeleaf-fejl
+
+        return "damage/create";
     }
 
     // Vis en specifik skadesrapport

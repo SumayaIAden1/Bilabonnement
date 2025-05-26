@@ -46,12 +46,6 @@
             </a>
         </th:block>
 
-        <th:block th:if="${user.userRole.name() == 'ADMIN'}">
-            <a href="/medarbejder">
-                <img src="/images/medarbejder.png" alt="Medarbejder">
-                <span>MEDARBEJDER</span>
-            </a>
-        </th:block>
 
         <th:block th:if="${user.userRole.name() == 'FORRETNINGSUDVIKLER' or user.userRole.name() == 'ADMIN'}">
             <a href="/business/dashboard">
@@ -60,11 +54,6 @@
             </a>
         </th:block>
 
-
-        <a href="/indbakke">
-            <img src="/images/indbakke.png" alt="Indbakke">
-            <span>INDBAKKE</span>
-        </a>
     </nav>
 
     <div class="right-side">
@@ -175,6 +164,11 @@
                             th:selected="${car.registrationNumber == leaseAgreement.carRegistrationNumber}">
                     </option>
                 </select>
+
+                <!-- Kommentar hvis ikke der er tilgængelige biler -->
+                <th:block th:if="${#lists.isEmpty(cars)}">
+                    <option disabled>Ingen tilgængelige biler</option>
+                </th:block>
             </form>
 
             <!-- Formular 2: Vises når bil er valgt -->
