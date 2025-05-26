@@ -501,8 +501,8 @@ main {
    Styling til Log ud knap
 ------------------------------------ */
 .logout-link {
-    padding: 10px 24px;
-    font-size: 14px;
+    padding: 5px 10px;
+    font-size: 7px;
     font-weight: bold;
     background-color: #005EB8;
     color: white;
