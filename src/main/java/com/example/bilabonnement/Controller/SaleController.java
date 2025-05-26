@@ -15,6 +15,8 @@ public class SaleController {
     @Autowired
     private SaleService saleService;
 
+    //Sumaya - Opsat Sales Controller, men ikke nået i mål med at bruge alle funktioner, grundet mangel på tid
+
     // Vis alle salg
     @GetMapping("/sales")
     public String getAllSales(Model model) {

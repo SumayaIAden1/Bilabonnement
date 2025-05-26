@@ -15,7 +15,7 @@
   </div>
 
   <nav class="center-logos">
-    <!-- Dynamisk navigation baseret på brugerrolle - Isabella -->
+    <!-- Dynamisk navigation baseret på brugerrolle -->
 
 
     <th:block th:if="${user.userRole.name() == 'DATAREGISTRERING' or user.userRole.name() == 'ADMIN'}">
@@ -26,7 +26,7 @@
     </th:block>
 
     <th:block th:if="${user.userRole.name() == 'SKADESMEDARBEJDER' or user.userRole.name() == 'ADMIN'}">
-      <a href="/skade">
+      <a href="/damages/create">
         <img src="/images/skader.png" alt="Skade og udbedring">
         <span>SKADE OG UDBEDRING</span>
       </a>
@@ -36,6 +36,13 @@
       <a href="/leaseagreement">
         <img src="/images/lejeaftaler.png" alt="Lejeaftaler">
         <span>LEJEAFTALER</span>
+      </a>
+    </th:block>
+
+    <th:block th:if="${user.userRole.name() == 'ADMIN'}">
+      <a href="/medarbejder">
+        <img src="/images/medarbejder.png" alt="Medarbejder">
+        <span>MEDARBEJDER</span>
       </a>
     </th:block>
 
@@ -52,6 +59,11 @@
         <span>DASHBOARD</span>
       </a>
     </th:block>
+
+    <a href="/indbakke">
+      <img src="/images/indbakke.png" alt="Indbakke">
+      <span>INDBAKKE</span>
+    </a>
   </nav>
 
   <div class="right-side">

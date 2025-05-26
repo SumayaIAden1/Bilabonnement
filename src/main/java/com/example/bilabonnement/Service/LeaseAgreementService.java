@@ -23,7 +23,7 @@ public class LeaseAgreementService implements LeaseAgreementServiceInterface
         return leaseAgreementRepo.fetchAll();
     }
 
-    /* Tilføjet Logik bag metoden*/
+    // Tilføjet Logik bag metoden
     @Override
     public void addLeaseAgreement(LeaseAgreement leaseAgreement)
     {
@@ -32,7 +32,6 @@ public class LeaseAgreementService implements LeaseAgreementServiceInterface
 
         leaseAgreementRepo.addLeaseAgreement(leaseAgreement);
     }
-
 
     /* Metode til beregning af pris --- ChronoUnit.DAYS.between(...): Beregner antal dage mellem to datoer.*/
     @Override
@@ -63,21 +62,21 @@ public class LeaseAgreementService implements LeaseAgreementServiceInterface
         return leaseAgreementRepo.sumTotalPriceOfLeasedCars();
     }
 
+    // Sumaya - sletter en lejeaftale ved at kalde delete-metoden i repository-laget
     @Override
     public boolean deleteLeaseAgreement(int id) {
         return leaseAgreementRepo.deleteLeaseAgreement(id);
     }
 
+    // Sumaya - Finder en lejeaftale baseret på ID ved at kalde repository-laget
     @Override
     public LeaseAgreement findById(int id) {
         return leaseAgreementRepo.findById(id);
     }
 
+    // Sumaya - Opdaterer en lejeaftale med nye data ved at kalde repository-laget
     @Override
     public void updateLeaseAgreement(int id, LeaseAgreement leaseAgreement) {
         leaseAgreementRepo.updateLeaseAgreement(id, leaseAgreement);
     }
-
-
-
 }

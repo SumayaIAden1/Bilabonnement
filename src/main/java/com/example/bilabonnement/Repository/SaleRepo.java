@@ -15,6 +15,8 @@ public class SaleRepo {
     @Autowired
     private JdbcTemplate template;
 
+    //Sumaya - Opsat Sales Controller, men ikke nået i mål med at bruge alle funktioner, grundet mangel på tid
+
     // Create a new sale
     public void createSale(Sale sale) {
         String sql = "INSERT INTO sales (date, price, currency, customerName, saleAgreement, carId, leaseId, isPreSold, status, paymentDate, deliveryLocation, invoiceNumber, createdBy) " +
