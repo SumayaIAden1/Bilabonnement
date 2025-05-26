@@ -46,12 +46,6 @@
             </a>
         </th:block>
 
-        <th:block th:if="${user.userRole.name() == 'ADMIN'}">
-            <a href="/medarbejder">
-                <img src="/images/medarbejder.png" alt="Medarbejder">
-                <span>MEDARBEJDER</span>
-            </a>
-        </th:block>
 
         <th:block th:if="${user.userRole.name() == 'FORRETNINGSUDVIKLER' or user.userRole.name() == 'ADMIN'}">
             <a href="/business/dashboard">
@@ -59,12 +53,6 @@
                 <span>DASHBOARD</span>
             </a>
         </th:block>
-
-
-        <a href="/indbakke">
-            <img src="/images/indbakke.png" alt="Indbakke">
-            <span>INDBAKKE</span>
-        </a>
     </nav>
 
     <div class="right-side">
@@ -117,8 +105,8 @@
         <option th:each="model : ${models}" th:value="${model.modelId}" th:text="${model.brand + ' ' + model.modelName}">Model</option>
     </select><br>
 
-    <label for="imageUrl">Billed-URL</label>
-    <input type="text" id="imageUrl" th:field="*{imageUrl}" placeholder="https://...jpg">
+    <!--<label for="imageUrl">Billed-URL</label>
+    <input type="text" id="imageUrl" th:field="*{imageUrl}" placeholder="https://...jpg">-->
 
 
     <button type="submit" class="button-outline">Opret bil</button>

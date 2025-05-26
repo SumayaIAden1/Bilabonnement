@@ -33,7 +33,7 @@ public class CarRepo {
         SELECT 
             c.registration_number, c.vin_number, c.status, c.color, c.purchase_price,
             c.registration_fee, c.mileage, c.location, c.model_id,
-            m.brand, m.model_name, m.equipment_level, m.co2_emission
+            m.brand, m.model_name, m.equipment_level, m.co2_emission, m.monthly_price
         FROM car c
         JOIN car_model m ON c.model_id = m.model_id
         """;
@@ -245,6 +245,18 @@ public class CarRepo {
         return result;
     }
 
+    /*Isabella - find pris pr. måned----------------------------------------------------------------------------------*/
 
+    public double findMonthlyPriceByRegistration(String regNumber) {
+        String sql = """
+        SELECT cm.monthly_price
+        FROM car c
+        JOIN car_model cm ON c.model_id = cm.model_id
+        WHERE c.registration_number = ?
+        """;
+        return template.queryForObject(sql, Double.class, regNumber);
+    }
+
+/*--------------------------------------------------------------------------------------------------------------------*/
 
 }

@@ -47,12 +47,6 @@
             </a>
         </th:block>
 
-        <th:block th:if="${user.userRole.name() == 'ADMIN'}">
-            <a href="/medarbejder">
-                <img src="/images/medarbejder.png" alt="Medarbejder">
-                <span>MEDARBEJDER</span>
-            </a>
-        </th:block>
 
         <th:block th:if="${user.userRole.name() == 'FORRETNINGSUDVIKLER' or user.userRole.name() == 'ADMIN'}">
             <a href="/business/dashboard">
@@ -61,11 +55,6 @@
             </a>
         </th:block>
 
-
-        <a href="/indbakke">
-            <img src="/images/indbakke.png" alt="Indbakke">
-            <span>INDBAKKE</span>
-        </a>
     </nav>
 
     <div class="right-side">

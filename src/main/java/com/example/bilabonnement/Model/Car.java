@@ -17,7 +17,8 @@ public class Car {
         Available,
         Rented,
         Damaged,
-        Returned
+        Returned,
+        Sold
     }
 
     //Isabella - her skal enum matche 100% det der står i SQL, da vi også har brugt enum der.
@@ -135,5 +136,4 @@ public class Car {
     public void setCarModel(CarModel carModel) {
         this.carModel = carModel;
     }
-
 }

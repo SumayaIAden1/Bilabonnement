@@ -46,25 +46,12 @@
             </a>
         </th:block>
 
-        <th:block th:if="${user.userRole.name() == 'ADMIN'}">
-            <a href="/medarbejder">
-                <img src="/images/medarbejder.png" alt="Medarbejder">
-                <span>MEDARBEJDER</span>
-            </a>
-        </th:block>
-
         <th:block th:if="${user.userRole.name() == 'FORRETNINGSUDVIKLER' or user.userRole.name() == 'ADMIN'}">
             <a href="/business/dashboard">
                 <img src="/images/dashboard.png" alt="Dashboard">
                 <span>DASHBOARD</span>
             </a>
         </th:block>
-
-
-        <a href="/indbakke">
-            <img src="/images/indbakke.png" alt="Indbakke">
-            <span>INDBAKKE</span>
-        </a>
     </nav>
 
     <div class="right-side">
@@ -104,7 +91,7 @@
         <th>Modelnavn</th>
         <th>Udstyrsniveau</th>
         <th>CO₂-udledning (g/km)</th>
-        <th>Handlinger</th>
+        <th>Pris pr. måned</th>
 
     </tr>
     </thead>
@@ -133,12 +120,7 @@
         <td th:text="${car.modelName}">Yaris</td>
         <td th:text="${car.equipmentLevel}">Comfort</td>
         <td th:text="${car.co2Emission}">99</td>
-        <td>
-            <a th:href="@{'/cars/viewOne/' + ${car.registrationNumber}}">Vis</a> |
-            <a th:href="@{'/cars/updateOne/' + ${car.registrationNumber}}">Rediger</a> |
-            <a th:href="@{'/cars/deleteOne/' + ${car.registrationNumber}}">Slet</a>
-        </td>
-
+        <td th:text="${car.monthlyPrice}">3.500</td>
     </tr>
     </tbody>
 </table>
@@ -146,6 +128,43 @@
 
 <br>
 <a href="/cars/create" class="button-outline">Opret ny bil</a>
+
+<!-- giver lidt mellemrum mellem de to tabeller -->
+<br>
+<br>
+<br>
+<br>
+
+<h3>Liste over solgte biler</h3>
+
+<table class="table sold-table">
+    <thead>
+    <tr>
+        <th>REG. NR.</th>
+        <th>STELNUMMER (VIN)</th>
+        <th>MÆRKE</th>
+        <th>MODELNAVN</th>
+        <th>LOKATION</th>
+        <th>FARVE</th>
+        <th>KILOMETER</th>
+        <th>PRIS / MÅNED</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="car : ${soldCars}">
+        <td th:text="${car.registrationNumber}">AB12345</td>
+        <td th:text="${car.vinNumber}">VIN123456789</td>
+        <td th:text="${car.brand}">Toyota</td>
+        <td th:text="${car.modelName}">Yaris</td>
+        <td th:text="${car.location}">København</td>
+        <td th:text="${car.color}">Sort</td>
+        <td th:text="${car.mileage}">15000</td>
+        <td th:text="${car.monthlyPrice}">3.500</td>
+    </tr>
+    </tbody>
+</table>
+
+
 
 <!-- JS til filtrering og søgning efter bil -->
 <script>

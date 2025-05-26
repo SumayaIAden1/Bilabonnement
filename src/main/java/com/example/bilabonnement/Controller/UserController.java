@@ -2,6 +2,7 @@ package com.example.bilabonnement.Controller;
 
 import com.example.bilabonnement.Model.User;
 import com.example.bilabonnement.Service.UserService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -66,15 +67,18 @@ public class UserController {
         return "redirect:/users";
     }
 
-    // Valider login
     @PostMapping("/users/login")
-    public String validateLogin(@RequestParam String username, @RequestParam String password, Model model) {
-        boolean valid = userService.validateLogin(username, password);
-        if (valid) {
-            return "redirect:/dashboard"; // eller anden relevant side
+    public String validateLogin(@RequestParam String username, @RequestParam String password, Model model, HttpSession session) {
+        User user = userService.getUserByUsername(username);
+
+        if (user != null && user.getPassword().equals(password)) {
+            session.setAttribute("user", user); // ✅ GEM BRUGER I SESSION
+            return "redirect:/intranet";
         } else {
             model.addAttribute("error", "Ugyldigt brugernavn eller adgangskode");
-            return "user/login"; // vis login-side igen
+            return "user/login";
         }
     }
+
+
 }
