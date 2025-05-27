@@ -24,39 +24,30 @@ public class LeaseAgreementController {
     @Autowired
     private CarService carService;
 
-    @Autowired
-    private UserService userService;
-
-    @Autowired
-    private CustomerService customerService;
-
+    // Sumaya - Viser oversigten over lejeaftaler (kun hvis bruger er logget ind)
     @GetMapping("")
     public String index(Model model, HttpSession session) {
         User user = (User) session.getAttribute("user");
-        if (user == null) {
+        if (user == null) { // Hvis ingen bruger er logget ind, redirect til login
             return "redirect:/";
         }
-            model.addAttribute("leaseAgreements", leaseAgreementService.fetchAll());
-            model.addAttribute("leaseAgreement", new LeaseAgreement());
-            model.addAttribute("cars", carService.getAvailableCars());
-            model.addAttribute("user", user);
+        // Tilføjer nødvendige data til viewet
+            model.addAttribute("leaseAgreements", leaseAgreementService.fetchAll()); //Henter alle lejeaftaler
+            model.addAttribute("leaseAgreement", new LeaseAgreement()); //Tomt objekt til ny aftale
+            model.addAttribute("cars", carService.getAvailableCars()); //Henter alle biler
+            model.addAttribute("user", user); //Brugerinfo til adgangstyrinh
 
         //Isabella - Hvis der ikke allerede er sat et aktivt faneblad, sætter vi det til "information" som standard
         if (!model.containsAttribute("activeTab")) {
             model.addAttribute("activeTab", "information");
         }
-        // hvis du bruger dropdowns senere:
-        // model.addAttribute("registrationNumbers", carService.getAllRegistrationNumbers());
-        // model.addAttribute("userList", userService.getAllUsers());
-        // model.addAttribute("customerList", customerService.getAllCustomers());
-
         return "leaseagreement/index";
     }
 
-
+    //Sumaya - Opretter ny lejeaftale
     @PostMapping("/create")
     public String create(@ModelAttribute("leaseAgreement") LeaseAgreement leaseAgreement) {
-        leaseAgreementService.addLeaseAgreement(leaseAgreement);
+        leaseAgreementService.addLeaseAgreement(leaseAgreement); //Gemmer aftalen i databasen
 
         // Hvis lejeaftalen er aktiv → opdater bilen til Rented
         if (leaseAgreement.getStatus().equalsIgnoreCase("Active")) {
@@ -65,6 +56,7 @@ public class LeaseAgreementController {
         }
         return "redirect:/leaseagreement";
     }
+
 
     @PostMapping("/monthly-price")
     public String getMonthlyPrice(@ModelAttribute("leaseAgreement") LeaseAgreement leaseAgreement,
@@ -83,13 +75,14 @@ public class LeaseAgreementController {
         return "leaseagreement/index";
     }
 
-
+    // Sumaya - Henter {id} fra URL'en og bruger det som input til at finde og slette en lejeaftale
     @GetMapping("/delete/{id}")
-    public String deleteLease(@PathVariable int id) {
+    public String deleteLease(@PathVariable int id) { // id bruges til at finde og slette aftalen
         leaseAgreementService.deleteLeaseAgreement(id);
         return "redirect:/leaseagreement";
     }
 
+    // Sumaya - Henter {id} fra URL'en og bruger det som input til at finde og redigere en lejeaftale
     @GetMapping("/edit/{id}")
     public String editLease(@PathVariable int id, Model model,HttpSession session) {
         LeaseAgreement leaseAgreement = leaseAgreementService.findById(id);
@@ -98,10 +91,12 @@ public class LeaseAgreementController {
         return "leaseagreement/edit";
     }
 
+    // Sumaya - Opdaterer lejeaftalen - Henter {id} fra URL'en og bruger det som input til at finde og redigere en lejeaftale
     @PostMapping("/update/{id}")
     public String updateLease(@PathVariable int id, @ModelAttribute LeaseAgreement leaseAgreement) {
         leaseAgreementService.updateLeaseAgreement(id, leaseAgreement);
 
+        // Hvis status er 'Completed' eller 'Cancelled', sættes bilens status til 'Available'
         if (leaseAgreement.getStatus().equalsIgnoreCase("Completed") ||
                 leaseAgreement.getStatus().equalsIgnoreCase("Cancelled")) {
             carService.updateCarStatus(leaseAgreement.getCarRegistrationNumber(), "Available");
@@ -109,6 +104,7 @@ public class LeaseAgreementController {
         return "redirect:/leaseagreement";
     }
 
+    //Metode til at afslutte lejeaftalen
     @PostMapping("/complete")
     public String completeLease(@RequestParam int leaseId, Model model, HttpSession session) {
         User user = (User) session.getAttribute("user");
@@ -133,10 +129,4 @@ public class LeaseAgreementController {
 
         return "leaseagreement/index";
     }
-
-
-
-
-
-
 }

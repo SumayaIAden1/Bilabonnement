@@ -501,8 +501,8 @@ main {
    Styling til Log ud knap
 ------------------------------------ */
 .logout-link {
-    padding: 10px 24px;
-    font-size: 14px;
+    padding: 5px 10px;
+    font-size: 7px;
     font-weight: bold;
     background-color: #005EB8;
     color: white;
@@ -555,7 +555,7 @@ main {
 /*Script tabel-------------------------*/
 
 
-/* Solgte biler - tabel design--------------------------------------------------------------------------------------*/
+/* Sumaya - Solgte biler - tabel design--------------------------------------------------------------------------------------*/
 .sold-table {
     background-color: #f9f9f9;
     border: 1px solid #ccc;

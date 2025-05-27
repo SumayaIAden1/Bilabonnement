@@ -14,7 +14,7 @@
 
   <nav class="center-logos">
     <!-- Dynamisk navigation baseret på brugerrolle - Isabella -->
-
+    <!--1.2.4: Vis links baseret på rolle (med th:if)-->
 
       <th:block th:if="${user.userRole.name() == 'DATAREGISTRERING' or user.userRole.name() == 'ADMIN'}">
       <a href="/dataentry/cars">
@@ -37,6 +37,13 @@
       </a>
     </th:block>
 
+    <th:block th:if="${user.userRole.name() == 'ADMIN'}">
+      <a href="/medarbejder">
+        <img src="/images/medarbejder.png" alt="Medarbejder">
+        <span>MEDARBEJDER</span>
+      </a>
+    </th:block>
+
     <th:block th:if="${user.userRole.name() == 'FORRETNINGSUDVIKLER' or user.userRole.name() == 'ADMIN' or user.userRole.name() == 'DATAREGISTRERING'}">
       <a href="/customers/startpage">
         <img src="/images/kunder.png" alt="Kunder">
@@ -51,25 +58,33 @@
       </a>
     </th:block>
 
+    <a href="/indbakke">
+      <img src="/images/indbakke.png" alt="Indbakke">
+      <span>INDBAKKE</span>
+    </a>
   </nav>
 
+  <!--1.2.6: Søgefunktion (mock)-->
   <div class="right-side">
     <div class="search-bar">
       <input type="text" placeholder="Søg...">
       <button>Søg</button>
     </div>
 
+    <!--1.2.5: Tilføj log ud-knap med link til /logout-->
+    <!--1.2.3: Vis brugerens navn og rolle i toppen til venstre af siden-->
     <div class="user-info">
       <span>Velkommen, <strong th:text="${user.username}">Bruger</strong></span><br>
       <span>Rolle: <strong th:text="${user.userRole}">ROLLE</strong></span>
       <a href="/logout" class="logout-link">Log ud</a>
     </div>
 
-    <a href="/logout" class="logout-link">Log ud</a>
+
 
   </div>
 </header>
 
+<!--1.3.1: Lav layout til intranet med overskrift og velkomst-->
 <div class="welcome-wrapper">
   <div class="welcome-text">
     <h1>Bilabonnements intranet</h1>
@@ -80,6 +95,7 @@
   </div>
 </div>
 
+
 <div class="tabs-wrapper">
   <div class="tabs">
     <button class="tab-button active" onclick="showTab(event, 'information')">Information</button>
@@ -88,6 +104,7 @@
   </div>
 
   <!--Isabella - Alt er mock data for at skabe et realistisk billede af hvordan intranettet kunne se ud-->
+  <!--1.3.2: Tilføj mock-nyheder med billeder og tekst-->
   <div id="information" class="tab-content active-tab">
     <div class="info-box">
       <strong>Nyheder</strong><br><br>
@@ -159,6 +176,7 @@
     </div>
 
 
+    <!--1.3.3: Tilføj kontaktafsnit med navne og mails-->
     <div class="info-box" style="font-size: 14px; line-height: 1.3;">
       <strong style="font-size: 16px;">Dine kontakter hos Bilabonnement</strong><br><br>
 
@@ -213,6 +231,7 @@
     </div>
 
 
+    <!--1.3.4: Tilføj meddelelsesbokse (læsbart + skriv-felt som disabled)-->
     <div class="info-box">
       <strong>Meddelelser</strong><br><br>
 
@@ -275,6 +294,7 @@
 </div>
 
 <script>
+  //1.3.5: Tilføj faneblade med JavaScript
   // JavaScript til faneblade uden reload - Isabella
   function showTab(event, tabId) {
     const allTabs = document.querySelectorAll('.tab-content');

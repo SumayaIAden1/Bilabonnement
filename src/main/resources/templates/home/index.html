@@ -11,15 +11,16 @@
 <body class="login-page">
 
 <main>
+    <!-- 1.1.6: Overordnet layout og styling af login-siden -->
     <div class="login-container">
         <img src="/images/logo.png" alt="Bilabonnement logo" class="login-til-logo">
 
         <h2>Log ind</h2>
 
-        <!-- Fejlbesked hvis login mislykkes -->
+        <!-- 1.1.5: Viser fejlbesked, hvis login mislykkes -->
         <div th:if="${error}" class="fejlbesked" th:text="${error}"></div>
 
-        <!--Isabella - task 0.1 Login metode-->
+        <!--1.1.4: Formular hvor bruger indtaster brugernavn og kodeord-->
         <form action="/login" method="post">
             <input type="text" name="username" placeholder="Brugernavn" required>
             <input type="password" name="password" placeholder="Adgangskode" required>

@@ -36,7 +36,6 @@ public class Car {
         this.mileage = mileage;
         this.location = location;
         this.modelId = modelId;
-        //this.imageURL = imageURL;
     }
 
     // Isabella - tilføjet CarModel

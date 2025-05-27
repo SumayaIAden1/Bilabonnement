@@ -19,7 +19,7 @@ public class LeaseAgreement {
     private int locationId;
 
 
-    public LeaseAgreement() {}
+    public LeaseAgreement(){}
 
     // Fuld constructor med alle felter
     public LeaseAgreement(int leaseId, Date startDate, Date endDate, int startMileage, int endMileage,
@@ -40,109 +40,33 @@ public class LeaseAgreement {
         this.locationId = locationId;
     }
 
-    // Getters & Setters
+    // Sumaya - Getters
+    public int getLeaseId()                         { return leaseId; }
+    public Date getStartDate()                      { return startDate; }
+    public Date getEndDate()                        { return endDate; }
+    public int getStartMileage()                    { return startMileage; }
+    public int getEndMileage()                      { return endMileage; }
+    public double getMonthlyPrice()                 { return monthlyPrice; }
+    public double getTotalPrice()                   { return totalPrice; }
+    public String getLeaseType()                    { return leaseType; }
+    public String getStatus()                       { return status; }
+    public String getCarRegistrationNumber()        { return carRegistrationNumber; }
+    public int getUserId()                          { return userId; }
+    public int getCustomerId()                      { return customerId; }
+    public int getLocationId()                      { return locationId; }
 
-    public int getLeaseId() {
-        return leaseId;
-    }
-
-    public void setLeaseId(int leaseId) {
-        this.leaseId = leaseId;
-    }
-
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
-
-    public int getStartMileage() {
-        return startMileage;
-    }
-
-    public void setStartMileage(int startMileage) {
-        this.startMileage = startMileage;
-    }
-
-    public int getEndMileage() {
-        return endMileage;
-    }
-
-    public void setEndMileage(int endMileage) {
-        this.endMileage = endMileage;
-    }
-
-    public double getMonthlyPrice() {
-        return monthlyPrice;
-    }
-
-    public void setMonthlyPrice(double monthlyPrice) {
-        this.monthlyPrice = monthlyPrice;
-    }
-
-    public double getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
-    }
-
-    public String getLeaseType() {
-        return leaseType;
-    }
-
-    public void setLeaseType(String leaseType) {
-        this.leaseType = leaseType;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getCarRegistrationNumber() {
-        return carRegistrationNumber;
-    }
-
-    public void setCarRegistrationNumber(String carRegistrationNumber) {
-        this.carRegistrationNumber = carRegistrationNumber;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public int getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
-    }
-
-    public int getLocationId() {
-        return locationId;
-    }
-
-    public void setLocationId(int locationId) {
-        this.locationId = locationId;
-    }
+    // Sumaya - Setters
+    public void setLeaseId(int leaseId)                                 { this.leaseId = leaseId; }
+    public void setStartDate(Date startDate)                            { this.startDate = startDate; }
+    public void setEndDate(Date endDate)                                { this.endDate = endDate; }
+    public void setStartMileage(int startMileage)                       { this.startMileage = startMileage; }
+    public void setEndMileage(int endMileage)                           { this.endMileage = endMileage; }
+    public void setMonthlyPrice(double monthlyPrice)                    { this.monthlyPrice = monthlyPrice; }
+    public void setTotalPrice(double totalPrice)                        { this.totalPrice = totalPrice; }
+    public void setLeaseType(String leaseType)                          { this.leaseType = leaseType; }
+    public void setStatus(String status)                                { this.status = status; }
+    public void setCarRegistrationNumber(String carRegistrationNumber)  { this.carRegistrationNumber = carRegistrationNumber; }
+    public void setUserId(int userId)                                   { this.userId = userId; }
+    public void setCustomerId(int customerId)                           { this.customerId = customerId; }
+    public void setLocationId(int locationId)                           { this.locationId = locationId; }
 }

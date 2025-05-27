@@ -1,6 +1,7 @@
 package com.example.bilabonnement.Controller;
 
 import com.example.bilabonnement.Repository.UserRepo;
+import com.example.bilabonnement.Service.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,7 +17,7 @@ public class HomeController
 {
 
     @Autowired
-    private UserRepo userRepo;
+    private UserService userService;
 
     @GetMapping("/")
     public String index()
@@ -25,7 +26,7 @@ public class HomeController
     }
 
 
-    //task 0.2---------------------------------------------------------------------------------------------
+    //1.1.3: Brug login fra service og gem bruger i sessionen (Isabella)
     //denne metode tjekker brugeren og gemmer i sessionen hvis det er en bruger med adgang og er aktiv - Isabella
     @PostMapping("/login")
     public String login(@RequestParam String username,
@@ -34,7 +35,7 @@ public class HomeController
                         HttpSession session,
                         Model model)
     {
-        User user = userRepo.login(username, password);
+        User user = userService.login(username, password);
         if(user != null && user.isActive())
         {
             session.setAttribute("user", user);
@@ -48,7 +49,7 @@ public class HomeController
     }
 
 
-
+    //1.2.1: Opret GET /intranet-metode, der tjekker session (Isabella)
     @GetMapping("/intranet")
     public String intranet(HttpSession session, Model model)
     {
@@ -63,7 +64,7 @@ public class HomeController
         return "home/intranet";
     }
 
-    // Logout
+    // 1.2.2: Tilføj GET /logout som nulstiller session (Isabella)
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
@@ -72,19 +73,4 @@ public class HomeController
 
     //--------------------------------------------------------------------------------------------------------------
 
-
-    // midlertidig test af databaseforbindelse, man skal bruge http://localhost:9696/test-db for at teste forbindelsen - Isabella
-    @GetMapping("/test-db")
-    @ResponseBody
-    public String testDb()
-    {
-        try
-        {
-            int antal = userRepo.getAllUsers().size();
-            return "✅ Forbindelse virker! Antal brugere: " + antal;
-        } catch (Exception e)
-        {
-            return "❌ Fejl ved databaseforbindelse: " + e.getMessage();
-        }
-    }
 }

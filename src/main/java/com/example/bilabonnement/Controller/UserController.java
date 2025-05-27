@@ -17,7 +17,7 @@ public class UserController {
     private UserService userService;
 
     // Vis alle brugere
-    @GetMapping("/users")
+    /*@GetMapping("/users")
     public String getAllUsers(Model model) {
         List<User> users = userService.getAllUsers();
         model.addAttribute("users", users);
@@ -65,20 +65,21 @@ public class UserController {
     public String deleteUser(@PathVariable("id") int id) {
         userService.deleteUser(id);
         return "redirect:/users";
-    }
+    }*/
 
-    @PostMapping("/users/login")
+    //Isabella - login
+    /*@PostMapping("/users/login")
     public String validateLogin(@RequestParam String username, @RequestParam String password, Model model, HttpSession session) {
         User user = userService.getUserByUsername(username);
 
         if (user != null && user.getPassword().equals(password)) {
-            session.setAttribute("user", user); // ✅ GEM BRUGER I SESSION
+            session.setAttribute("user", user); // GEM BRUGER I SESSION
             return "redirect:/intranet";
         } else {
             model.addAttribute("error", "Ugyldigt brugernavn eller adgangskode");
             return "user/login";
         }
-    }
+    }*/
 
 
 }
