@@ -128,7 +128,6 @@ public class LeaseAgreementRepo
     }
 
 
-
     public double sumTotalPriceOfLeasedCars()
     {
         String sql = "SELECT SUM(total_price) FROM lease_agreement WHERE status = 'active'";
