@@ -9,24 +9,22 @@
 
 <header class="top-wrapper">
     <div class="logo-left">
-        <a href="/intranet" title="Gå til forsiden">
-            <img src="/images/logo.png" alt="Bilabonnement logo">
-        </a>
+        <img src="/images/logo.png" alt="Bilabonnement logo">
     </div>
 
     <nav class="center-logos">
-        <!-- Dynamisk navigation baseret på brugerrolle -->
-
+        <!-- Dynamisk navigation baseret på brugerrolle - Isabella -->
+        <!--1.2.4: Vis links baseret på rolle (med th:if)-->
 
         <th:block th:if="${user.userRole.name() == 'DATAREGISTRERING' or user.userRole.name() == 'ADMIN'}">
-            <a href="/dataentry/cars" class = "car-style">
+            <a href="/dataentry/cars">
                 <img src="/images/biler.png" alt="Biler">
                 <span>BILER</span>
             </a>
         </th:block>
 
         <th:block th:if="${user.userRole.name() == 'SKADESMEDARBEJDER' or user.userRole.name() == 'ADMIN'}">
-            <a href="/damages/create">
+            <a href="/damage/overview">
                 <img src="/images/skader.png" alt="Skade og udbedring">
                 <span>SKADE OG UDBEDRING</span>
             </a>
@@ -66,18 +64,27 @@
         </a>
     </nav>
 
+    <!--1.2.6: Søgefunktion (mock)-->
     <div class="right-side">
         <div class="search-bar">
             <input type="text" placeholder="Søg...">
             <button>Søg</button>
         </div>
 
+        <!--1.2.5: Tilføj log ud-knap med link til /logout-->
+        <!--1.2.3: Vis brugerens navn og rolle i toppen til venstre af siden-->
         <div class="user-info">
             <span>Velkommen, <strong th:text="${user.username}">Bruger</strong></span><br>
             <span>Rolle: <strong th:text="${user.userRole}">ROLLE</strong></span>
+            <a href="/logout" class="logout-link">Log ud</a>
         </div>
+
+
+
     </div>
 </header>
+
+
 
 <main>
     <div class="login-container">
