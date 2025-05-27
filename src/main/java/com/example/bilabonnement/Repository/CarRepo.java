@@ -131,7 +131,7 @@ public class CarRepo {
     }
 
     //10
-    //Hvilke biler er udlejet, ledig .... med try/catch - Isabella
+    //Hvilke biler er udlejet, ledig (Til Dashboard)- Isabella
     public Map<String, Map<String, Integer>> getStatusCountsGroupedByModel() {
         String sql = "SELECT m.model_name, c.status, COUNT(*) AS count " +
                 "FROM car c " +
@@ -141,31 +141,23 @@ public class CarRepo {
 
         Map<String, Map<String, Integer>> result = new HashMap<>();
 
-        try {
-            template.query(sql, rs -> {
-                while (rs.next()) {
-                    String modelName = rs.getString("model_name");
-                    String status = rs.getString("status");
-                    int count = rs.getInt("count"); // evt. prøv "COUNT" hvis fejlslag
+        template.query(sql, rs -> {
+            while (rs.next()) {
+                String modelName = rs.getString("model_name");
+                String status = rs.getString("status");
+                int count = rs.getInt("count");
 
-                    // Byg nested map
-                    result.computeIfAbsent(modelName, k -> new HashMap<>()).put(status, count);
-                }
-                return null;
-            });
-
-            System.out.println("DEBUG result map: " + result);
-
-        } catch (Exception e) {
-            System.err.println("Fejl i getStatusCountsGroupedByModel: " + e.getMessage());
-            e.printStackTrace();
-        }
+                result.computeIfAbsent(modelName, k -> new HashMap<>()).put(status, count);
+            }
+            return null;
+        });
 
         return result;
     }
 
+
     /*Isabella - find pris pr. måned----------------------------------------------------------------------------------*/
-    //11
+
     public double findMonthlyPriceByRegistration(String regNumber) {
         String sql = """
         SELECT cm.monthly_price

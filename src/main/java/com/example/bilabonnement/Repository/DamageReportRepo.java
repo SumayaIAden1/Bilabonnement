@@ -58,8 +58,8 @@ public class DamageReportRepo {
     // Gemmer en ny skadesrapport
     public void save(DamageReport report) {
         String sql = "INSERT INTO damage_report (" +
-                "report_date, description, total_price, inspector, customer_present, status, lease_id, registration_number, attachment_path" +
-                ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                "report_date, description, total_price, inspector, customer_present, status, lease_id, registration_number" +
+                ") VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         jdbcTemplate.update(sql,
                 report.getDate(),
@@ -86,7 +86,6 @@ public class DamageReportRepo {
                 "status = ?, " +
                 "lease_id = ?, " +
                 "registration_number = ?, " +
-                "attachment_path = ? " +
                 "WHERE report_id = ?";
 
         jdbcTemplate.update(sql,
@@ -113,24 +112,25 @@ public class DamageReportRepo {
     public List<DamageReportOverviewDTO> findActiveDamageReports() {
         String sql = """
         SELECT c.registration_number,
-               c.brand,
-               c.model_name,
+               m.brand,
+               m.model_name,
                d.description,
                d.total_price,
                d.report_date
         FROM car c
-        JOIN damage_report d ON c.registration_number = d.registration_number
+        JOIN lease_agreement la ON c.registration_number = la.car_registration_number
+        JOIN damage_report d ON la.lease_id = d.lease_id
+        JOIN car_model m ON c.model_id = m.model_id
         WHERE c.status = 'Damaged'
-        """;
+    """;
 
         return jdbcTemplate.query(sql, (rs, rowNum) -> {
-            // Martin: Mapper resultatsæt til DTO
             DamageReportOverviewDTO dto = new DamageReportOverviewDTO();
             dto.setRegistrationNumber(rs.getString("registration_number"));
             dto.setBrand(rs.getString("brand"));
             dto.setModelName(rs.getString("model_name"));
             dto.setDescription(rs.getString("description"));
-            dto.setPrice(rs.getDouble("price"));
+            dto.setPrice(rs.getDouble("total_price"));
             dto.setReportDate(rs.getDate("report_date").toLocalDate());
             return dto;
         });
