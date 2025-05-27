@@ -15,7 +15,7 @@
     </div>
 
     <nav class="center-logos">
-        <!-- Dynamisk navigation baseret på brugerrolle -->
+        <!-- Isabella - Dynamisk navigation baseret på brugerrolle -->
 
 
         <th:block th:if="${user.userRole.name() == 'DATAREGISTRERING' or user.userRole.name() == 'ADMIN'}">
@@ -79,7 +79,7 @@
     </div>
 </header>
 
-
+<!--Metode til at oprette bil-->
 <div class="table-wrapper">
 <form action="/cars/addCar" method="post" th:object="${car}" class="form-container">
     <label>Registreringsnummer:</label>
@@ -88,6 +88,7 @@
     <label>Stelnummer (VIN):</label>
     <input type="text" th:field="*{vinNumber}" required><br>
 
+    <!--Isabella drop down til at vælge status-->
     <label>Status:</label>
     <select th:field="*{status}">
         <option value="Available">Available</option>
@@ -111,6 +112,7 @@
     <label>Lokation:</label>
     <input type="text" th:field="*{location}" required><br>
 
+    <!--Dropdown til at vælge bilmodel-->
     <label>Model:</label>
     <select th:field="*{modelId}">
         <option th:each="model : ${models}" th:value="${model.modelId}" th:text="${model.brand + ' ' + model.modelName}">Model</option>

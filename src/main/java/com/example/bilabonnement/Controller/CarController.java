@@ -22,7 +22,7 @@ public class CarController {
     @Autowired
     private CarModelService carModelService;
 
-    //2
+
     //Sumaya og Isabella - Ny metode til at hente alle biler, men også sortere ud når en bil er solgt
     @GetMapping("/dataentry/cars")
     public String getAllCars(Model model, HttpSession session) {
@@ -45,7 +45,7 @@ public class CarController {
     }
 
 
-    //1
+    //Isabella - henter alle biler
     @GetMapping("/cars/create")
     public String createCarForm(Model model, HttpSession session) {
         model.addAttribute("car", new Car());
@@ -54,7 +54,7 @@ public class CarController {
         return "dataentry/create";
     }
 
-    //3
+    //Isabella - opret en bil
     @PostMapping("/cars/addCar")
     public String addCar(@ModelAttribute Car car, RedirectAttributes redirectAttributes) {
         carService.addCar(car); // Gem bilen
@@ -66,7 +66,7 @@ public class CarController {
         return "redirect:/dataentry/cars";
     }
 
-    //4
+
     // Vis én bil
     @GetMapping("/cars/viewOne/{registrationNumber}")
     public String findCarByRegistration(@PathVariable("registrationNumber") String registrationNumber, Model model) {

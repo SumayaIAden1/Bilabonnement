@@ -22,7 +22,7 @@ public class CarRepo {
     JdbcTemplate template;
 
 
-    // Intern klasse der håndterer mapping fra ResultSet → Car-objekt med enum
+    // Isabella - Intern klasse der håndterer mapping fra ResultSet → Car-objekt med enum
     private static class CarRowMapper implements RowMapper<Car> {
         @Override
         public Car mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -40,15 +40,15 @@ public class CarRepo {
         }
     }
 
-    //1
+
     // Henter alle biler
     public List<Car> fetchAll() {
         String sql = "SELECT * FROM car";
         return template.query(sql, new CarRowMapper()); //static klassen brugt her
     }
 
-    //2
-    //Isabela - Hent alle biler med model (DTO)
+
+    //Isabella - Hent alle biler med model (DTO)
     public List<CarWithModelDTO> fetchAllCarsWithModel() {
         String sql = """
         SELECT 
@@ -63,8 +63,8 @@ public class CarRepo {
         return template.query(sql, rowMapper);
     }
 
-    //3
-    // Tilføjer ny bil
+
+    // Isabella - Tilføjer ny bil
     public void addCar(Car car) {
         String sql = "INSERT INTO car (registration_number, vin_number, status, color, purchase_price, registration_fee, mileage, location, model_id) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -81,8 +81,8 @@ public class CarRepo {
                 car.getModelId());
     }
 
-    //4
-    // Find bil ud fra registration_number (primær nøgle)
+
+    // Isabella - Find bil ud fra registration_number (primær nøgle)
     public Car findCarByRegistration(String regNumber) {
         String sql = "SELECT * FROM car WHERE registration_number = ?";
         return template.queryForObject(sql, new CarRowMapper(), regNumber);
@@ -90,8 +90,8 @@ public class CarRepo {
 
 
 
-    //6
-    // Opdater bil
+
+    //Isabella - Opdater bil
     public void updateCar(String regNumber, Car car) {
         String sql = "UPDATE car SET vin_number = ?, status = ?, color = ?, purchase_price = ?, registration_fee = ?, mileage = ?, location = ?, model_id = ? " +
                 "WHERE registration_number = ?";
@@ -113,7 +113,6 @@ public class CarRepo {
     //------------------------------------------------------------------------------------------------------------------
 
     //Isabella - Se status på biler i dashboard
-    //9
     public Map<String, Integer> getCarCountByStatus() {
         String sql = "SELECT status, COUNT(*) as count FROM car GROUP BY status";
 
@@ -130,8 +129,8 @@ public class CarRepo {
         });
     }
 
-    //10
-    //Hvilke biler er udlejet, ledig (Til Dashboard)- Isabella
+
+    //Isabella - Hvilke biler er udlejet, ledig (Til Dashboard)- Isabella
     public Map<String, Map<String, Integer>> getStatusCountsGroupedByModel() {
         String sql = "SELECT m.model_name, c.status, COUNT(*) AS count " +
                 "FROM car c " +

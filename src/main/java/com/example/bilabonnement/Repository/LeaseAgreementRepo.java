@@ -55,7 +55,7 @@ public class LeaseAgreementRepo
         return template.queryForObject(sql, Integer.class);
     }
 
-    //Til dashboard - se pris på nuværende udlejede biler
+
 
     // Sumaya - sletter en lejeaftale fra databasen baseret på lease_id
     public boolean deleteLeaseAgreement(int id) {
@@ -130,6 +130,7 @@ public class LeaseAgreementRepo
     }
 
 
+    //Isbaella - til Dashboard
     public double sumTotalPriceOfLeasedCars()
     {
         String sql = "SELECT SUM(total_price) FROM lease_agreement WHERE status = 'active'";

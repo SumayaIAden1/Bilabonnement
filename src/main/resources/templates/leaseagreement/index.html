@@ -179,7 +179,7 @@
             <strong>Oprettelse af en lejeaftale</strong><br><br>
             Udfyld formularen for at oprette en lejeaftale:<br>
 
-            <!-- Formular 1: Dropdown til valg af bil -->
+            <!-- Formular 1:  Dropdown til valg af bil i systemet der er Available -->
             <form th:action="@{/leaseagreement/monthly-price}" th:object="${leaseAgreement}" method="post">
                 <label for="carRegistrationNumber">Registreringsnummer</label>
                 <select id="carRegistrationNumber" th:field="*{carRegistrationNumber}" onchange="this.form.submit()">

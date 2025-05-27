@@ -15,7 +15,7 @@
     </div>
 
     <nav class="center-logos">
-        <!-- Dynamisk navigation baseret på brugerrolle -->
+        <!-- Isabella - Dynamisk navigation baseret på brugerrolle -->
 
         <th:block th:if="${user.userRole.name() == 'DATAREGISTRERING' or user.userRole.name() == 'ADMIN'}">
             <a href="/dataentry/cars" class = "car-style">
