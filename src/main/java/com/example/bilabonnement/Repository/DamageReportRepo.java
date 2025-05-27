@@ -1,5 +1,6 @@
 package com.example.bilabonnement.Repository;
 
+import com.example.bilabonnement.DTO.DamageReportOverviewDTO;
 import com.example.bilabonnement.Model.DamageReport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -30,8 +31,7 @@ public class DamageReportRepo {
                     rs.getString("inspector"),
                     rs.getBoolean("customer_present"),
                     rs.getString("status"),
-                    rs.getString("registration_number"),
-                    rs.getString("attachment_path")
+                    rs.getString("registration_number")
             );
 
         }
@@ -69,8 +69,8 @@ public class DamageReportRepo {
                 report.isCustomerPresent(),
                 report.getStatus(),
                 report.getLeaseId(),
-                report.getRegistrationNumber(),
-                report.getAttachmentPath()
+                report.getRegistrationNumber()
+
         );
     }
 
@@ -98,7 +98,6 @@ public class DamageReportRepo {
                 report.getStatus(),
                 report.getLeaseId(),
                 report.getRegistrationNumber(),
-                report.getAttachmentPath(),
                 report.getReportId()
         );
     }
@@ -109,4 +108,32 @@ public class DamageReportRepo {
         String sql = "DELETE FROM damage_report WHERE report_id = ?";
         jdbcTemplate.update(sql, id);
     }
+
+    // Martin: Finder alle biler med status 'Skadet' og tilhørende skader
+    public List<DamageReportOverviewDTO> findActiveDamageReports() {
+        String sql = """
+        SELECT c.registration_number,
+               c.brand,
+               c.model_name,
+               d.description,
+               d.total_price,
+               d.report_date
+        FROM car c
+        JOIN damage_report d ON c.registration_number = d.registration_number
+        WHERE c.status = 'Damaged'
+        """;
+
+        return jdbcTemplate.query(sql, (rs, rowNum) -> {
+            // Martin: Mapper resultatsæt til DTO
+            DamageReportOverviewDTO dto = new DamageReportOverviewDTO();
+            dto.setRegistrationNumber(rs.getString("registration_number"));
+            dto.setBrand(rs.getString("brand"));
+            dto.setModelName(rs.getString("model_name"));
+            dto.setDescription(rs.getString("description"));
+            dto.setPrice(rs.getDouble("price"));
+            dto.setReportDate(rs.getDate("report_date").toLocalDate());
+            return dto;
+        });
+    }
+
 }

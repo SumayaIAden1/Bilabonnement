@@ -12,7 +12,7 @@ public class DamageReport {
     private String registrationNumber;
     private boolean customerPresent;
     private String status;
-    private String attachmentPath;
+
 
     // Tom konstruktør
     public DamageReport() {
@@ -21,7 +21,7 @@ public class DamageReport {
     // Konstruktør
     public DamageReport(int reportId, LocalDate date, String description, double price, int leaseId,
                         String inspector, boolean customerPresent, String status,
-                        String registrationNumber, String attachmentPath) {
+                        String registrationNumber) {
         this.reportId = reportId;
         this.date = date;
         this.description = description;
@@ -31,10 +31,10 @@ public class DamageReport {
         this.customerPresent = customerPresent;
         this.status = status;
         this.registrationNumber = registrationNumber;
-        this.attachmentPath = attachmentPath;
+
     }
 
-    // Getters and setters
+    // Gettere og settere
     public int getReportId() {
         return reportId;
     }
@@ -107,12 +107,8 @@ public class DamageReport {
         this.status = status;
     }
 
-    public String getAttachmentPath() {
-        return attachmentPath;
-    }
 
-    public void setAttachmentPath(String attachmentPath) {
-        this.attachmentPath = attachmentPath;
-    }
+
+
 }
 
