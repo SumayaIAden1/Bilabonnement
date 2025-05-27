@@ -3,7 +3,7 @@ package com.example.bilabonnement.DTO;
 public class CarWithModelDTO {
     private String registrationNumber;
     private String vinNumber;
-    private String status;
+    private String status; //ok at bruge String her i stedet for enum, da vi kun bruger DTO til visning
     private String color;
     private int mileage;
     private String location;

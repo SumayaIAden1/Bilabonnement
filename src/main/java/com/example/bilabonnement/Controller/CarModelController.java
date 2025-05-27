@@ -1,4 +1,4 @@
-package com.example.bilabonnement.Controller;
+/*package com.example.bilabonnement.Controller;
 
 import com.example.bilabonnement.Model.CarModel;
 import com.example.bilabonnement.Service.CarModelService;
@@ -58,4 +58,4 @@ public class CarModelController {
         carModelService.deleteById(modelId);
         return "redirect:/carmodels";
     }
-}
+}*/

@@ -17,7 +17,7 @@ public class CarModelService {
     public List<CarModel> fetchAll() {
         return carModelRepo.fetchAll();
     }
-
+    /*
     // Find én model
     public CarModel findById(int modelId) {
         return carModelRepo.findById(modelId);
@@ -36,5 +36,5 @@ public class CarModelService {
     // Slet model
     public boolean deleteById(int modelId) {
         return carModelRepo.deleteById(modelId);
-    }
+    }*/
 }

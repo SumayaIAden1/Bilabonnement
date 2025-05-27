@@ -22,6 +22,7 @@ public class CarController {
     @Autowired
     private CarModelService carModelService;
 
+    //2
     //Sumaya - Ny metode til at hente alle biler, men også sortere ud når en bil er solgt
     @GetMapping("/dataentry/cars")
     public String getAllCars(Model model, HttpSession session) {
@@ -44,14 +45,16 @@ public class CarController {
     }
 
 
+    //1
     @GetMapping("/cars/create")
     public String createCarForm(Model model, HttpSession session) {
         model.addAttribute("car", new Car());
-        model.addAttribute("models", carModelService.fetchAll());
+        model.addAttribute("models", carModelService.fetchAll()); //fra CarModel
         model.addAttribute("user", session.getAttribute("user")); // Gør bruger tilgængelig
         return "dataentry/create";
     }
 
+    //3
     @PostMapping("/cars/addCar")
     public String addCar(@ModelAttribute Car car, RedirectAttributes redirectAttributes) {
         carService.addCar(car); // Gem bilen
@@ -63,7 +66,7 @@ public class CarController {
         return "redirect:/dataentry/cars";
     }
 
-
+    //4
     // Vis én bil
     @GetMapping("/cars/viewOne/{registrationNumber}")
     public String findCarByRegistration(@PathVariable("registrationNumber") String registrationNumber, Model model) {
@@ -71,6 +74,7 @@ public class CarController {
         return "car/viewOne"; // templates/car/viewOne.html
     }
 
+    //4
     // Isabella - opdater bilens status
     @GetMapping("/cars/updateOne/{registrationNumber}")
     public String updateForm(@PathVariable("registrationNumber")
@@ -85,6 +89,7 @@ public class CarController {
         return "car/updateOne";
     }
 
+    //4
     @PostMapping("/cars/updateStatus")
     public String updateCarStatus(@RequestParam String registrationNumber,
                                   @RequestParam String status) {

@@ -1,6 +1,5 @@
 package com.example.bilabonnement.Service;
 
-
 import com.example.bilabonnement.Model.Customer;
 import com.example.bilabonnement.Repository.CustomerRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,49 +8,72 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * Service-lag for kundehåndtering.
+
+ * Denne klasse omslutter forretningslogikken omkring Customer-objekter,
+ * koordinerer transaktioner og interagerer med CustomerRepo for databaseadgang.
+ */
 @Service
 public class CustomerService {
 
+    // Injicerer CustomerRepo til adgang til kunde- og adresse-tabellerne
     @Autowired
     private CustomerRepo customerRepo;
 
+    /**
+     * Konstruktor til manuel injection af CustomerRepo.
+     * Spring vil automatisk kalde denne, hvis der kun er én passende bean.
+     *
+     * @param customerRepo Repository-instans til databaseoperationer på kunder
+     */
     public CustomerService(CustomerRepo customerRepo) {
         this.customerRepo = customerRepo;
     }
 
-    // Henter alle kunder
+    /**
+     * Hent alle kunder inklusive tilhørende adresser.
+     *
+     * @return Liste af Customer-objekter med indlejrede Address
+     */
     public List<Customer> getAllCustomers() {
         return customerRepo.findAllWithAddress();
     }
-    /*
-    Når du annoterer metoden med @Transactional, sørger Spring for, at begge databaseoperationer —
-    indsættelse af adresse og indsættelse af kunde — kører i én og samme transaktion.
-    */
+
+    /**
+     * Tilføj kunde og adresse som én samlet transaktion.
+     *
+     * @param customer Customer-objekt, der indeholder både kunde- og adresseinfo
+     *
+     * Når metoden er annoteret med @Transactional, sikrer Spring,
+     * at både addAddress og addCustomer enten begge lykkes
+     * eller begge rulles tilbage ved fejl.
+     */
     @Transactional
     public void addCustomerWithAddress(Customer customer) {
-        // Indsæt adressen først og få den genererede address_id
+        // Indsæt adressen først for at få genereret address_id
         customerRepo.addAddress(customer.getAddress());
-        // Indsæt nu kunden med den gyldige address_id
+        // Indsæt herefter kunden med den korrekte address_id
         customerRepo.addCustomer(customer);
     }
 
+    /**
+     * Søg efter kunder baseret på navn, e-mail eller telefonnummer.
+     *
+     * @param keyword Fritekst-søgeterm, der bruges til case-insensitive match
+     * @return Liste af Customer-objekter, der matcher søgeordet
+     */
     public List<Customer> searchCustomers(String keyword) {
         return customerRepo.searchWithAddress(keyword);
     }
 
-    // Slet en kunde ud fra deres ID
-    public boolean deleteById(int customerId) {
-        return customerRepo.deleteById(customerId);
-    }
-
-    // Hent en kunde ud fra deres ID
-    public Customer getCustomerById(int customerId) {
-        return customerRepo.getCustomerById(customerId);
-    }
-
-    // Hent den sidst oprettede kunde
+    /**
+     * Hent den senest oprettede kunde med tilhørende adresse.
+     *
+     * @return Det sidste Customer-objekt målt på created_date
+     */
     public Customer getLastCreatedCustomer() {
-        return customerRepo.getLastCreatedCustomer();  // Kalder repo-metoden
+        return customerRepo.getLastCreatedCustomer();
     }
 
 }

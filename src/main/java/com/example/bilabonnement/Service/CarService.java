@@ -18,65 +18,46 @@ public class CarService {
     @Autowired
     private CarRepo carRepo;
 
+    //1
     // Henter alle biler
     public List<Car> fetchAll() {
         return carRepo.fetchAll();
     }
 
+    //2 - Bliver brugt i CarController
     // Isabella - Hent alle biler med modelinfo (DTO)
     public List<CarWithModelDTO> fetchAllCarsWithModel() {
         return carRepo.fetchAllCarsWithModel();
     }
 
-    // Tilføjer ny bil
+    //3
+    // Tilføjer ny bil - Bliver brugt i CarController
     public void addCar(Car car) {
         carRepo.addCar(car);
     }
 
+    //4 - Bliver brugt i CarController
     // Finder bil ud fra registreringsnummer
     public Car findCarByRegistration(String registrationNumber) {
         return carRepo.findCarByRegistration(registrationNumber);
     }
 
-    // Sletter bil
-    public boolean deleteCar(String registrationNumber) {
-        return carRepo.deleteCar(registrationNumber);
-    }
 
-    // Opdaterer bil
-    public void updateCar(String registrationNumber, Car car) {
-        carRepo.updateCar(registrationNumber, car);
-    }
 
-    //Sumaya - Metode der returnerer en liste med alle bilers registreringsnumre - bruges i dropdown
-    public List<String> getAllRegistrationNumbers() {
-        return carRepo.fetchAllRegistrationNumbers();
-    }
 
     //------------------------------------------------------------------------------------------------------------------
 
-    //US6
 
-    public List<Car> fetchAllLeasedCars()
-    {
-        return carRepo.fetchAllLeasedCars();
-    }
 
     //------------------------------------------------------------------------------------------------------------------
-
+    //9
     /*Isabella - Se status på biler i dashboard*/
-
     public Map<String, Integer> getCarStatusOverview() {
         return carRepo.getCarCountByStatus();
     }
 
-    //Isabella - metode til at vise status og modelnavn på biler i databasen....----------------------------------------
 
-    /*public List<Map<String , Object>> getCarCountByStatusAndModel()
-    {
-        return carRepo.getCarCountByStatusAndModel();
-    }*/
-
+    //10
     // Isabella - Henter status-fordeling pr. modelnavn til dashboard
     public Map<String, Map<String, Integer>> getStatusCountsGroupedByModel() {
         return carRepo.getStatusCountsGroupedByModel();
@@ -84,7 +65,12 @@ public class CarService {
 
     /*Isabella- find pris pr. måned-----------------------------------------------------------------------------------*/
 
+    //6
+    public void updateCar(String registrationNumber, Car car) {
+        carRepo.updateCar(registrationNumber, car);
+    }
 
+    //1 - 1.1 LeaseAgreement
     //Sumaya - Ændrer status på alle biler, og vises i dropDown i LeaseAgreement
     public List<Car> getAvailableCars() {
         // Henter alle biler fra databasen via carRepo
@@ -103,6 +89,7 @@ public class CarService {
         return availableCars;
     }
 
+    //4 - 4.4 LeaseAgreement
     //Sumaya - opdatere bilerne efter deres status
     public void updateCarStatus(String registrationNumber, String newStatus) {
         // Finder bilen i databasen ud fra dens registreringsnummer
@@ -116,6 +103,7 @@ public class CarService {
     }
 
 
+    // LeaseAgreement
     public double findMonthlyPriceByRegistration(String registrationNumber) {
         return carRepo.findMonthlyPriceByRegistration(registrationNumber);
     }
