@@ -362,6 +362,8 @@ main {
     width: 100%;
     margin-top: 30px;
     padding: 40px;
+    overflow-x: auto; /* gør tabellen scroll-bar venlig ved overflow */
+    box-sizing: border-box; /* sørger for at padding ikke udvider total bredde */
 }
 
 
@@ -490,6 +492,7 @@ main {
     cursor: pointer;
     text-decoration: none;
     transition: all 0.3s ease;
+    margin-left: 20px; /* Matcher padding i .table-wrapper */
 }
 
 .button-outline:hover {
@@ -553,15 +556,3 @@ main {
 }
 
 /*Script tabel-------------------------*/
-
-
-/* Sumaya - Solgte biler - tabel design--------------------------------------------------------------------------------------*/
-.sold-table {
-    background-color: #f9f9f9;
-    border: 1px solid #ccc;
-}
-
-.sold-table thead {
-    background-color: #002855;
-    color: white;
-}

@@ -17,7 +17,6 @@
     <nav class="center-logos">
         <!-- Dynamisk navigation baseret på brugerrolle -->
 
-
         <th:block th:if="${user.userRole.name() == 'DATAREGISTRERING' or user.userRole.name() == 'ADMIN'}">
             <a href="/dataentry/cars" class = "car-style">
                 <img src="/images/biler.png" alt="Biler">
@@ -89,6 +88,9 @@
         <input type="text" id="modelSearch" class="model-search-input" placeholder="F.eks. Sandero eller Captur" onkeyup="filterByModel()">
     </div>
 
+    <h3 style="text-align: center;"> <!-- Sumaya - Inline så overskriften nemt kan centreres -->
+        Oversigt over biler
+    </h3>
 
     <table class="table">
     <thead>
@@ -112,6 +114,9 @@
         <td th:text="${car.registrationNumber}">AB12345</td>
         <td th:text="${car.vinNumber}">VIN123456789</td>
         <td>
+            <!-- Sumaya - Dropdown til opdatering af bilens status. Når en ny status vælges, sendes formularen automatisk.
+            Brugeren kan fx ændre status til "Rented", "Damaged" eller "Sold". -->
+
             <form th:action="@{/cars/updateStatus}" method="post">
                 <input type="hidden" name="registrationNumber" th:value="${car.registrationNumber}" />
 
@@ -141,15 +146,19 @@
 <br>
 <a href="/cars/create" class="button-outline">Opret ny bil</a>
 
-<!-- giver lidt mellemrum mellem de to tabeller -->
+<!-- Sumaya - giver lidt mellemrum mellem de to tabeller -->
 <br>
 <br>
 <br>
 <br>
 
-<h3>Liste over solgte biler</h3>
+<h3 style="text-align: center;">  <!-- Sumaya - Inline så overskriften nemt kan centreres -->
+    Oversigt over solgte biler
+</h3>
 
-<table class="table sold-table">
+
+<div class="table-wrapper">
+<table class="table">
     <thead>
     <tr>
         <th>REG. NR.</th>
@@ -175,10 +184,10 @@
     </tr>
     </tbody>
 </table>
+</div>
 
 
-
-<!-- JS til filtrering og søgning efter bil -->
+<!-- Sumaya - JS til filtrering og søgning efter bil -->
 <script>
 // Filtrer biler ud fra modelnavn
     function filterByModel() {
@@ -191,8 +200,6 @@
         });
     }
 </script>
-
-
 </body>
 </html>
 
