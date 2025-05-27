@@ -25,6 +25,7 @@ public class LeaseAgreementController {
     private CarService carService;
 
     // Sumaya - Viser oversigten over lejeaftaler (kun hvis bruger er logget ind)
+    //1.1
     @GetMapping("")
     public String index(Model model, HttpSession session) {
         User user = (User) session.getAttribute("user");
@@ -41,10 +42,16 @@ public class LeaseAgreementController {
         if (!model.containsAttribute("activeTab")) {
             model.addAttribute("activeTab", "information");
         }
+        // hvis du bruger dropdowns senere:
+        // model.addAttribute("registrationNumbers", carService.getAllRegistrationNumbers());
+        // model.addAttribute("userList", userService.getAllUsers());
+        // model.addAttribute("customerList", customerService.getAllCustomers());
+
         return "leaseagreement/index";
     }
 
     //Sumaya - Opretter ny lejeaftale
+    //4.4
     @PostMapping("/create")
     public String create(@ModelAttribute("leaseAgreement") LeaseAgreement leaseAgreement) {
         leaseAgreementService.addLeaseAgreement(leaseAgreement); //Gemmer aftalen i databasen
@@ -58,6 +65,7 @@ public class LeaseAgreementController {
     }
 
 
+    //1.1
     @PostMapping("/monthly-price")
     public String getMonthlyPrice(@ModelAttribute("leaseAgreement") LeaseAgreement leaseAgreement,
                                   Model model, HttpSession session) {
@@ -91,7 +99,7 @@ public class LeaseAgreementController {
         return "leaseagreement/edit";
     }
 
-    // Sumaya - Opdaterer lejeaftalen - Henter {id} fra URL'en og bruger det som input til at finde og redigere en lejeaftale
+    //4.4
     @PostMapping("/update/{id}")
     public String updateLease(@PathVariable int id, @ModelAttribute LeaseAgreement leaseAgreement) {
         leaseAgreementService.updateLeaseAgreement(id, leaseAgreement);
@@ -104,6 +112,7 @@ public class LeaseAgreementController {
         return "redirect:/leaseagreement";
     }
 
+    //4.4
     //Metode til at afslutte lejeaftalen
     @PostMapping("/complete")
     public String completeLease(@RequestParam int leaseId, Model model, HttpSession session) {
@@ -129,4 +138,5 @@ public class LeaseAgreementController {
 
         return "leaseagreement/index";
     }
+
 }

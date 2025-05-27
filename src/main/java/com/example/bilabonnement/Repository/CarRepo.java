@@ -21,79 +21,6 @@ public class CarRepo {
     @Autowired
     JdbcTemplate template;
 
-    // Henter alle biler
-    public List<Car> fetchAll() {
-        String sql = "SELECT * FROM car";
-        return template.query(sql, new CarRowMapper());
-    }
-
-    //Isabela - Hent alle biler med model
-    public List<CarWithModelDTO> fetchAllCarsWithModel() {
-        String sql = """
-        SELECT 
-            c.registration_number, c.vin_number, c.status, c.color, c.purchase_price,
-            c.registration_fee, c.mileage, c.location, c.model_id,
-            m.brand, m.model_name, m.equipment_level, m.co2_emission, m.monthly_price
-        FROM car c
-        JOIN car_model m ON c.model_id = m.model_id
-        """;
-
-        RowMapper<CarWithModelDTO> rowMapper = new BeanPropertyRowMapper<>(CarWithModelDTO.class);
-        return template.query(sql, rowMapper);
-    }
-
-    // Tilføjer ny bil
-    public void addCar(Car car) {
-        String sql = "INSERT INTO car (registration_number, vin_number, status, color, purchase_price, registration_fee, mileage, location, model_id) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-        template.update(sql,
-                car.getRegistrationNumber(),
-                car.getVinNumber(),
-                car.getStatus().name(),  // enum → string
-                car.getColor(),
-                car.getPurchasePrice(),
-                car.getRegistrationFee(),
-                car.getMileage(),
-                car.getLocation(),
-                car.getModelId());
-    }
-
-    // Find bil ud fra registration_number (primær nøgle)
-    public Car findCarByRegistration(String regNumber) {
-        String sql = "SELECT * FROM car WHERE registration_number = ?";
-        return template.queryForObject(sql, new CarRowMapper(), regNumber);
-    }
-
-    // Slet bil
-    public boolean deleteCar(String regNumber) {
-        String sql = "DELETE FROM car WHERE registration_number = ?";
-        return template.update(sql, regNumber) > 0;
-    }
-
-    // Opdater bil
-    public void updateCar(String regNumber, Car car) {
-        String sql = "UPDATE car SET vin_number = ?, status = ?, color = ?, purchase_price = ?, registration_fee = ?, mileage = ?, location = ?, model_id = ? " +
-                "WHERE registration_number = ?";
-
-        template.update(sql,
-                car.getVinNumber(),
-                car.getStatus().name(),
-                car.getColor(),
-                car.getPurchasePrice(),
-                car.getRegistrationFee(),
-                car.getMileage(),
-                car.getLocation(),
-                car.getModelId(),
-                regNumber);
-    }
-
-    public Car findCarById(int id) {
-        String sql = "SELECT * FROM car WHERE car_id = ?";
-        RowMapper<Car> rowMapper = new BeanPropertyRowMapper<>(Car.class);
-        return template.queryForObject(sql, rowMapper, id);
-    }
-
 
     // Intern klasse der håndterer mapping fra ResultSet → Car-objekt med enum
     private static class CarRowMapper implements RowMapper<Car> {
@@ -113,31 +40,80 @@ public class CarRepo {
         }
     }
 
-    //Metode til at vise bilerne - dropdown
-    public List<String> fetchAllRegistrationNumbers() {
-        String sql = "SELECT registration_number FROM car";
-        return template.queryForList(sql, String.class);
+    //1
+    // Henter alle biler
+    public List<Car> fetchAll() {
+        String sql = "SELECT * FROM car";
+        return template.query(sql, new CarRowMapper()); //static klassen brugt her
     }
 
-    //-----------------------------------------------------------------------------------------------------------------
+    //2
+    //Isabela - Hent alle biler med model (DTO)
+    public List<CarWithModelDTO> fetchAllCarsWithModel() {
+        String sql = """
+        SELECT 
+            c.registration_number, c.vin_number, c.status, c.color, c.purchase_price,
+            c.registration_fee, c.mileage, c.location, c.model_id,
+            m.brand, m.model_name, m.equipment_level, m.co2_emission, m.monthly_price
+        FROM car c
+        JOIN car_model m ON c.model_id = m.model_id
+        """;
 
-    //User story 6: Lageroversigt
-
-    public List<Car> fetchAllLeasedCars()
-    {
-        String sql = "select c.*" +
-                "from car c" +
-                "join lease_agreement l on c.car_id = l.car_id" +
-                "where current_date between l.start_date and l.end_date";
-
-        RowMapper<Car> rowMapper = new BeanPropertyRowMapper<>(Car.class);
+        RowMapper<CarWithModelDTO> rowMapper = new BeanPropertyRowMapper<>(CarWithModelDTO.class); //Vi kan bruge BeanPropertyRowMapper her da vi bruger String status i DTO
         return template.query(sql, rowMapper);
     }
+
+    //3
+    // Tilføjer ny bil
+    public void addCar(Car car) {
+        String sql = "INSERT INTO car (registration_number, vin_number, status, color, purchase_price, registration_fee, mileage, location, model_id) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        template.update(sql,
+                car.getRegistrationNumber(),
+                car.getVinNumber(),
+                car.getStatus().name(),  // enum → string
+                car.getColor(),
+                car.getPurchasePrice(),
+                car.getRegistrationFee(),
+                car.getMileage(),
+                car.getLocation(),
+                car.getModelId());
+    }
+
+    //4
+    // Find bil ud fra registration_number (primær nøgle)
+    public Car findCarByRegistration(String regNumber) {
+        String sql = "SELECT * FROM car WHERE registration_number = ?";
+        return template.queryForObject(sql, new CarRowMapper(), regNumber);
+    }
+
+
+
+    //6
+    // Opdater bil
+    public void updateCar(String regNumber, Car car) {
+        String sql = "UPDATE car SET vin_number = ?, status = ?, color = ?, purchase_price = ?, registration_fee = ?, mileage = ?, location = ?, model_id = ? " +
+                "WHERE registration_number = ?";
+
+        template.update(sql,
+                car.getVinNumber(),
+                car.getStatus().name(),
+                car.getColor(),
+                car.getPurchasePrice(),
+                car.getRegistrationFee(),
+                car.getMileage(),
+                car.getLocation(),
+                car.getModelId(),
+                regNumber);
+    }
+
+
 
     //------------------------------------------------------------------------------------------------------------------
 
     //Isabella - Se status på biler i dashboard
-
+    //9
     public Map<String, Integer> getCarCountByStatus() {
         String sql = "SELECT status, COUNT(*) as count FROM car GROUP BY status";
 
@@ -154,7 +130,8 @@ public class CarRepo {
         });
     }
 
-
+    //10
+    //Hvilke biler er udlejet, ledig .... med try/catch - Isabella
     public Map<String, Map<String, Integer>> getStatusCountsGroupedByModel() {
         String sql = "SELECT m.model_name, c.status, COUNT(*) AS count " +
                 "FROM car c " +
@@ -170,8 +147,6 @@ public class CarRepo {
                     String modelName = rs.getString("model_name");
                     String status = rs.getString("status");
                     int count = rs.getInt("count"); // evt. prøv "COUNT" hvis fejlslag
-
-                    System.out.println("DEBUG row: model=" + modelName + ", status=" + status + ", count=" + count);
 
                     // Byg nested map
                     result.computeIfAbsent(modelName, k -> new HashMap<>()).put(status, count);
@@ -190,7 +165,7 @@ public class CarRepo {
     }
 
     /*Isabella - find pris pr. måned----------------------------------------------------------------------------------*/
-
+    //11
     public double findMonthlyPriceByRegistration(String regNumber) {
         String sql = """
         SELECT cm.monthly_price

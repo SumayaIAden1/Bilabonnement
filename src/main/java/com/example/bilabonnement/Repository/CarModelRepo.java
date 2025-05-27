@@ -22,7 +22,7 @@ public class CarModelRepo {
         return template.query(sql, rowMapper);
     }
 
-    // Find én model ud fra ID
+    /*/ Find én model ud fra ID
     public CarModel findById(int modelId) {
         String sql = "SELECT * FROM car_model WHERE model_id = ?";
         RowMapper<CarModel> rowMapper = new BeanPropertyRowMapper<>(CarModel.class);
@@ -56,5 +56,5 @@ public class CarModelRepo {
     public boolean deleteById(int modelId) {
         String sql = "DELETE FROM car_model WHERE model_id = ?";
         return template.update(sql, modelId) > 0;
-    }
+    }*/
 }

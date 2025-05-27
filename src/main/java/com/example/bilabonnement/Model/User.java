@@ -12,7 +12,7 @@ public class User {
         private LocalDate createdAt;
 
 
-        //Tilføjet enum så de kan få forskellig adgang til funktioner på deres intranet -Isabella
+        //1.2.7: Oprette enum for relevante roller (ADMIN, SKADESMEDARBEJDER...)
         //Rollerne skal skrives med store bogstaver når vi opretter en ny user - Isabella
         public enum UserRole{
             ADMIN,
