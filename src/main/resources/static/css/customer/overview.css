@@ -1,41 +1,42 @@
-/* Overview Container */
+/* Oversigt-container */
 .overview-container {
     margin: 50px auto;
     padding: 20px;
     text-align: center;
-    width: 90%; /* Allow container to grow, but limit to 90% of viewport width */
-    max-width: none; /* Remove max-width constraint */
-    display: flex; /* Use flexbox for consistent spacing */
-    flex-direction: column; /* Stack elements vertically */
-    align-items: center; /* Center elements horizontally */
-    gap: 20px; /* Add spacing between child elements */
+    width: 90%; /* Begræns til 90% af skærmbredden */
+    max-width: none;
+    display: flex; /* Fleksibel boks */
+    flex-direction: column; /* Lodret stak */
+    align-items: center; /* Centrer horisontalt */
+    gap: 20px; /* Luft mellem elementer */
 }
 
-/* Overview Heading */
+/* Overskriftstekst */
 .overview-container h1 {
     font-size: 28px;
-    color: #000000;
+    color: #000;
     margin: 20px 0;
 }
 
-/* Overview Text */
+/* Brødtekst */
 .overview-container p {
     font-size: 16px;
     color: #143c54;
     margin-bottom: 20px;
 }
 
-/* Table Styling */
+/* Tabel-wrapper */
 .table-wrapper {
     width: 100%;
-    margin-top: 0; /* Remove margin-top since gap handles spacing */
-    overflow-x: auto; /* Ensure table is scrollable on small screens */
+    margin-top: 0; /* Gap dækker afstanden */
+    overflow-x: auto; /* Scroll ved smalle skærme */
 }
 
+/* Grundlæggende tabel-layout */
 .table {
     width: 100%;
     border-collapse: collapse;
-    background-color: white;
+    background-color: #fff;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
     border-radius: 8px;
     overflow: hidden;
@@ -43,31 +44,35 @@
 
 Lot of code in the middle
 
+    /* Tabel-header */
 .table thead {
     background-color: #005EB8;
-    color: white;
+    color: #fff;
 }
 
 .table thead th {
     padding: 12px 15px;
-    text-align: center; /* Center text horizontally */
-    vertical-align: middle; /* Center text vertically */
+    text-align: center; /* Centrer tekst */
+    vertical-align: middle;
     font-size: 14px;
     text-transform: uppercase;
 }
 
+/* Tabel-celler */
 .table tbody td {
     padding: 12px 15px;
     border-bottom: 1px solid #ddd;
-    text-align: center; /* Center text horizontally */
-    vertical-align: middle; /* Center text vertically */
+    text-align: center;
+    vertical-align: middle;
     font-size: 14px;
 }
 
+/* Hover-effekt på rækker */
 .table tbody tr:hover {
     background-color: #f2f8ff;
 }
 
+/* Links i tabel */
 .table td a {
     color: #005EB8;
     font-weight: bold;
@@ -79,24 +84,24 @@ Lot of code in the middle
     text-decoration: underline;
 }
 
-/* No Data Message */
+/* Besked ved ingen data */
 .no-data-message {
     font-size: 16px;
     color: #143c54;
     text-align: center;
-    margin: 0; /* Remove margin since gap handles spacing */
+    margin: 0;
     padding: 10px;
     background-color: #f8d7da;
     border: 1px solid #f5c6cb;
     border-radius: 6px;
 }
 
-/* Overview Button */
+/* Knappen til oversigt */
 .overview-button {
     display: inline-block;
     padding: 12px 24px;
     background-color: #005EB8;
-    color: white;
+    color: #fff;
     font-size: 16px;
     font-weight: bold;
     text-decoration: none;
@@ -109,11 +114,13 @@ Lot of code in the middle
     background-color: #00AEEF;
 }
 
+/* Søge-container */
 .search-container {
     margin-bottom: 1rem;
-    text-align: right; /* or left if you prefer */
+    text-align: right;
 }
 
+/* Input i søgeboks */
 .table-search-input {
     padding: 0.5rem;
     width: 200px;
@@ -121,12 +128,13 @@ Lot of code in the middle
     border-radius: 4px;
 }
 
+/* Søgeknap */
 .table-search-button {
     padding: 0.5rem 0.75rem;
     margin-left: 0.25rem;
     border: none;
     background-color: #007bff;
-    color: white;
+    color: #fff;
     border-radius: 4px;
     cursor: pointer;
 }

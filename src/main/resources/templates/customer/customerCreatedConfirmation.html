@@ -3,7 +3,7 @@
 <head>
     <title>Bekræftelse</title>
     <link rel="stylesheet" href="/css/style.css"> <!-- Main CSS -->
-    <link rel="stylesheet" href="/css/customer/createCustomerConfirmation.css"> <!-- Confirmation page CSS -->
+    <link rel="stylesheet" href="/css/customer/createCustomerConfirmation.css">
 </head>
 <body>
 
@@ -16,7 +16,7 @@
 <div class="confirmation-container">
     <h1>Bekræftelse af Kundeoprettelse</h1>
     <p th:text="${message}"></p> <!-- Vis succesbeskeden -->
-    <!-- Customer details -->
+
     <div class="customer-details">
         <h3>Kundeoplysninger</h3>
         <p><strong>Navn:</strong> <span th:text="${customer.customerName}"></span></p>

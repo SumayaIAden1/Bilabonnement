@@ -3,7 +3,7 @@
 <head>
   <title>Opret Kunde</title>
   <link rel="stylesheet" href="/css/style.css"> <!-- Main CSS -->
-  <link rel="stylesheet" href="/css/customer/createCustomer.css"> <!-- Customer-specific CSS -->
+  <link rel="stylesheet" href="/css/customer/createCustomer.css">
 </head>
 <body>
 
@@ -15,7 +15,7 @@
   </div>
 
   <nav class="center-logos">
-    <!-- Dynamisk navigation baseret på brugerrolle - Isabella -->
+
 
 
     <th:block th:if="${user.userRole.name() == 'DATAREGISTRERING' or user.userRole.name() == 'ADMIN'}">
