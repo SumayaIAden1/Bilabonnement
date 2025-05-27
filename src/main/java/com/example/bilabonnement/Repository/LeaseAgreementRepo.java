@@ -91,8 +91,10 @@ public class LeaseAgreementRepo
 
     public LeaseAgreement findActiveLeaseByRegistrationNumber(String regNumber) {
         String sql = "SELECT * FROM lease_agreement WHERE car_registration_number = ? AND status = 'Active'";
-        return template.queryForObject(sql, new LeaseAgreementRowMapper(), regNumber);
+        List<LeaseAgreement> result = template.query(sql, new LeaseAgreementRowMapper(), regNumber);
+        return result.stream().findFirst().orElse(null);
     }
+
 
     // Intern klasse til mapping af LeaseAgreement
     private static class LeaseAgreementRowMapper implements RowMapper<LeaseAgreement> {

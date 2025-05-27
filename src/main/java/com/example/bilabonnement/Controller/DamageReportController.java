@@ -1,5 +1,6 @@
 package com.example.bilabonnement.Controller;
 
+import com.example.bilabonnement.DTO.DamageReportOverviewDTO;
 import com.example.bilabonnement.Model.DamageReport;
 import com.example.bilabonnement.Model.User;
 import com.example.bilabonnement.Service.DamageReportService;
@@ -97,4 +98,45 @@ public class DamageReportController {
         damageReportService.update(damageReport);
         return "redirect:/damages";
     }
+
+    // Martin: Viser skadeoversigten
+    @GetMapping("/damage/overview")
+    public String showDamageOverview(Model model, HttpSession session) {
+        // Martin: Tilføj bruger til modellen for topbaren
+        User user = (User) session.getAttribute("user");
+        model.addAttribute("user", user);
+
+        // Martin: Hent listen af aktive skader
+        List<DamageReportOverviewDTO> damageList = damageReportService.getActiveDamageReports();
+        model.addAttribute("damageList", damageList);
+
+        return "damage/overview";
+    }
+
+
+   /* // Martin: Viser startsiden med knapper til oversigt og opret skade
+    @GetMapping("/damage")
+    public String damageIndex(HttpSession session, Model model) {
+        User user = (User) session.getAttribute("user");
+        model.addAttribute("user", user); // <- Martin: Lægger brugeren ind i modellen
+        return "damage/index";
+    }*/
+
+    @GetMapping("/damage")
+    public String damageIndex(HttpSession session, Model model) {
+        User user = (User) session.getAttribute("user");
+        model.addAttribute("user", user);
+        model.addAttribute("damageList", damageReportService.getActiveDamageReports());
+        model.addAttribute("activeTab", "overview"); // så den står på tab 1
+        return "damage/index";
+    }
+
+
+
+
+
+
+
+
+
 }

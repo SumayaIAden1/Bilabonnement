@@ -1,5 +1,6 @@
 package com.example.bilabonnement.Service;
 
+import com.example.bilabonnement.DTO.DamageReportOverviewDTO;
 import com.example.bilabonnement.Model.Car;
 import com.example.bilabonnement.Model.DamageReport;
 import com.example.bilabonnement.Model.LeaseAgreement;
@@ -71,4 +72,18 @@ public class DamageReportService {
     public void deleteById(int id) {
         damageReportRepo.deleteById(id);
     }
+
+    // Martin: Returnerer liste over aktive skader og markerer gamle (over 10 dage)
+    public List<DamageReportOverviewDTO> getActiveDamageReports() {
+        List<DamageReportOverviewDTO> list = damageReportRepo.findActiveDamageReports();
+        LocalDate today = LocalDate.now();
+
+        for (DamageReportOverviewDTO d : list) {
+            // Martin: Tjekker om skaden er ældre end 10 dage
+            d.setOld(d.getReportDate().isBefore(today.minusDays(10)));
+        }
+
+        return list;
+    }
+
 }
