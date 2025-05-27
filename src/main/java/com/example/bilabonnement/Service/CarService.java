@@ -29,7 +29,8 @@ public class CarService {
 
     //2 - Bliver brugt i CarController
     // Isabella - Hent alle biler med modelinfo (DTO)
-    public List<CarWithModelDTO> fetchAllCarsWithModel() {
+    public List<CarWithModelDTO> fetchAllCarsWithModel()
+    {
         return carRepo.fetchAllCarsWithModel();
     }
 

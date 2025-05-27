@@ -23,7 +23,7 @@ public class CarController {
     private CarModelService carModelService;
 
     //2
-    //Sumaya - Ny metode til at hente alle biler, men også sortere ud når en bil er solgt
+    //Sumaya og Isabella - Ny metode til at hente alle biler, men også sortere ud når en bil er solgt
     @GetMapping("/dataentry/cars")
     public String getAllCars(Model model, HttpSession session) {
         List<CarWithModelDTO> allCars = carService.fetchAllCarsWithModel();
